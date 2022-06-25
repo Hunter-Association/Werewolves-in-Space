@@ -12,17 +12,27 @@ const Column = styled.div`
 `;
 const ColoredColumn = styled(Column)`
   background-color: red;
+  & div {
+    color: blue
+  };
 `;
+
+const Box = styled.div`
+  width:${(props) => props.size === 'xl' ? 500 : 100 }px
+`;
+
 const Login = () => {
   const { isDarkMode, setIsDarkMode } = useContext(GlobalContext);
 
   return (
     <Link to="/Csslog">
-      <Row>
-        <div>1</div>
-        <div>2</div>
-      </Row>
-      <p>{isDarkMode}</p>
+      <Box size="500">
+        <Row>
+          <div>1</div>
+          <div>2</div>
+        </Row>
+        <p>{isDarkMode}</p>
+      </Box>
     </Link>
   );
 };
