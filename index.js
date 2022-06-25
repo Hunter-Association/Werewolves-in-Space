@@ -22,8 +22,12 @@ app.use(session({
 
 app.use(cookieParser('secretcode'));
 
+// app.use((req,res) => {
+//   console.log(req.url);
+// });
+
 app.use('/', express.static(path.join(__dirname, './public')));
-app.use('/', router);
+app.use(router);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log('Listening on port:', PORT));

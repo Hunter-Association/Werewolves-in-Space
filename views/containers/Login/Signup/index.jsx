@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 // import { GlobalContext } from '../../../store';
+import axios from 'axios';
 import AuthForm from '../components/AuthForm';
 
 const Signup = () => {
@@ -9,8 +10,21 @@ const Signup = () => {
   const [signupUsername, setSignupUsername] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
 
-  const handleSubmit = () => {
-    console.log('submit');
+  const signup = () => {
+    axios({
+      method: 'post',
+      data: {
+        username: signupUsername,
+        password: signupPassword,
+      },
+      withCredentials: true,
+      url: '/authentication/signup',
+    }).then((res) => console.log(res));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signup();
   };
 
   const handleUsernameChange = (event) => {
@@ -24,6 +38,7 @@ const Signup = () => {
   return (
     <Background>
       <AuthForm route="Signup" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} />
+
       <Link to="/">Login</Link>
     </Background>
   );
