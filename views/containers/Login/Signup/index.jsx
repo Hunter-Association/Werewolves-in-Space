@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import AuthForm from './components/AuthForm';
-// import { GlobalContext } from '../../store';
+// import { GlobalContext } from '../../../store';
+import AuthForm from '../components/AuthForm';
 
-const Login = () => {
+const Signup = () => {
   // const { isDarkMode, setIsDarkMode } = useContext(GlobalContext);
-  const [loginUsername, setLoginUsername] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
+  const [signupUsername, setSignupUsername] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
 
   const handleSubmit = () => {
     console.log('submit');
   };
 
   const handleUsernameChange = (event) => {
-    setLoginUsername(event.target.value);
+    setSignupUsername(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
-    setLoginPassword(event.target.value);
+    setSignupPassword(event.target.value);
   };
 
   return (
     <Background>
-      <AuthForm route="Login" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} />
-      <Link to="/signup">Signup</Link>
+      <AuthForm route="Signup" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} />
+      <Link to="/">Login</Link>
     </Background>
   );
 };
@@ -45,5 +45,4 @@ const Background = styled.div`
   align-items: center;
 `;
 
-//= ======unique styling
-export default Login;
+export default Signup;
