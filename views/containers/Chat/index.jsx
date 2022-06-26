@@ -23,6 +23,8 @@ const Chat = () => {
         });
       }
     });
+
+    return () => socket.disconnect();
   }, []);
 
   const clickHandler = () => {

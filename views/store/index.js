@@ -11,7 +11,7 @@ const [player, setPlayer] = useState({
   isWolf: false,
   socket: {},
 });
-const [gameID, setGameID] = useState('');
+const [gameID, setGameID] = useState(''); // When user joins game he will give this, host game create this.
 
 
 // =================================================== export your state and setState functions here

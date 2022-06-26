@@ -23,28 +23,22 @@ io.on('connection',  (socket) => {
     const playersArr = [...allPlayers].map(sktID => playerMap.get(sktID));
     io.to(gameID).emit('player-joined', playersArr);
   })
-
   socket.on('vote', (gameID, player, suspect) => {
     io.to(gameID).emit('player-voted', player, suspect)
   })
-
   socket.on('voteToEat', (gameID, player, astronaut) => {
     io.to(gameID).emit('werewolf-spotted', player, astronaut)
   })
-
   socket.on('murdered', (gameID, player, victim) => {
     io.to(gameID).emit('murdered', player, victim)
   })
-
   socket.on('disconnect', () => {
     io.emit('player-disconnected')
   })
-
   socket.on('game-over', (winningTeam) => {
     io.emit('game-over', winningTeam)
     clearInterval(roundsTimer)
   })
-
   socket.on('start-game', (gameID, roundLength = 120000) => {
     io.to(gameID).emit('game-started', roundLength)
     roundsTimer = setInterval(() => {
