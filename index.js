@@ -4,10 +4,38 @@ const httpServer = require('http').createServer(app);
 const io = require('socket.io')(httpServer);
 const router = require('./routes');
 const path = require('path');
+const cors = require('cors');
+const session = require('express-session');
+const passport = require('passport');
+const dotenv = require('dotenv').config();
+const MongoStore = require('connect-mongo');
 
-app.use(express.json())
-app.use(express.static(path.join(__dirname, './public')))
+
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
+
+app.use(session({
+  store: MongoStore.create({mongoUrl: process.env.DATABASE_URL}),
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+require('./passportConfig')(passport);
 app.use(router);
+
+app.use(express.static(path.join(__dirname, './public')))
+const PORT = process.env.PORT || 3000;
+
+
+//=====SOCKETS==================
 
 let map = new Map();
 let rounds;
@@ -54,5 +82,5 @@ io.on('connection', socket => {
   })
 })
 
-const PORT = process.env.PORT || 3000;
+
 httpServer.listen(PORT, () => console.log('Listening on port:', PORT))
