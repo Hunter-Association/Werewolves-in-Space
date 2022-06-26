@@ -1,39 +1,53 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import io from 'socket.io-client';
 import { GlobalContext } from '../../store';
-import styled from 'styled-components';
-
-const Row = styled.div`
-  display: flex;
-`;
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const ColoredColumn = styled(Column)`
-  background-color: red;
-  & div {
-    color: blue
-  };
-`;
-
-const Box = styled.div`
-  width:${(props) => props.size === 'xl' ? 500 : 100 }px
-`;
+import { Row, Button } from '../../library';
 
 const Login = () => {
   const { isDarkMode, setIsDarkMode } = useContext(GlobalContext);
+  const [socket, setSocket] = useState({});
+  const [players, setPlayers] = useState([]);
+  const [votes, setVotes] = useState([]);
+
+  useMemo(() => {
+    const skt = io();
+    skt.player = { username: 'ethan' };
+    skt.gameID = 'ethan';
+    setSocket(skt);
+  }, []);
+
+  const clickHandler = () => {
+    socket.emit('join-game', 'ethan', { username: 'ethan' });
+  };
+
+  const voteHandler = () => {
+    socket.emit('vote', 'ethan', { username: 'ethan' }, { username: 'wolfie' });
+  };
+
+  useEffect(() => {
+    socket.on('player-voted', (prson, player) => {
+      console.log(socket);
+      setVotes(prson);
+      console.log(prson);
+    });
+    socket.on('player-joined', (playersArr) => {
+      console.log(socket);
+      setPlayers(playersArr);
+      console.log(playersArr);
+    });
+
+    return socket.disconnect;
+  }, []);
 
   return (
-    <Link to="/Csslog">
-      <Box size="500">
-        <Row>
-          <div>1</div>
-          <div>2</div>
-        </Row>
-        <p>{isDarkMode}</p>
-      </Box>
-    </Link>
+    <Row>
+      <Link to="/home">
+        <div>this blows</div>
+      </Link>
+      <Button onClick={voteHandler}>Click me to vote</Button>
+      <Button onClick={clickHandler}>Click me to connect</Button>
+    </Row>
   );
 };
 

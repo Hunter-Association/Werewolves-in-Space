@@ -13,7 +13,7 @@ export const Column = Styled.div`
   align-items: ${(props) => props.align}
 `;
 
-export const Scroll = Styled.Column`
+export const Scroll = Styled(Column)`
   display: flex;
   flex-direction: column;
   justify-content: ${(props) => props.justify};

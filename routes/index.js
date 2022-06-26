@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const loginRouter = require('./login');
 
-router.use('/login',loginRouter);
+router.use('/login', loginRouter);
 
 /*
   Express server redirects to here...
