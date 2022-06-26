@@ -1,7 +1,8 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  res.send(req.user);
+  // console.log(req.session);
+  res.send({user: req.user, session: req.sessionID});
 });
 
 

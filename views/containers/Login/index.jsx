@@ -6,7 +6,7 @@ import AuthForm from './components/AuthForm';
 import { GlobalContext } from '../../store';
 
 const Login = () => {
-  const { setUserData } = useContext(GlobalContext);
+  const { setUserData, setSessionData } = useContext(GlobalContext);
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
@@ -30,7 +30,10 @@ const Login = () => {
     e.preventDefault();
     login()
       .then(getUser)
-      .then((res) => setUserData(res.data));
+      .then((res) => {
+        setUserData(res.data.user);
+        setSessionData(res.data.session);
+      });
   };
 
   const handleUsernameChange = (event) => {
