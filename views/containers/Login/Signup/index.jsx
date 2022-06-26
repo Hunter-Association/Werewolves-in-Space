@@ -4,9 +4,9 @@ import styled from 'styled-components';
 // import { GlobalContext } from '../../../store';
 import axios from 'axios';
 import AuthForm from '../components/AuthForm';
+import { Button } from '../../../library';
 
 const Signup = () => {
-  // const { isDarkMode, setIsDarkMode } = useContext(GlobalContext);
   const [signupUsername, setSignupUsername] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
 
@@ -39,7 +39,7 @@ const Signup = () => {
     <Background>
       <AuthForm route="Signup" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} />
 
-      <Link to="/">Login</Link>
+      <Link to="/"><Button>Login</Button></Link>
     </Background>
   );
 };

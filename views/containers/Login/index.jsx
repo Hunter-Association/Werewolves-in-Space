@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import AuthForm from './components/AuthForm';
+// import io from 'socket.io-client';
 import { GlobalContext } from '../../store';
+import { Button } from '../../library';
 
 const Login = () => {
   const { setUserData, setSessionData } = useContext(GlobalContext);
@@ -47,7 +49,7 @@ const Login = () => {
   return (
     <Background>
       <AuthForm route="Login" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} />
-      <Link to="/signup">Signup</Link>
+      <Link to="/signup"><Button>Signup</Button></Link>
     </Background>
   );
 };
@@ -64,7 +66,7 @@ const Background = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  justifty-content: space-around;
+  justify-content: space-around;
   align-items: center;
 `;
 
