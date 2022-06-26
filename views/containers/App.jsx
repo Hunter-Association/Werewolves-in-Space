@@ -1,16 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { GlobalProvider } from '../store';
 import Home from './Home';
-import Login from './Login';
+import Chat from './Chat';
 
 const App = () => (
-  <GlobalProvider>
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/home" element={<Home />} />
-    </Routes>
-  </GlobalProvider>
+  <Routes>
+    <Route path="/" element={<Chat />} />
+    <Route path="/home" element={<Home />} />
+  </Routes>
 );
 
 export default App;

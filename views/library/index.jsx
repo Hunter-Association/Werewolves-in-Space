@@ -5,14 +5,12 @@ export const Row = Styled.div`
   justify-content: ${(props) => props.justify};
   align-items: ${(props) => props.align};
 `;
-
 export const Column = Styled.div`
   display: flex;
   flex-direction: column;
   justify-content: ${(props) => props.justify};
   align-items: ${(props) => props.align}
 `;
-
 export const Scroll = Styled(Column)`
   display: flex;
   flex-direction: column;
@@ -21,7 +19,6 @@ export const Scroll = Styled(Column)`
 
   overflow: scroll;
 `;
-
 export const Button = Styled.button`
 border-radius: 10px;
 width: 417px;
@@ -37,7 +34,6 @@ margin-top: 13px;
   box-shadow: none;
 }
 `;
-
 export const TextInput = Styled.input`
   border-radius: 10px;
   width: 417px;
@@ -52,4 +48,10 @@ export const TextInput = Styled.input`
   outline: none;
   box-shadow: none;
 }
+`;
+export const Center = Styled.div`
+  display: flex;
+  flex-direction: ${(props) => props.direction || 'column'};
+  align-items: center;
+  justify-content: center;
 `;
