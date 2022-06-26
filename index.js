@@ -29,6 +29,10 @@ require('./passportConfig')(passport);
 
 
 app.use('/', express.static(path.join(__dirname, './public')));
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+});
+
 app.use(router);
 
 const PORT = process.env.PORT || 3000;
