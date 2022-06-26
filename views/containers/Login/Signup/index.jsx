@@ -56,7 +56,7 @@ const Background = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  justifty-content: space-around;
+  justify-content: space-around;
   align-items: center;
 `;
 
