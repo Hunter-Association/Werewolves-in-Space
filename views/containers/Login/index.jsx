@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import AuthForm from './components/AuthForm';
@@ -8,9 +8,11 @@ import { GlobalContext } from '../../store';
 import { Button } from '../../library';
 
 const Login = () => {
+  const navigate = useNavigate();
   const { setUserData, setSessionData } = useContext(GlobalContext);
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+  const [displayWarning, setDisplayWarning] = useState(false);
 
   const login = () => axios({
     method: 'post',
@@ -31,10 +33,17 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login()
-      .then(getUser)
-      .then((res) => {
-        setUserData(res.data.user);
-        setSessionData(res.data.session);
+      .then((response) => {
+        if (response.data === 'No User Exists') {
+          setDisplayWarning(true);
+        } else {
+          getUser()
+            .then((res) => {
+              setUserData(res.data.user);
+              setSessionData(res.data.session);
+            })
+            .then(navigate('/home'));
+        }
       });
   };
 
@@ -48,7 +57,8 @@ const Login = () => {
 
   return (
     <Background>
-      <AuthForm route="Login" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} />
+      <AuthForm route="Login" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} displayWarning={displayWarning} />
+
       <Link to="/signup"><Button>Signup</Button></Link>
     </Background>
   );
