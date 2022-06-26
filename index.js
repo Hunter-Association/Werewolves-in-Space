@@ -5,6 +5,8 @@ const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const passport = require('passport');
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -21,10 +23,10 @@ app.use(session({
 }));
 
 app.use(cookieParser('secretcode'));
+app.use(passport.initialize());
+app.use(passport.session());
+require('./passportConfig')(passport);
 
-// app.use((req,res) => {
-//   console.log(req.url);
-// });
 
 app.use('/', express.static(path.join(__dirname, './public')));
 app.use(router);

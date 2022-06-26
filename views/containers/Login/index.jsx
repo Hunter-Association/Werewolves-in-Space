@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 import AuthForm from './components/AuthForm';
-// import { GlobalContext } from '../../store';
+import { GlobalContext } from '../../store';
 
 const Login = () => {
-  // const { isDarkMode, setIsDarkMode } = useContext(GlobalContext);
+  const { setUserData } = useContext(GlobalContext);
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
-  const handleSubmit = () => {
-    console.log('submit');
+  const login = () => axios({
+    method: 'post',
+    data: {
+      username: loginUsername,
+      password: loginPassword,
+    },
+    withCredentials: true,
+    url: '/authentication/login',
+  });
+
+  const getUser = () => axios({
+    method: 'get',
+    withCredentials: true,
+    url: '/authentication/user',
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login()
+      .then(getUser)
+      .then((res) => setUserData(res.data));
   };
 
   const handleUsernameChange = (event) => {
