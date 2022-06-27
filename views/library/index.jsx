@@ -32,8 +32,9 @@ export const Submit = Styled.input`
 border-radius: 10px;
 width: 417px;
 height: 54px;
+font-family: AnotherDanger;
 background-color: ${(props) => props.backgroundColor || '#3e7DA0'};
-color:  ${(props) => props.color || '#E0E0E0'};
+color:  ${(props) => props.color || 'white'};
 font-size: 24px;
 border: none;
 box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
@@ -45,21 +46,28 @@ margin-top: 13px;
 `;
 
 export const TextInput = Styled.input`
-border-radius: 10px;
-width: 417px;
-height: 54px;
-background-color: ${(props) => props.backgroundColor || '#3e7DA0'};
-color:  ${(props) => props.color || '#E0E0E0'};
-font-size: 24px;
-border: none;
-box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
-margin-top: 13px;
+  border-radius: 10px;
+  width: 417px;
+  height: 54px;
+  text-align: center;
+  background-color: ${(props) => props.backgroundColor || '#D20000'};
+  color:  ${(props) => props.color || 'white'};
+  font-size: 24px;
+  border: none;
+  box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
+  margin-top: 13px;
 &:active {
   outline: none;
   box-shadow: none;
 }
 &::placeholder {
   color: #c2c2c2;
+}
+&:focus::placeholder {
+  color: transparent;
+}
+&:focus {
+  outline: none;
 }
 `;
 export const Center = Styled.div`
