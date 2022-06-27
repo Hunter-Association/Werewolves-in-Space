@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Start from './Start';
+import Lobby from './Lobby.jsx';
 
-const Lobby = () => (
+const LobbyList = () => (
   <Link to="/lobby">
-    <Start />
+    <Lobby />
   </Link>
 
 );
 
-export default Lobby;
+export default LobbyList;

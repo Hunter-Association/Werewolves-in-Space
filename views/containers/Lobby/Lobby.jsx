@@ -5,7 +5,15 @@ class Lobby extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: {},
+      players: [{
+        username: 'user1', isDead: false, isWolf: false, socket: {}, id: '',
+      }, {
+        username: 'user2', isDead: false, isWolf: false, socket: {}, id: '',
+      }, {
+        username: 'user3', isDead: false, isWolf: false, socket: {}, id: '',
+      }, {
+        username: 'user4', isDead: false, isWolf: false, socket: {}, id: '',
+      }],
       playerColor: 'none',
       playerStatus: false,
 

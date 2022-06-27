@@ -1,4 +1,5 @@
 import React from 'react';
+import Player from './Player';
 
 const List = (props) => (
   const playerList = props.players.map((player) =>
