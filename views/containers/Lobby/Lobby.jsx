@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import GlobalContext from '../../store';
-import List from './List';
+import { GlobalContext, GlobalProvider } from '../../store';
 import socket from '../../util/socket.config';
 
 const Lobby = () => {
@@ -19,7 +18,16 @@ const Lobby = () => {
       });
     });
     socket.on('start', () => {
-      <Board />
+      console.log('add board component here');
+    });
+    socket.on('list', () => {
+      players.map((each) => (
+        <>
+          <li>{each}</li>
+          <div>{each.color}</div>
+          <div>{each.status}</div>
+        </>
+      ));
     });
   }, []);
 
@@ -30,13 +38,24 @@ const Lobby = () => {
     socket.emit('start', player, gameID);
   };
 
+  const makeList = () => {
+    socket.emit('list', players);
+  };
+  // const makeList = (players) => {
+  //   players.map((player) => (
+  //     <>
+  //       <li>{player}</li>
+  //       <div>{player.color}</div>
+  //       <div>{player.status}</div>
+  //     </>
+  //   ));
+  // };
+
   return (
     <>
-      <List
-        players={players}
-      />
+      {makeList}
       <button onClick={readyUp} type="submit">READY UP!</button>
-      {isHost ? <button onClick={startGame} type="submit">START GAME</button> : null}
+      {player.isHost ? <button onClick={startGame} type="submit">START GAME</button> : null}
     </>
   );
 };

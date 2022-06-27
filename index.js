@@ -42,7 +42,7 @@ io.on('connection', socket => {
   socket.on('join-game', async (gameID, player) => {
     socket.player = player;
     socket.gameID = gameID;
-    playerMap.set(socket.id, player);
+    // playerMap.set(socket.id, player);
     socket.gameID = gameID;
     socket.join(gameID);
 
