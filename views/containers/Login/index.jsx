@@ -6,10 +6,15 @@ const Login = () => {
   const { isDarkMode, setIsDarkMode } = useContext(GlobalContext);
 
   return (
-    <Link to="/home">
-      <div>Home</div>
-      <p>{isDarkMode}</p>
-    </Link>
+    <div>
+      <Link to="/home">
+        <div>Home</div>
+        <p>{isDarkMode}</p>
+      </Link >
+      <Link to="/board">
+        <div>Board</div>
+      </Link>
+    </div>
   );
 };
 
