@@ -4,7 +4,7 @@ import Styled from 'styled-components';
 // import { GlobalContext } from '../../../store';
 import axios from 'axios';
 import AuthForm from '../components/AuthForm';
-import { Button, Center } from '../../../library';
+import { Center } from '../../../library';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const Signup = () => {
     <Center>
       <AuthForm route="Signup" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} signupWarning={signupWarning} />
 
-      <Link to="/"><BottomButton backgroundColor="red">Login</BottomButton></Link>
+      <Link to="/"><FooterDiv>Already have an account?</FooterDiv></Link>
     </Center>
   );
 };
@@ -67,8 +67,10 @@ const Signup = () => {
 //   align-items: center;
 // `;
 
-const BottomButton = Styled(Button)`
-  margin-top: 15vh
+const FooterDiv = Styled.div`
+  color: white;
+  letter-spacing: 2px;
+  margin-top: 10px;
 `;
 
 export default Signup;
