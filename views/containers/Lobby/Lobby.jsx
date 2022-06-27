@@ -14,14 +14,21 @@ class Lobby extends React.Component {
       }, {
         username: 'user4', isDead: false, isWolf: false, socket: {}, id: '',
       }],
-      playerColor: 'none',
-      playerStatus: false,
-
     };
     this.readyUp = this.readyUp.bind(this);
     this.startGame = this.startGame.bind(this);
   }
 
+  componentDidMount() {
+    const players = this.state;
+    for (let i = 0; i < { players }.length; i += 1) {
+      var player = players[i];
+      this.setState({
+        player.playerColor: 'none',
+        playerStatus: false,
+      });
+    }
+  }
   readyUp() {
     this.setState({
       playerStatus: true,
@@ -33,13 +40,11 @@ class Lobby extends React.Component {
   }
 
   render() {
-    const { players, playerColor, playerStatus } = this.state;
+    const { players } = this.state;
     return (
       <>
         <List
           players={players}
-          color={playerColor}
-          status={playerStatus}
         />
         <button onClick={this.readyUp} type="submit">READY UP!</button>
         <button onClick={this.startGame} type="submit">START GAME</button>
