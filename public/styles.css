@@ -1,4 +1,12 @@
 /* Custom Reset */
+
+/* Importing Custom Font */
+@font-face {
+  font-family: "AnotherDanger";
+  src: local("AnotherDanger"),
+    url("../views/library/AnotherDanger.ttf") format("truetype");
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -35,7 +43,9 @@ html:focus-within {
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
-
+  font-family: AnotherDanger;
+  color: white;
+  letter-spacing: 4;
 }
 
 /* A elements that don't have a class get default styles */
