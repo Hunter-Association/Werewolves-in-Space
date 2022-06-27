@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { TextInput, Submit } from '../../../library';
 
 const AuthForm = ({
-  route, handleUserNameChange, handlePasswordChange, handleSubmit, displayWarning,
+  route, handleUserNameChange, handlePasswordChange, handleSubmit, displayWarning, signupWarning,
 }) => (
   <LoginForm onSubmit={handleSubmit}>
 
@@ -13,6 +13,7 @@ const AuthForm = ({
 
     <Submit type="submit" value={route} />
     {displayWarning && <Warn>Please enter a valid username or password</Warn>}
+    {signupWarning && <Warn>Username already exists</Warn>}
   </LoginForm>
 );
 

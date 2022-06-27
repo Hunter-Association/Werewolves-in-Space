@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // import { GlobalContext } from '../../../store';
 import axios from 'axios';
@@ -7,24 +7,32 @@ import AuthForm from '../components/AuthForm';
 import { Button } from '../../../library';
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [signupUsername, setSignupUsername] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
+  const [signupWarning, setSignupWarning] = useState(false);
 
-  const signup = () => {
-    axios({
-      method: 'post',
-      data: {
-        username: signupUsername,
-        password: signupPassword,
-      },
-      withCredentials: true,
-      url: '/authentication/signup',
-    }).then((res) => console.log(res));
-  };
+  const signup = () => axios({
+    method: 'post',
+    data: {
+      username: signupUsername,
+      password: signupPassword,
+    },
+    withCredentials: true,
+    url: '/authentication/signup',
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup();
+    signup()
+      .then((response) => {
+        console.log(response.data);
+        if (response.data === 'User created') {
+          navigate('/');
+        } else {
+          setSignupWarning(true);
+        }
+      });
   };
 
   const handleUsernameChange = (event) => {
@@ -37,7 +45,7 @@ const Signup = () => {
 
   return (
     <Background>
-      <AuthForm route="Signup" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} />
+      <AuthForm route="Signup" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} signupWarning={signupWarning} />
 
       <Link to="/"><Button>Login</Button></Link>
     </Background>
