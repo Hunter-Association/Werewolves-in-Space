@@ -1,11 +1,10 @@
 // import { Link } from 'react-router-dom';
 import React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 import MuteIcon from '../../../../assets/img/sound/mute.svg';
 import UnmuteIcon from '../../../../assets/img/sound/unmute.svg';
-// const [isPlaying, setIsPlaying] = useState(false);
-// const audioElement = useRef(null);
+
 const MuteButton = ({ muteFunction, isPlaying }) => {
   const xl = {
     position: 'absolute',

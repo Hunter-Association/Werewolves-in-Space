@@ -1,15 +1,10 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../../store/index';
-// import MusicPlayer from './components/musicPlayer.jsx';
-// const player = require('play-sound')({});
+import React from 'react';
+// import { GlobalContext } from '../../../store/index';
+
 import song from '../../../../assets/music/board/Track1.mp3';
 import MuteButton from './muteButton';
 
 class MusicPlayer extends React.Component {
-  // player.play('../../../public/assets/music/board/Track1.mp3', (err) => {
-  //   if (err) throw err;
-  // });
-
   constructor(props) {
     super(props);
     const { isSoundEnabled } = this.props;
@@ -50,12 +45,10 @@ class MusicPlayer extends React.Component {
   }
 
   playSound() {
-    console.log('play sound func ran');
     this.sound.play();
   }
 
   stopSound() {
-    console.log('stop sound func ran');
     this.sound.pause();
   }
 

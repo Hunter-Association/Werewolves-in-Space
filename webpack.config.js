@@ -29,7 +29,11 @@ module.exports = {
       {
         test: /\.mp3$/,
         loader: 'file-loader',
-
+      },
+      // loader for font file
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
       },
     ]
   },
@@ -38,6 +42,6 @@ module.exports = {
   devtool: "eval-cheap-module-source-map",
   // [devServer] configuration for the live server including port
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ttf'],
   }
 }
