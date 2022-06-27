@@ -1,6 +1,6 @@
 // import { Link } from 'react-router-dom';
 import React from 'react';
-// import styled from 'styled-components';
+import Styled from 'styled-components';
 
 import MuteIcon from '../../../../assets/img/sound/mute.svg';
 import UnmuteIcon from '../../../../assets/img/sound/unmute.svg';
@@ -23,15 +23,19 @@ const MuteButton = ({ muteFunction, isPlaying }) => {
   if (isPlaying) {
     return (
       <div>
-        <UnmuteIcon style={l} onClick={() => { muteFunction(); }} />
+        <Icon src={UnmuteIcon} style={l} alt="unmuteIcon" onClick={() => { muteFunction(); }} />
       </div>
     );
   }
   return (
     <div>
-      <MuteIcon style={l} onClick={() => { muteFunction(); }} />
+      <Icon src={MuteIcon} style={l} alt="muteIcon" onClick={() => { muteFunction(); }} />
     </div>
   );
 };
 
 export default MuteButton;
+
+const Icon = Styled.img`
+
+`;
