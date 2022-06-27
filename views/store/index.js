@@ -15,7 +15,7 @@ const [player, setPlayer] = useState({
 const [players, setPlayers] = useState([]);
 const [gameID, setGameID] = useState(''); // When user joins game he will give this, host game create this.
 
-const [userData, setUserData] = useState(null);
+
 const [sessionData, setSessionData] = useState(null);
 
 // =================================================== export your state and setState functions here
@@ -30,8 +30,6 @@ return (
     setPlayer,
     players,
     setPlayers,
-    userData,
-    setUserData,
     sessionData,
     setSessionData,
   }}>

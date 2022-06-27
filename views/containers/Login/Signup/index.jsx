@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import Styled from 'styled-components';
 // import { GlobalContext } from '../../../store';
 import axios from 'axios';
 import AuthForm from '../components/AuthForm';
-import { Button } from '../../../library';
+import { Button, Center } from '../../../library';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -26,7 +26,6 @@ const Signup = () => {
     e.preventDefault();
     signup()
       .then((response) => {
-        console.log(response.data);
         if (response.data === 'User created') {
           navigate('/');
         } else {
@@ -44,28 +43,32 @@ const Signup = () => {
   };
 
   return (
-    <Background>
+    <Center>
       <AuthForm route="Signup" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} signupWarning={signupWarning} />
 
-      <Link to="/"><Button>Login</Button></Link>
-    </Background>
+      <Link to="/"><BottomButton backgroundColor="red">Login</BottomButton></Link>
+    </Center>
   );
 };
 
 //= ======Move to seperate
-const Background = styled.div`
-  background: black;
-  width: 45em;
-  height: 50em;
-  border-radius: 25px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+// const Background = styled.div`
+//   background: black;
+//   width: 45em;
+//   height: 50em;
+//   border-radius: 25px;
+//   position: fixed;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-around;
+//   align-items: center;
+// `;
+
+const BottomButton = Styled(Button)`
+  margin-top: 15vh
 `;
 
 export default Signup;
