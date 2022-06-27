@@ -11,6 +11,7 @@ const [player, setPlayer] = useState({
   isWolf: false,
   socket: {},
 });
+const [players, setPlayers] = useState([]);
 const [gameID, setGameID] = useState(''); // When user joins game he will give this, host game create this.
 
 
@@ -24,6 +25,8 @@ return (
     setGameID,
     player,
     setPlayer,
+    players,
+    setPlayers,
   }}>
     {props.children}
   </GlobalContext.Provider>

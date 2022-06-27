@@ -11,7 +11,6 @@ app.use(express.static(path.join(__dirname, './public')))
 app.use(router);
 
 io.on('connection',  (socket) => {
-
   socket.on('join-game', async (gameID, player) => {
     socket.player = player;
     socket.gameID = gameID;
@@ -56,5 +55,5 @@ io.on('connection',  (socket) => {
 
 const PORT = process.env.PORT || 3000;
 
-// Please dont touch this. This wont break your routes, and is equivelent to app.listen()
+// Please dont touch this. This wont break your routes, and is equivelent to app.listen(), do not add app.listen();
 httpServer.listen(PORT, () => console.log('Listening on port:', PORT))
