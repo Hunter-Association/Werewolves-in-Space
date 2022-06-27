@@ -19,10 +19,14 @@ const AuthForm = ({
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Warn = styled.div`
-  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+  color: #d20000;
+  margin-top: 6px;
 `;
 
 export default AuthForm;
