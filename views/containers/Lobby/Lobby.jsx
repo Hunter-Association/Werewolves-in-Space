@@ -1,56 +1,44 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import GlobalContext from '../../store';
 import List from './List';
+import socket from '../../util/socket.config';
 
-class Lobby extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      players: [{
-        username: 'user1', isDead: false, isWolf: false, socket: {}, id: '',
-      }, {
-        username: 'user2', isDead: false, isWolf: false, socket: {}, id: '',
-      }, {
-        username: 'user3', isDead: false, isWolf: false, socket: {}, id: '',
-      }, {
-        username: 'user4', isDead: false, isWolf: false, socket: {}, id: '',
-      }],
-    };
-    this.readyUp = this.readyUp.bind(this);
-    this.startGame = this.startGame.bind(this);
-  }
-
-  componentDidMount() {
-    const players = this.state;
-    for (let i = 0; i < { players }.length; i += 1) {
-      var player = players[i];
-      this.setState({
-        player.playerColor: 'none',
-        playerStatus: false,
+const Lobby = () => {
+  const {
+    players, setPlayers, player, gameID,
+  } = useContext(GlobalContext);
+  useEffect(() => {
+    socket.on('ready', (user) => {
+      setPlayers((prev) => {
+        prev.map((current) => {
+          if (current.username === user.username) {
+            return { ...current, status: true };
+          }
+          return current;
+        });
       });
-    }
-  }
-  readyUp() {
-    this.setState({
-      playerStatus: true,
     });
-  }
+    socket.on('start', () => {
+      <Board />
+    });
+  }, []);
 
-  startGame() {
-    return 'add function that starts the game';
-  }
+  const readyUp = () => {
+    socket.emit('ready', player, gameID);
+  };
+  const startGame = () => {
+    socket.emit('start', player, gameID);
+  };
 
-  render() {
-    const { players } = this.state;
-    return (
-      <>
-        <List
-          players={players}
-        />
-        <button onClick={this.readyUp} type="submit">READY UP!</button>
-        <button onClick={this.startGame} type="submit">START GAME</button>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <List
+        players={players}
+      />
+      <button onClick={readyUp} type="submit">READY UP!</button>
+      {isHost ? <button onClick={startGame} type="submit">START GAME</button> : null}
+    </>
+  );
+};
 
 export default Lobby;
