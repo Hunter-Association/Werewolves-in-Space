@@ -1,15 +1,16 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import Styled from 'styled-components';
 import axios from 'axios';
 import AuthForm from './components/AuthForm';
 // import io from 'socket.io-client';
 import { GlobalContext } from '../../store';
-import { Button } from '../../library';
+import { Button, Center } from '../../library';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUserData, setSessionData } = useContext(GlobalContext);
+  const { setPlayer, setSessionData } = useContext(GlobalContext);
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [displayWarning, setDisplayWarning] = useState(false);
@@ -39,7 +40,13 @@ const Login = () => {
         } else {
           getUser()
             .then((res) => {
-              setUserData(res.data.user);
+              setPlayer({
+                username: res.data.user.username,
+                isDead: false,
+                isWolf: false,
+                socket: {},
+                id: res.data.user._id,
+              });
               setSessionData(res.data.session);
             })
             .then(navigate('/home'));
@@ -56,29 +63,33 @@ const Login = () => {
   };
 
   return (
-    <Background>
+    <Center>
       <AuthForm route="Login" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} displayWarning={displayWarning} />
 
-      <Link to="/signup"><Button>Signup</Button></Link>
-    </Background>
+      <Link to="/signup"><BottomButton backgroundColor="red">Signup</BottomButton></Link>
+    </Center>
   );
 };
 
 //= ======Move to seperate
-const Background = styled.div`
-  background: black;
-  width: 45em;
-  height: 50em;
-  border-radius: 25px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-`;
+// const Background = styled.div`
+//   background: black;
+//   width: 45em;
+//   height: 50em;
+//   border-radius: 25px;
+//   position: fixed;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-around;
+//   align-items: center;
+// `;
 
 //= ======unique styling
+const BottomButton = Styled(Button)`
+  margin-top: 15vh
+`;
+
 export default Login;
