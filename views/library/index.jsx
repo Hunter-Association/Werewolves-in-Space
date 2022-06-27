@@ -14,7 +14,7 @@ export const Column = Styled.div`
 `;
 export const Button = Styled.button`
 border-radius: 10px;
-width: 30%;
+width: 417px;
 height: 54px;
 background-color: ${(props) => props.backgroundColor || '#3e7DA0'};
 color:  ${(props) => props.color || '#E0E0E0'};
