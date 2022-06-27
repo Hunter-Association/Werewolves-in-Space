@@ -67,7 +67,7 @@ display: flex;
 flex-direction: ${(props) => props.direction || 'column'};
 align-items: center;
 justify-content: center;
-height: 100%;
+height: 100vh;
 width: 100%;
 background-color: ${(props) => props.backgroundColor || '#181818'};
 `;

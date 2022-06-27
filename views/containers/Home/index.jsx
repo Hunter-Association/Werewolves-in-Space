@@ -64,10 +64,10 @@ const HostOptions = ({ show, joinGame, gameID }) => {
             setCopied((prev) => !prev);
           }}
         >
-          {18948398439}
+          {gameID}
           <Icon src={clipboard} alt="clipboard" />
         </Text>
-        <button type="button" onClick={joinGame}>Go To Lobby</button>
+        <button type="button" onClick={joinGame}>Go</button>
       </Row>
       )
       }
@@ -80,7 +80,7 @@ const JoinOptions = ({ show, joinGame, changeText }) => (
       show && (
         <Row>
           <input type="text" onChange={(e) => changeText(e.target.value)} />
-          <button type="button" onClick={joinGame}>Join Game</button>
+          <button type="button" onClick={joinGame}>Go</button>
         </Row>
       )
     }

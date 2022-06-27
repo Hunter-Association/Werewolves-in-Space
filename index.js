@@ -79,6 +79,7 @@ io.on('connection', socket => {
     :
     io.to(gameID).emit('dead-chat-message', player, msg);
   })
+
 })
 
 httpServer.listen(PORT, () => console.log('Listening on port:', PORT))
