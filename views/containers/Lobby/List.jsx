@@ -1,14 +1,12 @@
 import React from 'react';
 import Player from './Player';
 
-const List = (props) => (
-  const playerList = props.players.map((player) =>
-   <Player name={props.name} color={props.color} status={props.status}/>
-  )
+const List = ({ players, name, color, status}) => {
+  players.map(() => <Player name={name} color={color} status={status} />);
 
   return (
     <li><Player /></li>
-  )
-);
+  );
+  };
 
 export default List;
