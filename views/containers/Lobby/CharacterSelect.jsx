@@ -6,7 +6,7 @@ import agent from '../../../Assets/characters/singleAgent.png';
 import cyberpunk from '../../../Assets/characters/singleCyberpunk.png';
 import soldier from '../../../Assets/characters/singleFutureSoldier.png';
 import normalGirl from '../../../Assets/characters/singleNormalGirl.png';
-import { GlobalContext } from '../../store';
+// import { GlobalContext } from '../../store';
 
 import characterBios from '../../../Assets/characters/characterBios';
 
