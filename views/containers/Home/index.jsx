@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import copy from 'copy-to-clipboard';
-import Styled from 'styled-components';
-import { Link } from 'react-router-dom';
+// import copy from 'copy-to-clipboard';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import {
   Button, Center, Column, TextInput,
 } from '../../library';
@@ -16,7 +17,7 @@ const Home = () => {
     setGameID,
     player,
     setPlayer,
-    // players,
+    players,
     setPlayers,
   } = useContext(GlobalContext);
 
@@ -61,6 +62,7 @@ const Home = () => {
 };
 export default Home;
 
+<<<<<<< HEAD
 const HostOptions = ({ show, joinGame, gameID }) => {
   const [copied, setCopied] = useState(false);
   return (
@@ -88,6 +90,33 @@ const HostOptions = ({ show, joinGame, gameID }) => {
     </span>
   );
 };
+=======
+// const HostOptions = ({ show, joinGame, gameID }) => {
+//   const [copied, setCopied] = useState(false);
+//   return (
+//     <span>
+//       {
+//       show && (
+//       <Row justify="space-between" align="center">
+//         <Text
+//           justify="space-between"
+//           align="center"
+//           onClick={() => {
+//             copy(gameID);
+//             setCopied((prev) => !prev);
+//           }}
+//         >
+//           {gameID}
+//           <Icon src={clipboard} alt="clipboard" />
+//         </Text>
+//         <button type="button" onClick={joinGame}>Go</button>
+//       </Row>
+//       )
+//       }
+//     </span>
+//   );
+// };
+>>>>>>> 4ed1ba6db303d9bd43242dae4eec7bda02ea3d3e
 const JoinOptions = ({ show, joinGame, changeText }) => (
   <span>
     {
