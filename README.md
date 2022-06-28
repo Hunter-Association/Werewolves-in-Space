@@ -13,7 +13,7 @@ Werewolf is a super fun party game that can be played with a large group of peop
   <li>Compile webpack</li>
   <code>npm run build:dev</code>
   <li>Start server</li>
-  <code>npm start:dev</code>
+  <code>npm run start:dev</code>
 </ol>
 
 # Committing your work

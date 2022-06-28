@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import copy from 'copy-to-clipboard';
 import Styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import {
   Button, Center, Row,
 } from '../../library';
@@ -67,7 +68,9 @@ const HostOptions = ({ show, joinGame, gameID }) => {
           {gameID}
           <Icon src={clipboard} alt="clipboard" />
         </Text>
-        <button type="button" onClick={joinGame}>Go</button>
+        <Link to="/lobby">
+          <button type="button" onClick={joinGame}>Go</button>
+        </Link>
       </Row>
       )
       }

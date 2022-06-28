@@ -42,13 +42,16 @@ io.on('connection', socket => {
   socket.on('join-game', async (gameID, player) => {
     socket.player = player;
     socket.gameID = gameID;
-    playerMap.set(socket.id, player);
     socket.gameID = gameID;
+    playerMap.set(socket.id, player);
     socket.join(gameID);
 
     const allPlayers = await io.in(gameID).allSockets();
     const playersArr = [...allPlayers].map(sktID => playerMap.get(sktID));
     io.to(gameID).emit('player-joined', playersArr);
+  })
+  socket.on('ready', (player) => {
+    io.to(gameID).emit('')
   })
   socket.on('vote', (gameID, player, suspect) => {
     io.to(gameID).emit('player-voted', player, suspect)
