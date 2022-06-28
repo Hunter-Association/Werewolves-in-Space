@@ -29,16 +29,15 @@ const Lobby = () => {
         return current;
       });
       setPlayers(playList);
-      console.log(playList);
       if (player.isHost) {
         setCanStart(playList.every((each) => each.status));
       }
     });
-    socket.on('start-game', () => navigate('/board'));
+    socket.on('game-started', () => navigate('/board'));
   }, []);
 
-  const readyUp = () => {
-    socket.emit('ready', player, gameID);
+  const readyUp = (p) => {
+    socket.emit('ready', p, gameID);
   };
   const startGame = () => {
     socket.emit('start-game', player, gameID);
@@ -47,8 +46,9 @@ const Lobby = () => {
   const getCharAndReady = () => {
     const oldPlayer = { ...player };
     oldPlayer.charDex = currentCharacter;
+    console.log('oldie', oldPlayer);
     setPlayer(oldPlayer);
-    readyUp();
+    readyUp(oldPlayer);
   };
 
   const handleChatShow = () => {
