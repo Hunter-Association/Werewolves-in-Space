@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Styled from 'styled-components';
-import { GlobalContext, GlobalProvider } from '../../store';
+import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import CrewManifest from '../../../Assets/CrewManifest.png';
 // import { Button } from '../../library';
@@ -49,7 +49,7 @@ const Lobby = () => {
             ))}
           </ListCol>
           <Column>
-            <div>Room Code</div>
+            <CodeDiv>Room Code</CodeDiv>
             <LoadingButton color="grey" onClick={startGame} type="button">HKFAJ</LoadingButton>
           </Column>
         </LeftColumn>
@@ -100,6 +100,11 @@ const PlayerRow = Styled.div`
   margin-bottom: 5px;
   width: 20rem;
   z-index: 100;
+`;
+
+const CodeDiv = Styled.div`
+  z-index: 75;
+  margin-bottom: 1.7em;
 
 `;
 
@@ -107,12 +112,12 @@ const Column = Styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid green;
 `;
 
 const ListCol = Styled(Column)`
-  padding-top: 5em;
-  background: 'red';
+  margin-top: 5.5em;
+  background-color: black;
+  z-index: 50;
 `;
 
 const LeftColumn = Styled(Column)`
@@ -140,10 +145,11 @@ const LoadingButton = Styled.button`
   border: none;
   box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
   width: 15rem;
+  z-index: 75;
 `;
 
 const Placeholder = Styled.div`
-  height: 38vh;
+  height: 50vh;
   width: 25rem;
   border: 2px solid red;
 `;
