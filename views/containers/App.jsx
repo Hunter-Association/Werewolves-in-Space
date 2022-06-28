@@ -1,15 +1,20 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { GlobalProvider } from '../store';
 import Home from './Home';
 import Login from './Login';
-import Lobby from './Lobby';
+// import Lobby from './Lobby';
+import Signup from './Login/Signup';
+import Lobby from './Lobby/Lobby';
+import { GlobalProvider } from '../store';
 
 const App = () => (
   <GlobalProvider>
     <Routes>
       <Route path="/" element={<Lobby />} />
+      {/* <Route path="/" element={<Login />} /> */}
+      <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/lobby" element={<Lobby />} />
     </Routes>
   </GlobalProvider>
 );

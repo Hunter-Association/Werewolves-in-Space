@@ -1,43 +1,136 @@
-import React from 'react';
-import List from './List';
+import React, { useContext, useState, useEffect } from 'react';
+import Styled from 'styled-components';
+import { GlobalContext, GlobalProvider } from '../../store';
+import socket from '../../util/socket.config';
+// import { Button } from '../../library';
 
-class Lobby extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      players: {},
-      playerColor: 'none',
-      playerStatus: false,
-
-    };
-    this.readyUp = this.readyUp.bind(this);
-    this.startGame = this.startGame.bind(this);
-  }
-
-  readyUp() {
-    this.setState({
-      playerStatus: true,
+const Lobby = () => {
+  const {
+    players, setPlayers, player, gameID, allPlayers,
+  } = useContext(GlobalContext);
+  useEffect(() => {
+    socket.on('ready', (user) => {
+      setPlayers((prev) => {
+        prev.map((current) => {
+          if (current.username === user.username) {
+            return { ...current, status: true };
+          }
+          return current;
+        });
+      });
     });
-  }
+    // socket.on('start', () => 'add board component here');
+    // });
+  }, []);
 
-  startGame() {
-    return 'add function that starts the game';
-  }
+  const readyUp = () => {
+    socket.emit('ready', player, gameID);
+  };
+  const startGame = () => {
+    socket.emit('start', player, gameID);
+  };
+  // const makeList = players.map((each) => (
+  //   <div>{each.username}</div>
+  // ));
 
-  render() {
-    const { players, playerColor, playerStatus } = this.state;
-    return (
-      <>
-        <List
-          players={players}
-          color={playerColor}
-          status={playerStatus}
-        />
-        <button onClick={this.readyUp} type="submit">READY UP!</button>
-        <button onClick={this.startGame} type="submit">START GAME</button>
-      </>
-    );
-  }
-}
+  return (
+    <Background>
+      <Title>LOADING BAY</Title>
+      <Row>
+        <Column>
+          { players.map((each) => (
+            <PlayerRow>
+              <PlayerName key={each.id}>{each.username.slice(0, 20)}</PlayerName>
+              <PlayerSelection>{each.color}</PlayerSelection>
+            </PlayerRow>
+          ))}
+        </Column>
 
+        <Column>
+          <Placeholder />
+          <LoadingButton onClick={readyUp} color="green" type="button">IM READY!</LoadingButton>
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          <div>Room Code</div>
+          <LoadingButton color="grey" onClick={startGame} type="button">HKFAJ</LoadingButton>
+        </Column>
+        {player.isHost ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
+      </Row>
+    </Background>
+
+  // <div>
+  // { players.map((each) => (
+  //   <>
+  //     <div key={each.id}>{each.username}</div>
+  //     <div>{each.color}</div>
+  //   </>
+  // ))}
+  //   <button onClick={readyUp} type="button">READY UP!</button>
+  //   {player.isHost ? <button onClick={startGame} type="button">START GAME</button> : null}
+  // </div>
+  );
+};
+
+const Background = Styled.div`
+  display: flex;
+  flex-direction: column;
+  background: #181818;
+  height: 100vh;
+  align-items: center;
+`;
+
+const Title = Styled.div`
+  font-family: anotherDanger;
+  color: red;
+  font-size: 10vh;
+`;
+
+const PlayerRow = Styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background-color: #232323;
+  margin-bottom: 5px;
+  width: 25rem;
+
+`;
+
+const Column = Styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Row = Styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 5vh;
+`;
+
+const LoadingButton = Styled.button`
+  background-color: #232323;
+  color:  ${(props) => props.color || '#E0E0E0'};
+  font-size: 24px;
+  border: none;
+  box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
+  width: 15rem;
+`;
+
+const Placeholder = Styled.div`
+  height: 35vh;
+  width: 25rem;
+  border: 2px solid red;
+`;
+
+const PlayerName = Styled.div`
+  font-size: 2rem;
+`;
+
+const PlayerSelection = Styled.div`
+  font-size: 2rem;
+`;
 export default Lobby;
