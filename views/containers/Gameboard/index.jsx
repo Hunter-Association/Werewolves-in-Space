@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../store';
 import MusicPlayer from './components/musicPlayer';
-import socket from '../../util';
+import socket from '../../util/socket.config.js';
 
-const GameBoard = (props) => {
+const Gameboard = (props) => {
   useEffect(() => {
     socket.on('ejectedViaAirLock');
     socket.on('werewolf-spotted');
@@ -28,4 +28,4 @@ const GameBoard = (props) => {
   );
 };
 
-export default GameBoard;
+export default Gameboard;

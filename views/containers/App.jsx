@@ -11,7 +11,7 @@ const App = () => (
   <GlobalProvider>
     <Routes>
       {/* <Route path="/" element={<Lobby />} /> */}
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Gameboard />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Home />} />
       <Route path="/board" element={<Gameboard />} />
