@@ -15,13 +15,14 @@ const MusicPlayer = () => {
 
   useEffect(() => {
     document.getElementById('gameMusic').muted = !isPlaying;
+    document.getElementById('gameMusic').volume = volume;
   });
 
   return (
     <div className="music-player">
       <audio preload="auto" id="gameMusic" display="hidden" autoPlay className="test" type="audio/mpeg">
         <track kind="captions" />
-        <source src={songURL} type="audio/mpeg" />
+        <source preload="auto" src={songURL} type="audio/mpeg" />
       </audio>
       <MuteButton muteFunction={handleMuteClick} isPlaying={isPlaying} />
     </div>
