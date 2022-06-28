@@ -5,6 +5,7 @@ import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import CrewManifest from '../../../Assets/CrewManifest.png';
 // import Chat from '../Chat';
+import CharacterSelect from './CharacterSelect';
 
 const Lobby = () => {
   const {
@@ -18,7 +19,7 @@ const Lobby = () => {
       setPlayers((prev) => {
         prev.map((current) => {
           if (current.username === user.username) {
-            return { ...current, status: true };
+            return { ...current, status: true }; // add character:"soldier"
           }
           return current;
         });
