@@ -34,17 +34,14 @@ const Lobby = () => {
       }
     });
     socket.on('game-started', () => {
-      console.log('game-started is runningggg');
-      navigate('/board')
+      navigate('/board');
     });
-
   }, []);
 
   const readyUp = (p) => {
     socket.emit('ready', p, gameID);
   };
   const startGame = () => {
-    console.log('startGame is running');
     socket.emit('start-game', gameID, player);
   };
 
@@ -180,11 +177,11 @@ const LoadingButton = Styled.button`
   z-index: 75;
 `;
 
-const Placeholder = Styled.div`
-  height: 50vh;
-  width: 25rem;
-  border: 2px solid red;
-`;
+// const Placeholder = Styled.div`
+//   height: 50vh;
+//   width: 25rem;
+//   border: 2px solid red;
+// `;
 
 const PlayerName = Styled.div`
   font-size: 2rem;

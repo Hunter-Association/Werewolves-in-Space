@@ -62,7 +62,7 @@ export default CharacterSelect;
 const Big = Styled.div`
   height: 50vh;
   width: 25rem;
-  border: 2px solid red;
+
 `;
 
 const Row = Styled.div`
@@ -103,7 +103,7 @@ const CenterDiv = Styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid blue;
+
 `;
 
 // const CharacterHeader = Styled.h2`
@@ -117,7 +117,7 @@ const CharacterText = Styled.div`
 `;
 
 const CharactersOverview = Styled.div`
-  border: 1px solid pink;
+
   display: flex;
   justify-content: center;
   align-items: center;
