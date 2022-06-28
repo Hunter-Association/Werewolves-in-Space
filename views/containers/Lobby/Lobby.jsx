@@ -7,6 +7,8 @@ import CrewManifest from '../../../Assets/CrewManifest.png';
 import LobbyChat from './LobbyChat';
 import arrowDown from '../../../Assets/arrow-down.svg';
 import arrowUp from '../../../Assets/arrow-up.svg';
+// import Chat from '../Chat';
+import CharacterSelect from './CharacterSelect';
 
 const Lobby = () => {
   const {
@@ -68,7 +70,7 @@ const Lobby = () => {
         </LeftColumn>
 
         <Column>
-          <Placeholder />
+          <CharacterSelect />
           <LoadingButton onClick={readyUp} color="green" type="button">IM READY!</LoadingButton>
         </Column>
 
