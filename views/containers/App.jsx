@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Login/Signup';
-import Lobby from './Lobby';
+import Lobby from './Lobby/Lobby';
 import { GlobalProvider } from '../store';
 
 const App = () => (

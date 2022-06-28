@@ -11,6 +11,9 @@ const [player, setPlayer] = useState({
   isWolf: false,
   socket: {},
   id: '',
+  color: 'none',
+  status: false,
+  isHost: true
 });
 const [players, setPlayers] = useState([{
   username: 'user1', isDead: false, isWolf: false, socket: {}, id: '', color: 'none', status: false,

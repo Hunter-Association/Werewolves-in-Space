@@ -40,13 +40,14 @@ const Login = () => {
         } else {
           getUser()
             .then((res) => {
-              setPlayer({
+              setPlayer((prev) => ({
+                ...prev,
                 username: res.data.user.username,
                 isDead: false,
                 isWolf: false,
                 socket: {},
                 id: res.data.user._id,
-              });
+              }));
               setSessionData(res.data.session);
             })
             .then(navigate('/home'));

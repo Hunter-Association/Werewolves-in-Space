@@ -36,14 +36,14 @@ const PORT = process.env.PORT || 3000;
 
 
 //=====SOCKETS==================
-
+const playerMap = new Map();
 io.on('connection', socket => {
 
   socket.on('join-game', async (gameID, player) => {
     socket.player = player;
     socket.gameID = gameID;
-    // playerMap.set(socket.id, player);
     socket.gameID = gameID;
+    playerMap.set(socket.id, player);
     socket.join(gameID);
 
     const allPlayers = await io.in(gameID).allSockets();
