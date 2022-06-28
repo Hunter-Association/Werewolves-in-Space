@@ -51,9 +51,13 @@ const Warn = styled.div`
   margin-top: 6px;
 `;
 
-const GameName = styled.div`
-  font-size: 70px;
-  filter: drop-shadow(4px 4px 4px #0000009d);
+const LogoWrapper = styled.section`
+  height: 550px;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 `;
 
 const ClawMarks = styled.img`
@@ -69,13 +73,9 @@ const WerewolfImg = styled.img`
   filter: drop-shadow(4px 4px 4px #0000009d);
 `;
 
-const LogoWrapper = styled.section`
-  height: 550px;
-  width: 700px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
+const GameName = styled.div`
+  font-size: 70px;
+  filter: drop-shadow(4px 4px 4px #0000009d);
 `;
 
 const LoginButton = styled.input`
