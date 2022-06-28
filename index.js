@@ -35,7 +35,7 @@ const PORT = process.env.PORT || 3000;
 
 
 //=====SOCKETS==================
-
+const playerMap = new Map();
 io.on('connection', socket => {
 
   socket.on('join-game', async (gameID, player) => {
