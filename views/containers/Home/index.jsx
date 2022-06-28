@@ -37,10 +37,6 @@ const Home = () => {
 
   const joinGame = () => {
     socket.on('player-joined', (allPlayers) => {
-<<<<<<< HEAD
-      // console.log(allPlayers);
-=======
->>>>>>> dev
       setPlayers(allPlayers);
     });
     socket.emit('join-game', gameID, player);

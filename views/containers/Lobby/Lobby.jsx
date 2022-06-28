@@ -35,16 +35,6 @@ const Lobby = () => {
     <Background>
       <Title>LOADING BAY</Title>
       <Row>
-<<<<<<< HEAD
-        <Column>
-          { players.map((each) => (
-            <PlayerRow>
-              <PlayerName key={each.id}>{each.username.slice(0, 20)}</PlayerName>
-              <PlayerSelection color={each.color}>O</PlayerSelection>
-            </PlayerRow>
-          ))}
-        </Column>
-=======
         <LeftColumn>
           <Img src={CrewManifest} alt="crew-manifest" />
           <ListCol>
@@ -60,7 +50,6 @@ const Lobby = () => {
             <LoadingButton color="grey" onClick={startGame} type="button">HKFAJ</LoadingButton>
           </Column>
         </LeftColumn>
->>>>>>> dev
 
         <Column>
           <Placeholder />
