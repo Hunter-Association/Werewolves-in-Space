@@ -8,8 +8,6 @@ const [isDarkMode, setIsDarkMode] = useState('false');
 const [player, setPlayer] = useState(null);
 const [players, setPlayers] = useState([]);
 const [gameID, setGameID] = useState(''); // When user joins game he will give this, host game create this.
-
-
 const [sessionData, setSessionData] = useState(null);
 
 // =================================================== export your state and setState functions here
