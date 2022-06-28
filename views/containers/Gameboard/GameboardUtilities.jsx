@@ -1,5 +1,7 @@
 //========================= GAMEMASTER ======================//
 
+//TODO - Export all functions so the socket handlers can run them
+
 const runPlayerRound = () => {
   //start checking for enough votes to end round
   let lockedIn = players.map((p) => {
@@ -220,6 +222,7 @@ const endWolfRound = (wolvesLockedIn) => {
     //change all the accusations to no one, and locked in to false
   }
 
+<<<<<<< HEAD
     //========================= EMITTERS ======================//
 
   const suspect = (defendant) => {
@@ -229,3 +232,5 @@ const endWolfRound = (wolvesLockedIn) => {
   const lockIn = () => {
     socket.emit('lockIn', player, player);
   };
+=======
+>>>>>>> cc17bdfb3a081dc2a46862162ddfa9723e3a7868
