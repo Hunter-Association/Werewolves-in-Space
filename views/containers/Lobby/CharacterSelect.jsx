@@ -8,15 +8,22 @@ import soldier from '../../../Assets/characters/singleFutureSoldier.png';
 import normalGirl from '../../../Assets/characters/singleNormalGirl.png';
 import { GlobalContext } from '../../store';
 
-const CharacterSelect = ({ currentCharacter, setCurrentCharacter }) => {
-  const { characterList, setCharacterList } = useContext(GlobalContext);
+// const CharacterSelect = ({ currentCharacter, setCurrentCharacter }) => {
+//   const { characterList, setCharacterList } = useContext(GlobalContext);
 
-  // const [currentCharcter, setCurrentCharacter] = useState(3);
-  // const [characterList, setCharacterList] = useState(
-  //   [adventureGirl, agent, cyberpunk, soldier, normalGirl],
-  // );
-  const i = `    this is the charcter bio. he is the super soldier that has the ability to hunt the werewolves in space!
-  testing for a longer string and to make sure the text doesnt go past testing 4 lines ahahasdlf`;
+//   // const [currentCharcter, setCurrentCharacter] = useState(3);
+//   // const [characterList, setCharacterList] = useState(
+//   //   [adventureGirl, agent, cyberpunk, soldier, normalGirl],
+//   // );
+//   const i = `    this is the charcter bio. he is the super soldier that has the ability to hunt the werewolves in space!
+//   testing for a longer string and to make sure the text doesnt go past testing 4 lines ahahasdlf`;
+import characterBios from '../../../Assets/characters/characterBios';
+
+const CharacterSelect = () => {
+  const [currentCharacter, setCurrentCharacter] = useState(3);
+  const [characterList, setCharacterList] = useState(
+    [adventureGirl, agent, cyberpunk, soldier, normalGirl],
+  );
 
   const nextCharacterLeft = () => {
     if (currentCharacter !== 0) {
@@ -49,7 +56,7 @@ const CharacterSelect = ({ currentCharacter, setCurrentCharacter }) => {
         <ButtonLeft onClick={() => nextCharacterLeft()} />
         <CenterDiv>
           <CharacterImage src={characterList[currentCharacter]} alt={currentCharacter} />
-          <CharacterText>{i}</CharacterText>
+          <CharacterText>{characterBios[currentCharacter]}</CharacterText>
         </CenterDiv>
         <ButtonRight onClick={() => nextCharacterRight()} />
       </Row>
@@ -103,7 +110,10 @@ const CenterDiv = Styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
   max-width: 250px;
   border: 1px solid blue;
 `;
