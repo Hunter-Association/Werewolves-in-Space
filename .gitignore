@@ -103,4 +103,6 @@ dist
 
 public/bundle.js
 public/*.ttf
+public/*.png
+public/*.svg
 public/font

@@ -6,7 +6,7 @@ import axios from 'axios';
 import AuthForm from './components/AuthForm';
 // import io from 'socket.io-client';
 import { GlobalContext } from '../../store';
-import { Button, Center } from '../../library';
+import { Center } from '../../library';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -67,7 +67,8 @@ const Login = () => {
     <Center>
       <AuthForm route="Login" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} displayWarning={displayWarning} />
 
-      <Link to="/signup"><BottomButton backgroundColor="red">Signup</BottomButton></Link>
+      <Link to="/signup"><FooterDiv>Signup</FooterDiv></Link>
+      <Link to="/signup"><FooterDiv>Forgot Password?</FooterDiv></Link>
     </Center>
   );
 };
@@ -89,8 +90,10 @@ const Login = () => {
 // `;
 
 //= ======unique styling
-const BottomButton = Styled(Button)`
-  margin-top: 15vh
+const FooterDiv = Styled.div`
+  color: white;
+  letter-spacing: 2px;
+  margin-top: 10px;
 `;
 
 export default Login;
