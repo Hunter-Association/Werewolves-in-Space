@@ -6,7 +6,6 @@ import socket from '../../util/socket.config.js';
 
 const Gameboard = (props) => {
   useEffect(() => {
-<<<<<<< HEAD
     socket.on('suspect', suspectHandler)
     socket.on('lockIn', lockHandler)
     socket.on('ejectViaAirLock', ejectHandler)
@@ -14,14 +13,6 @@ const Gameboard = (props) => {
     socket.on('player-disconnected',)
     socket.on('chat-message', )
   }, [])
-=======
-    socket.on('ejectedViaAirLock');
-    socket.on('werewolf-spotted');
-    socket.on('murdered');
-    socket.on('player-disconnected');
-    socket.on('chat-message');
-  }, []);
->>>>>>> cc17bdfb3a081dc2a46862162ddfa9723e3a7868
 
   const {
     user, players, setUser, setPlayers,
