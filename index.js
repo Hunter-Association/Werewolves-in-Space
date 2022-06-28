@@ -52,14 +52,17 @@ io.on('connection', socket => {
   socket.on('ready', (player) => {
     io.to(gameID).emit('ready', player)
   })
-  socket.on('vote', (gameID, player, suspect) => {
-    io.to(gameID).emit('player-voted', player, suspect)
+  socket.on('suspect', (gameID, player, suspect) => {
+    io.to(gameID).emit('suspect', player, suspect)
   })
-  socket.on('voteToEat', (gameID, player, astronaut) => {
-    io.to(gameID).emit('werewolf-spotted', player, astronaut)
+  socket.on('lockIn', (gameID, player, colonist) => {
+    io.to(gameID).emit('lockIn', player, colonist)
   })
-  socket.on('murdered', (gameID, player, victim) => {
-    io.to(gameID).emit('murdered', player, victim)
+  socket.on('ejectViaAirLock', (gameID, player, colonist) => {
+    io.to(gameID).emit('ejectViaAirLock', player, colonist)
+  })
+  socket.on('eatPlayer', (gameID, player, colonist) => {
+    io.to(gameID).emit('eatPlayer', player, colonist)
   })
   socket.on('disconnect', () => {
     io.emit('player-disconnected')

@@ -1,15 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Styled from 'styled-components';
 import copy from 'copy-to-clipboard';
+import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import CrewManifest from '../../../Assets/CrewManifest.png';
-// import Chat from '../Chat';
+import LobbyChat from './LobbyChat';
+import arrowDown from '../../../Assets/arrow-down.svg';
+import arrowUp from '../../../Assets/arrow-up.svg';
+import CharacterSelect from './CharacterSelect';
 
 const Lobby = () => {
+  const navigate = useNavigate();
   const {
-    players, setPlayers, player, gameID,
+    players, setPlayers, player, setPlayer, gameID,
   } = useContext(GlobalContext);
+  const [currentCharacter, setCurrentCharacter] = useState(3);
 
   const [showChat, setShowChat] = useState(false);
   const [ canStart, setCanStart] = useState(false);
@@ -27,8 +33,7 @@ const Lobby = () => {
         setCanStart(playList.every((each) => each.status));
       }
     });
-    // socket.on('start', () => 'add board component here');
-    // });
+    socket.on('start-game', () => navigate('/board'));
   }, []);
 
   const readyUp = () => {
@@ -36,6 +41,17 @@ const Lobby = () => {
   };
   const startGame = () => {
     socket.emit('start-game', player, gameID);
+  };
+
+  const getCharAndReady = () => {
+    const oldPlayer = { ...player };
+    oldPlayer.charDex = currentCharacter;
+    setPlayer(oldPlayer);
+    readyUp();
+  };
+
+  const handleChatShow = () => {
+    setShowChat((prev) => !prev);
   };
 
   return (
@@ -48,7 +64,9 @@ const Lobby = () => {
             { players.map((each) => (
               <PlayerRow>
                 <PlayerName key={each.id}>{each.username.slice(0, 10)}</PlayerName>
-                <PlayerSelection backgroundColor={each.color}>O</PlayerSelection>
+                {each.status
+                  ? <PlayerSelection color="green">Ready</PlayerSelection>
+                  : <PlayerSelection color="red">Waiting</PlayerSelection> }
               </PlayerRow>
             ))}
           </ListCol>
@@ -59,8 +77,11 @@ const Lobby = () => {
         </LeftColumn>
 
         <Column>
-          <Placeholder />
-          <LoadingButton onClick={readyUp} color="green" type="button">IM READY!</LoadingButton>
+          <CharacterSelect
+            currentCharacter={currentCharacter}
+            setCurrentCharacter={setCurrentCharacter}
+          />
+          <LoadingButton onClick={getCharAndReady} color="green" type="button">IM READY!</LoadingButton>
         </Column>
 
       </Row>
@@ -69,7 +90,15 @@ const Lobby = () => {
         {player.isHost && canStart ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
       </Row>
 
-      {/* <Chat width="30em" height="350px" /> */}
+      <ChatDiv>
+        {showChat && <LobbyChat />}
+        <ChatExpandCont>
+          <ChatText>Chat</ChatText>
+          <ArrowDiv onClick={handleChatShow}>
+            {showChat ? <img src={arrowDown} alt="arrow" /> : <img src={arrowUp} alt="arrow" /> }
+          </ArrowDiv>
+        </ChatExpandCont>
+      </ChatDiv>
     </Background>
   );
 };
@@ -159,13 +188,44 @@ const PlayerName = Styled.div`
 
 const PlayerSelection = Styled.div`
   font-size: 2rem;
-  background-color: ${(props) => props.backgroundColor || 'white'},
-  border-radius: 50%,
-  border: 3px solid grey,
-  width: 20px,
-  height: 20px
+  color:  ${(props) => props.color};
 `;
 
-const PlayerStatus = Styled.div`
-font-size: 2rem;`;
+const ChatDiv = Styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 23.5em;
+  width: 22.2em;
+  position: fixed;
+  bottom: 1rem;
+  right: 2em;
+  z-index: 500;
+`;
+
+const ChatExpandCont = Styled.div`
+  display: flex;
+  height: 3em;
+  width: 21.9em;
+  background-color: black;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 1rem;
+`;
+
+const ChatText = Styled.div`
+  letter-spacing: 4px;
+  color: white;
+  flex-grow: 3;
+  padding-left: 1em;
+`;
+
+const ArrowDiv = Styled.div`
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  padding-right: 1em;
+  align-items: center;
+`;
+
 export default Lobby;

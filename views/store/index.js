@@ -1,37 +1,47 @@
 import React, {createContext, useState} from 'react';
+import adventureGirl from '../../Assets/characters/singleAdventureGirl.png';
+import agent from '../../Assets/characters/singleAgent.png';
+import cyberpunk from '../../Assets/characters/singleCyberpunk.png';
+import soldier from '../../Assets/characters/singleFutureSoldier.png';
+import normalGirl from '../../Assets/characters/singleNormalGirl.png';
 
-const GlobalContext = createContext()
+
+const GlobalContext = createContext();
 const GlobalProvider = props => {
 
 // =================================================== create your state below
 const [isDarkMode, setIsDarkMode] = useState('false');
+const [isSoundEnabled, setIsSoundEnabled] = useState('true');
+const [characterList, setCharacterList] = useState(
+  [adventureGirl, agent, cyberpunk, soldier, normalGirl],
+);
 const [player, setPlayer] = useState({
   username: 'anonymous',
   isDead: false,
   isWolf: false,
   socket: {},
   id: '',
-  color: 'none',
+  charDex: null,
   status: false,
   isHost: true
 });
 const [players, setPlayers] = useState([{
-  username: 'realkllkdajldfdfakdjflksdsfd adlsd', isDead: false, isWolf: false, socket: {}, id: '', color: 'none', status: false,
+  username: 'realkllkdajldfdfakdjflksdsfd adlsd', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
 },
  {
-  username: 'user2', isDead: false, isWolf: false, socket: {}, id: '', color: 'none', status: false,
+  username: 'user2', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
 }, {
-  username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', color: 'blue', status: false,
+  username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: true,
 }, {
-  username: 'user4', isDead: false, isWolf: false, socket: {}, id: '', color: 'yellow', status: false,
+  username: 'user4', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
 }, {
-  username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', color: 'purple', status: false,
+  username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
 }, {
-  username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', color: 'orange', status: false,
+  username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
 }, {
-  username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', color: 'pink', status: false,
+  username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
 }, {
-  username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', color: 'none', status: false,
+  username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
 }
 ]);
 const [gameID, setGameID] = useState(''); // When user joins game he will give this, host game create this.
@@ -45,6 +55,7 @@ return (
     /*state goes here*/
     isDarkMode,
     setIsDarkMode,
+    isSoundEnabled,
     gameID,
     setGameID,
     player,
@@ -53,6 +64,8 @@ return (
     setPlayers,
     sessionData,
     setSessionData,
+    characterList,
+    setCharacterList,
   }}>
     {props.children}
   </GlobalContext.Provider>
