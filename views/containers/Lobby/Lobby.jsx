@@ -40,12 +40,14 @@ const Lobby = () => {
       <Row>
         <LeftColumn>
           <Img src={CrewManifest} alt="crew-manifest" />
-          { players.map((each) => (
-            <PlayerRow>
-              <PlayerName key={each.id}>{each.username.slice(0, 15)}</PlayerName>
-              <PlayerSelection>{each.color}</PlayerSelection>
-            </PlayerRow>
-          ))}
+          <ListCol>
+            { players.map((each) => (
+              <PlayerRow>
+                <PlayerName key={each.id}>{each.username.slice(0, 10)}</PlayerName>
+                <PlayerSelection>{each.color}</PlayerSelection>
+              </PlayerRow>
+            ))}
+          </ListCol>
           <Column>
             <div>Room Code</div>
             <LoadingButton color="grey" onClick={startGame} type="button">HKFAJ</LoadingButton>
@@ -94,7 +96,7 @@ const PlayerRow = Styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 1rem;
-  background-color: #232323;
+  background-color: 'black';
   margin-bottom: 5px;
   width: 20rem;
   z-index: 100;
@@ -106,6 +108,11 @@ const Column = Styled.div`
   flex-direction: column;
   align-items: center;
   border: 2px solid green;
+`;
+
+const ListCol = Styled(Column)`
+  padding-top: 5em;
+  background: 'red';
 `;
 
 const LeftColumn = Styled(Column)`
@@ -143,6 +150,7 @@ const Placeholder = Styled.div`
 
 const PlayerName = Styled.div`
   font-size: 2rem;
+  letter-spacing: 4px;
 `;
 
 const PlayerSelection = Styled.div`
