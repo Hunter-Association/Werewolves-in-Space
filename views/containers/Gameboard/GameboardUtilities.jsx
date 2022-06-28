@@ -1,5 +1,7 @@
 //========================= GAMEMASTER ======================//
 
+//TODO - Export all functions so the socket handlers can run them
+
 const runPlayerRound = () => {
   //start checking for enough votes to end round
   let lockedIn = players.map((player) => {
@@ -219,3 +221,4 @@ const endWolfRound = (wolvesLockedIn) => {
     });
     //change all the accusations to no one, and locked in to false
   }
+
