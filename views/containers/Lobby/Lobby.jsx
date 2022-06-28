@@ -4,6 +4,7 @@ import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import CrewManifest from '../../../Assets/CrewManifest.png';
 // import { Button } from '../../library';
+import CharacterSelect from './CharacterSelect';
 
 const Lobby = () => {
   const {
@@ -55,7 +56,7 @@ const Lobby = () => {
         </LeftColumn>
 
         <Column>
-          <Placeholder />
+          <CharacterSelect />
           <LoadingButton onClick={readyUp} color="green" type="button">IM READY!</LoadingButton>
         </Column>
       </Row>
