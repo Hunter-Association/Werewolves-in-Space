@@ -1,15 +1,18 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Styled from 'styled-components';
+import copy from 'copy-to-clipboard';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import CrewManifest from '../../../Assets/CrewManifest.png';
-// import { Button } from '../../library';
-import CharacterSelect from './CharacterSelect';
+// import Chat from '../Chat';
 
 const Lobby = () => {
   const {
     players, setPlayers, player, gameID,
   } = useContext(GlobalContext);
+
+  const [showChat, setShowChat] = useState(false);
+
   useEffect(() => {
     socket.on('ready', (user) => {
       setPlayers((prev) => {
@@ -51,7 +54,7 @@ const Lobby = () => {
           </ListCol>
           <Column>
             <CodeDiv>Room Code</CodeDiv>
-            <LoadingButton color="grey" onClick={startGame} type="button">HKFAJ</LoadingButton>
+            <LoadingButton color="grey" onClick={() => copy(gameID)} type="button">{gameID}</LoadingButton>
           </Column>
         </LeftColumn>
 
@@ -59,11 +62,14 @@ const Lobby = () => {
           <CharacterSelect />
           <LoadingButton onClick={readyUp} color="green" type="button">IM READY!</LoadingButton>
         </Column>
+
       </Row>
 
       <Row>
         {player.isHost ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
       </Row>
+
+      {/* <Chat width="30em" height="350px" /> */}
     </Background>
 
   // <div>
@@ -138,6 +144,7 @@ const Row = Styled.div`
   align-items: center;
   gap: 1rem;
   padding-top: 5vh;
+
 `;
 
 const LoadingButton = Styled.button`

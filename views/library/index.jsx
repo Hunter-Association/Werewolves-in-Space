@@ -18,6 +18,8 @@ export const Button = Styled.button`
 border-radius: 10px;
 width: 417px;
 height: 54px;
+letter-spacing: 4px;
+text-shadow: 3px 3px #00000051;
 background-color: ${(props) => props.backgroundColor || '#3e7DA0'};
 color:  ${(props) => props.color || '#E0E0E0'};
 font-size: 24px;

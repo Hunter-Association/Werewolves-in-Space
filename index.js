@@ -10,7 +10,6 @@ const passport = require('passport');
 const dotenv = require('dotenv').config();
 const MongoStore = require('connect-mongo');
 
-
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors({
@@ -76,13 +75,11 @@ io.on('connection', socket => {
     }, roundLength);
   })
   socket.on('chat-message', (gameID, player, msg) => {
-    socket.join(gameID);
     !player.isAlive ?
     io.to(gameID).emit('chat-message', player, msg)
     :
     io.to(gameID).emit('dead-chat-message', player, msg);
   })
-
 })
 
 httpServer.listen(PORT, () => console.log('Listening on port:', PORT))
