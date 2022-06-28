@@ -94,9 +94,13 @@ const LoginButton = styled.input`
 `;
 
 const PasswordBox = styled(TextInput)`
+  font-family: Arial;
   &:focus {
-    font-family: Arial;
     outline: none;
+  }
+
+  &::placeholder {
+    font-family: AnotherDanger;
   }
 `;
 
