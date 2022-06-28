@@ -34,11 +34,13 @@ const Lobby = () => {
       }
     });
     socket.on('game-started', () => {
+      console.log('happy');
       navigate('/board');
     });
   }, []);
 
   const readyUp = (p) => {
+    console.log('poop');
     socket.emit('ready', p, gameID);
   };
   const startGame = () => {

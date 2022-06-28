@@ -10,7 +10,7 @@ import { GlobalContext } from '../../store';
 
 const CharacterSelect = ({ currentCharacter, setCurrentCharacter }) => {
   const { characterList, setCharacterList } = useContext(GlobalContext);
-  // console.log(characterList[1]);
+
   // const [currentCharcter, setCurrentCharacter] = useState(3);
   // const [characterList, setCharacterList] = useState(
   //   [adventureGirl, agent, cyberpunk, soldier, normalGirl],
@@ -104,6 +104,8 @@ const CenterDiv = Styled.div`
   flex-direction: column;
   align-items: center;
 
+  max-width: 250px;
+  border: 1px solid blue;
 `;
 
 // const CharacterHeader = Styled.h2`
