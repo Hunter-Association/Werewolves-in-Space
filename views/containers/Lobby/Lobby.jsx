@@ -194,9 +194,8 @@ const ChatDiv = Styled.div`
   flex-direction: column;
   height: 23.5em;
   width: 22.2em;
-  border: 2px solid red;
   position: fixed;
-  bottom: 0;
+  bottom: 1rem;
   right: 2em;
   z-index: 500;
 `;
@@ -209,7 +208,7 @@ const ChatExpandCont = Styled.div`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  bottom: 0;
+  bottom: 1rem;
 `;
 
 const ChatText = Styled.div`
