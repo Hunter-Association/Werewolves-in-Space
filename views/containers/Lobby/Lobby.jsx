@@ -22,7 +22,6 @@ const Lobby = () => {
 
   useEffect(() => {
     socket.on('ready', (user) => {
-      console.log('hi', user);
       const playList = players.map((current) => {
         if (current.username === user.username) {
           return { ...current, status: !current.status };
@@ -30,6 +29,7 @@ const Lobby = () => {
         return current;
       });
       setPlayers(playList);
+      console.log(playList);
       if (player.isHost) {
         setCanStart(playList.every((each) => each.status));
       }
