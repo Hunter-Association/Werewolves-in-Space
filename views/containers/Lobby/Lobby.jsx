@@ -68,7 +68,7 @@ const Lobby = () => {
 
       {/* <Chat width="30em" height="350px" /> */}
     </Background>
-  )
+  );
 };
 
 const Background = Styled.div`
