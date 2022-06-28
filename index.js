@@ -50,7 +50,7 @@ io.on('connection', socket => {
     io.to(gameID).emit('player-joined', playersArr);
   })
   socket.on('ready', (player) => {
-    io.to(gameID).emit('')
+    io.to(gameID).emit('ready', player)
   })
   socket.on('vote', (gameID, player, suspect) => {
     io.to(gameID).emit('player-voted', player, suspect)
@@ -66,13 +66,9 @@ io.on('connection', socket => {
   })
   socket.on('game-over', (winningTeam) => {
     io.emit('game-over', winningTeam)
-    clearInterval(roundsTimer)
   })
-  socket.on('start-game', (gameID, roundLength = 120000) => {
-    io.to(gameID).emit('game-started', roundLength)
-    roundsTimer = setInterval(() => {
-      io.to(gameID).emit('toggle-round')
-    }, roundLength);
+  socket.on('start-game', (gameID) => {
+    io.to(gameID).emit('game-started')
   })
   socket.on('chat-message', (gameID, player, msg) => {
     !player.isAlive ?

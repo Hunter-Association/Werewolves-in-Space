@@ -12,17 +12,20 @@ const Lobby = () => {
   } = useContext(GlobalContext);
 
   const [showChat, setShowChat] = useState(false);
+  const [ canStart, setCanStart] = useState(false);
 
   useEffect(() => {
     socket.on('ready', (user) => {
-      setPlayers((prev) => {
-        prev.map((current) => {
-          if (current.username === user.username) {
-            return { ...current, status: true };
-          }
-          return current;
-        });
+      const playList = players.map((current) => {
+        if (current.username === user.username) {
+          return { ...current, status: !current.status };
+        }
+        return current;
       });
+      setPlayers(playList);
+      if (player.isHost) {
+        setCanStart(playList.every((each) => each.status));
+      }
     });
     // socket.on('start', () => 'add board component here');
     // });
@@ -32,7 +35,7 @@ const Lobby = () => {
     socket.emit('ready', player, gameID);
   };
   const startGame = () => {
-    socket.emit('start', player, gameID);
+    socket.emit('start-game', player, gameID);
   };
 
   return (
@@ -45,7 +48,7 @@ const Lobby = () => {
             { players.map((each) => (
               <PlayerRow>
                 <PlayerName key={each.id}>{each.username.slice(0, 10)}</PlayerName>
-                <PlayerSelection>{each.color}</PlayerSelection>
+                <PlayerSelection backgroundColor={each.color}>O</PlayerSelection>
               </PlayerRow>
             ))}
           </ListCol>
@@ -63,7 +66,7 @@ const Lobby = () => {
       </Row>
 
       <Row>
-        {player.isHost ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
+        {player.isHost && canStart ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
       </Row>
 
       {/* <Chat width="30em" height="350px" /> */}
@@ -156,10 +159,13 @@ const PlayerName = Styled.div`
 
 const PlayerSelection = Styled.div`
   font-size: 2rem;
-  color: ${(props) => props.color || 'white'},
+  background-color: ${(props) => props.backgroundColor || 'white'},
   border-radius: 50%,
   border: 3px solid grey,
-  width: 10px,
-  height: 10px
+  width: 20px,
+  height: 20px
 `;
+
+const PlayerStatus = Styled.div`
+font-size: 2rem;`;
 export default Lobby;
