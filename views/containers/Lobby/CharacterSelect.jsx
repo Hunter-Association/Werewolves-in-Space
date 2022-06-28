@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import Styled from 'styled-components';
 
 import adventureGirl from '../../../Assets/characters/singleAdventureGirl.png';
@@ -6,10 +6,12 @@ import agent from '../../../Assets/characters/singleAgent.png';
 import cyberpunk from '../../../Assets/characters/singleCyberpunk.png';
 import soldier from '../../../Assets/characters/singleFutureSoldier.png';
 import normalGirl from '../../../Assets/characters/singleNormalGirl.png';
+// import { GlobalContext } from '../../store';
+
 import characterBios from '../../../Assets/characters/characterBios';
 
-const CharacterSelect = () => {
-  const [currentCharacter, setCurrentCharacter] = useState(3);
+const CharacterSelect = ({ currentCharacter, setCurrentCharacter }) => {
+  // const { characterList } = useContext(GlobalContext);
   const [characterList, setCharacterList] = useState(
     [adventureGirl, agent, cyberpunk, soldier, normalGirl],
   );
@@ -58,7 +60,7 @@ export default CharacterSelect;
 const Big = Styled.div`
   height: 50vh;
   width: 25rem;
-  border: 2px solid red;
+
 `;
 
 const Row = Styled.div`
@@ -114,7 +116,7 @@ const CharacterText = Styled.div`
 `;
 
 const CharactersOverview = Styled.div`
-  border: 1px solid pink;
+
   display: flex;
   justify-content: center;
   align-items: center;

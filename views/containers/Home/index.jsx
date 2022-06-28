@@ -32,6 +32,7 @@ const Home = () => {
     socket.emit('join-game', uid, player);
     setGameID(uid);
     setPlayer((prev) => ({ ...prev, isHost: true }));
+    setPlayers([player]);
     navigate('/lobby');
   };
 
