@@ -59,7 +59,7 @@ const Lobby = () => {
         </LeftColumn>
 
         <Column>
-          <Placeholder />
+          <CharacterSelect />
           <LoadingButton onClick={readyUp} color="green" type="button">IM READY!</LoadingButton>
         </Column>
 
