@@ -5,6 +5,7 @@ import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import CrewManifest from '../../../Assets/CrewManifest.png';
 // import Chat from '../Chat';
+import CharacterSelect from './CharacterSelect';
 
 const Lobby = () => {
   const {
