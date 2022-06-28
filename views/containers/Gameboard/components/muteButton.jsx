@@ -12,7 +12,7 @@ const MuteButton = ({ muteFunction, isPlaying }) => {
     width: '100px',
     right: 0,
     top: 0,
-    fill: 'grey',
+    color: 'grey',
     zIndex: 2,
   };
 
