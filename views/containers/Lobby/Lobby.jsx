@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import Styled from 'styled-components';
 import { GlobalContext, GlobalProvider } from '../../store';
 import socket from '../../util/socket.config';
+import CrewManifest from '../../../Assets/CrewManifest.png';
 // import { Button } from '../../library';
 
 const Lobby = () => {
@@ -37,25 +38,27 @@ const Lobby = () => {
     <Background>
       <Title>LOADING BAY</Title>
       <Row>
-        <Column>
+        <LeftColumn>
+          <Img src={CrewManifest} alt="crew-manifest" />
           { players.map((each) => (
             <PlayerRow>
-              <PlayerName key={each.id}>{each.username.slice(0, 20)}</PlayerName>
+              <PlayerName key={each.id}>{each.username.slice(0, 15)}</PlayerName>
               <PlayerSelection>{each.color}</PlayerSelection>
             </PlayerRow>
           ))}
-        </Column>
+          <Column>
+            <div>Room Code</div>
+            <LoadingButton color="grey" onClick={startGame} type="button">HKFAJ</LoadingButton>
+          </Column>
+        </LeftColumn>
 
         <Column>
           <Placeholder />
           <LoadingButton onClick={readyUp} color="green" type="button">IM READY!</LoadingButton>
         </Column>
       </Row>
+
       <Row>
-        <Column>
-          <div>Room Code</div>
-          <LoadingButton color="grey" onClick={startGame} type="button">HKFAJ</LoadingButton>
-        </Column>
         {player.isHost ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
       </Row>
     </Background>
@@ -93,7 +96,8 @@ const PlayerRow = Styled.div`
   padding: 0 1rem;
   background-color: #232323;
   margin-bottom: 5px;
-  width: 25rem;
+  width: 20rem;
+  z-index: 100;
 
 `;
 
@@ -101,6 +105,17 @@ const Column = Styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 2px solid green;
+`;
+
+const LeftColumn = Styled(Column)`
+  position: relative;
+  width: 30rem;
+`;
+
+const Img = Styled.img`
+  position: absolute;
+  width: 100%;
 `;
 
 const Row = Styled.div`
@@ -121,7 +136,7 @@ const LoadingButton = Styled.button`
 `;
 
 const Placeholder = Styled.div`
-  height: 35vh;
+  height: 38vh;
   width: 25rem;
   border: 2px solid red;
 `;
