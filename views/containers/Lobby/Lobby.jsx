@@ -1,12 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Styled from 'styled-components';
-import { GlobalContext, GlobalProvider } from '../../store';
+import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
+import CrewManifest from '../../../Assets/CrewManifest.png';
 // import { Button } from '../../library';
 
 const Lobby = () => {
   const {
-    players, setPlayers, player, gameID, allPlayers,
+    players, setPlayers, player, gameID,
   } = useContext(GlobalContext);
   useEffect(() => {
     socket.on('ready', (user) => {
@@ -34,6 +35,7 @@ const Lobby = () => {
     <Background>
       <Title>LOADING BAY</Title>
       <Row>
+<<<<<<< HEAD
         <Column>
           { players.map((each) => (
             <PlayerRow>
@@ -42,17 +44,31 @@ const Lobby = () => {
             </PlayerRow>
           ))}
         </Column>
+=======
+        <LeftColumn>
+          <Img src={CrewManifest} alt="crew-manifest" />
+          <ListCol>
+            { players.map((each) => (
+              <PlayerRow>
+                <PlayerName key={each.id}>{each.username.slice(0, 10)}</PlayerName>
+                <PlayerSelection>{each.color}</PlayerSelection>
+              </PlayerRow>
+            ))}
+          </ListCol>
+          <Column>
+            <CodeDiv>Room Code</CodeDiv>
+            <LoadingButton color="grey" onClick={startGame} type="button">HKFAJ</LoadingButton>
+          </Column>
+        </LeftColumn>
+>>>>>>> dev
 
         <Column>
           <Placeholder />
           <LoadingButton onClick={readyUp} color="green" type="button">IM READY!</LoadingButton>
         </Column>
       </Row>
+
       <Row>
-        <Column>
-          <div>Room Code</div>
-          <LoadingButton color="grey" onClick={startGame} type="button">HKFAJ</LoadingButton>
-        </Column>
         {player.isHost ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
       </Row>
     </Background>
@@ -77,9 +93,15 @@ const PlayerRow = Styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 1rem;
-  background-color: #232323;
+  background-color: 'black';
   margin-bottom: 5px;
-  width: 25rem;
+  width: 20rem;
+  z-index: 100;
+`;
+
+const CodeDiv = Styled.div`
+  z-index: 75;
+  margin-bottom: 1.7em;
 
 `;
 
@@ -87,6 +109,22 @@ const Column = Styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const ListCol = Styled(Column)`
+  margin-top: 5.5em;
+  background-color: black;
+  z-index: 50;
+`;
+
+const LeftColumn = Styled(Column)`
+  position: relative;
+  width: 30rem;
+`;
+
+const Img = Styled.img`
+  position: absolute;
+  width: 100%;
 `;
 
 const Row = Styled.div`
@@ -104,16 +142,18 @@ const LoadingButton = Styled.button`
   border: none;
   box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
   width: 15rem;
+  z-index: 75;
 `;
 
 const Placeholder = Styled.div`
-  height: 35vh;
+  height: 50vh;
   width: 25rem;
   border: 2px solid red;
 `;
 
 const PlayerName = Styled.div`
   font-size: 2rem;
+  letter-spacing: 4px;
 `;
 
 const PlayerSelection = Styled.div`
