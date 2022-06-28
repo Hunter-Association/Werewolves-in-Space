@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Styled from 'styled-components';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
@@ -7,7 +7,7 @@ import CrewManifest from '../../../Assets/CrewManifest.png';
 
 const Lobby = () => {
   const {
-    players, setPlayers, player, gameID, allPlayers,
+    players, setPlayers, player, gameID,
   } = useContext(GlobalContext);
   useEffect(() => {
     socket.on('ready', (user) => {
