@@ -5,13 +5,17 @@ const GlobalProvider = props => {
 
 // =================================================== create your state below
 const [isDarkMode, setIsDarkMode] = useState('false');
-const [player, setPlayer] = useState({
+const [user, setUser] = useState({
   username: 'anonymous',
   isDead: false,
   isWolf: false,
   socket: {},
   id: '',
+  isHost: false;
+  suspects: null;
+  lockedIn: false;
 });
+const [player, setPlayer] = useState(null);
 const [players, setPlayers] = useState([]);
 const [gameID, setGameID] = useState(''); // When user joins game he will give this, host game create this.
 

@@ -31,7 +31,6 @@ margin-top: 13px;
   box-shadow: none;
 }
 `;
-
 export const Submit = Styled.input`
 border-radius: 10px;
 width: 417px;
@@ -48,7 +47,6 @@ text-shadow: 2px 2px #00000051;
   box-shadow: none;
 }
 `;
-
 export const TextInput = Styled.input`
   border-radius: 10px;
   width: 417px;
