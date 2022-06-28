@@ -124,6 +124,7 @@ const ListCol = Styled(Column)`
 const LeftColumn = Styled(Column)`
   position: relative;
   width: 30rem;
+  height: 100%;
 `;
 
 const Img = Styled.img`

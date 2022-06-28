@@ -11,7 +11,11 @@ const CharacterSelect = () => {
   return (
     <Big>
       <CharacterHeader>Character Select</CharacterHeader>
-      <CharactersOverview />
+      <CharactersOverview>
+        <CharacterImagePreview src={soldier} alt="crew pic preview" />
+        <CharacterImagePreview src={soldier} alt="crew pic preview" />
+        <CharacterImagePreview src={soldier} alt="crew pic preview" />
+      </CharactersOverview>
 
       <Row>
         <ButtonLeft onClick={() => setCurrentCharacter(characterList[currentCharcter - 1])} />
@@ -28,7 +32,9 @@ const CharacterSelect = () => {
 export default CharacterSelect;
 
 const Big = Styled.div`
-  border: 1px solid purple;
+  height: 50vh;
+  width: 25rem;
+  border: 2px solid red;
 `;
 
 const Row = Styled.div`
@@ -38,8 +44,13 @@ const Row = Styled.div`
 `;
 
 const CharacterImage = Styled.img`
-  height: 250;
-  width: 200;
+  height: 275px;
+  width: 225px;
+`;
+
+const CharacterImagePreview = Styled.img`
+  max-height: 50px;
+  max-width: 50px;
 `;
 
 const ButtonRight = Styled.div`
@@ -81,5 +92,7 @@ const CharacterText = Styled.p`
 
 const CharactersOverview = Styled.div`
   border: 1px solid pink;
-  text-align:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
