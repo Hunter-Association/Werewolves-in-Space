@@ -10,8 +10,8 @@ import { GlobalProvider } from '../store';
 const App = () => (
   <GlobalProvider>
     <Routes>
-      <Route path="/" element={<Lobby />} />
-      {/* <Route path="/" element={<Login />} /> */}
+      {/* <Route path="/" element={<Lobby />} /> */}
+      <Route path="/" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Home />} />
       <Route path="/board" element={<Gameboard />} />
