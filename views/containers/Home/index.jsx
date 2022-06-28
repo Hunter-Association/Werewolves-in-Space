@@ -17,7 +17,7 @@ const Home = () => {
     setGameID,
     player,
     setPlayer,
-    // players,
+    players,
     setPlayers,
   } = useContext(GlobalContext);
 

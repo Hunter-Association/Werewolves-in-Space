@@ -1,10 +1,12 @@
 //========================= GAMEMASTER ======================//
 
+//TODO - Export all functions so the socket handlers can run them
+
 const runPlayerRound = () => {
   //start checking for enough votes to end round
-  let lockedIn = players.map((player) => {
-    if(player.lockedIn === true) {
-      return player;
+  let lockedIn = players.map((p) => {
+    if(p.lockedIn === true) {
+      return p;
     }
   });
   //run endPlayerround when cleared
@@ -18,11 +20,11 @@ const runPlayerRound = () => {
 const endPlayerRound = (lockedIn) => {
   //run ejectViaAirlock if appropriate
   let votes = {};
-  lockedIn.forEach((player) => {
-    if(!votes[player.suspects]) {
-      votes[player.suspects] = 1;
+  lockedIn.forEach((p) => {
+    if(!votes[p.suspects]) {
+      votes[p.suspects] = 1;
     } else {
-      votes[player.suspects]++;
+      votes[p.suspects]++;
     }
   });
 
@@ -35,17 +37,17 @@ const endPlayerRound = (lockedIn) => {
   };
 
   if(player.isHost) {
-    socket.emit('ejectViaAirLock', user, currentPoll[0]);
+    socket.emit('ejectViaAirLock', player, currentPoll[0]);
   }
 
 
   let colonists = [];
   let wolves = [];
-  players.forEach(player) {
-    if(player.isWolf) {
-      wolves.push(player);
+  players.forEach(p) {
+    if(p.isWolf) {
+      wolves.push(p);
     } else {
-      colonists.push(player);
+      colonists.push(p);
     }
   }
   //check to see if all wolves are dead, or if wolves = colonists
@@ -61,11 +63,11 @@ const endPlayerRound = (lockedIn) => {
 
 const runWolfRound = () => {
   let wolves = 0;
-  let wolvesLockedIn = players.map(player) {
-    if(player['isWolf']) {
+  let wolvesLockedIn = players.map(p) {
+    if(p['isWolf']) {
       wolves++;
-      if(player['isLockedin']) {
-        return player;
+      if(p['isLockedin']) {
+        return p;
       }
     }
   };
@@ -78,12 +80,12 @@ const runWolfRound = () => {
 
 const endWolfRound = (wolvesLockedIn) => {
   let votes = {};
-  wolvesLockedIn.forEach(player) {
-    let voteFor = player.suspects;
-    if(!votes[player.suspects]) {
-      votes[player.suspects] = 1;
+  wolvesLockedIn.forEach(p) {
+    let voteFor = p.suspects;
+    if(!votes[p.suspects]) {
+      votes[p.suspects] = 1;
     } else {
-      votes[player.suspects]++;
+      votes[p.suspects]++;
     }
   }
 
@@ -101,11 +103,11 @@ const endWolfRound = (wolvesLockedIn) => {
 
   let colonists = [];
   let wolves = [];
-  players.forEach(player) {
-    if(player.isWolf) {
-      wolves.push(player);
+  players.forEach(p) {
+    if(p.isWolf) {
+      wolves.push(p);
     } else {
-      colonists.push(player);
+      colonists.push(p);
     }
   }
 
@@ -118,13 +120,13 @@ const endWolfRound = (wolvesLockedIn) => {
 
   //========================= LISTENERS ======================//
 
-  const voteHandler = (prosecutor, defendant) => {
+  const suspectHandler = (prosecutor, defendant) => {
     //change accusation for specified vote
     setPlayers((prev) => {
-      prev.map((player) => {
-        if(player.id === prosecutor.id) {
+      prev.map((p) => {
+        if(p.id === prosecutor.id) {
           return ({
-            ...player,
+            ...p,
             suspects: defendant,
           })
         }
@@ -135,11 +137,11 @@ const endWolfRound = (wolvesLockedIn) => {
   const lockHandler = (prosecutor) => {
     //flip bool status for lock
     setPlayers((prev) => {
-      prev.map((player) => {
-        if(player.id === prosecutor.id) {
+      prev.map((p) => {
+        if(p.id === prosecutor.id) {
           return ({
-            ...player,
-            lockedIn: !player.lockedIn,
+            ...p,
+            lockedIn: !p.lockedIn,
           })
         }
       })
@@ -157,10 +159,10 @@ const endWolfRound = (wolvesLockedIn) => {
       }));
     }
     setPlayers((prev) => {
-      prev.map((player) => {
-        if(player.id === suspect.id) {
+      prev.map((p) => {
+        if(p.id === suspect.id) {
           return ({
-            ...player,
+            ...p,
             isDead: true,
           })
         }
@@ -187,10 +189,10 @@ const endWolfRound = (wolvesLockedIn) => {
       }));
     }
     setPlayers((prev) => {
-      prev.map((player) => {
-        if(player.id === dinner.id) {
+      prev.map((p) => {
+        if(p.id === dinner.id) {
           return ({
-            ...player,
+            ...p,
             isDead: true,
           })
         }
@@ -209,9 +211,9 @@ const endWolfRound = (wolvesLockedIn) => {
   const clearData = () => {
 
     setPlayers((prev) => {
-      prev.map((player, index, array) => {
+      prev.map((p, index, array) => {
         return ({
-          ...player,
+          ...p,
           suspects: null,
           lockedIn: false,
         })
@@ -219,3 +221,13 @@ const endWolfRound = (wolvesLockedIn) => {
     });
     //change all the accusations to no one, and locked in to false
   }
+
+    //========================= EMITTERS ======================//
+
+  const suspect = (defendant) => {
+    socket.emit('suspect', player, defendant);
+  };
+
+  const lockIn = () => {
+    socket.emit('lockIn', player, player);
+  };

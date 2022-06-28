@@ -5,6 +5,7 @@ const GlobalProvider = props => {
 
 // =================================================== create your state below
 const [isDarkMode, setIsDarkMode] = useState('false');
+const [isSoundEnabled, setIsSoundEnabled] = useState('true');
 const [player, setPlayer] = useState({
   username: 'anonymous',
   isDead: false,
@@ -45,6 +46,7 @@ return (
     /*state goes here*/
     isDarkMode,
     setIsDarkMode,
+    isSoundEnabled,
     gameID,
     setGameID,
     player,
