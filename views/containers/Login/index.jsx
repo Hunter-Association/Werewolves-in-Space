@@ -66,13 +66,8 @@ const Login = () => {
     <Center>
       <AuthForm route="Login" handleSubmit={handleSubmit} handleUserNameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} displayWarning={displayWarning} />
 
-<<<<<<< HEAD
-      <Link to="/signup"><BottomButton backgroundColor="red">Signup</BottomButton></Link>
-      <Link to="/board"> Board </Link>
-=======
       <Link to="/signup"><FooterDiv>Signup</FooterDiv></Link>
       <Link to="/signup"><FooterDiv>Forgot Password?</FooterDiv></Link>
->>>>>>> 2ba32de43a2d4b3c8a72af7b03397b47f6be46d5
     </Center>
   );
 };
