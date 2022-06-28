@@ -15,6 +15,7 @@ const Lobby = () => {
   const {
     players, setPlayers, player, setPlayer, gameID,
   } = useContext(GlobalContext);
+
   const [currentCharacter, setCurrentCharacter] = useState(3);
 
   const [showChat, setShowChat] = useState(false);
@@ -44,12 +45,14 @@ const Lobby = () => {
     socket.emit('ready', p, gameID);
   };
   const startGame = () => {
-    socket.emit('start-game', gameID, player);
+    socket.emit('start-game', gameID);
   };
 
   const getCharAndReady = () => {
+    console.log('hi');
     const oldPlayer = { ...player };
     oldPlayer.charDex = currentCharacter;
+    console.log('old', oldPlayer);
     setPlayer(oldPlayer);
     readyUp(oldPlayer);
   };
