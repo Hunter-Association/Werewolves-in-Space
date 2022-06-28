@@ -7,35 +7,36 @@ import React, { useEffect, useContext, useState } from 'react';
 import Styled from 'styled-components';
 import playAreaBG from '../../../assets/img/playAreaBG.gif';
 import { GlobalContext } from '../../store';
+import {
+  runPlayerRound,
+  endPlayerRound,
+  runWolfRound,
+  endWolfRound,
+  suspectHandler,
+  lockHandler,
+  ejectHandler,
+  eatHandler,
+  clearData,
+  suspect,
+  lockIn,
+} from './GameboardUtilities.jsx';
 
 // build a reference object/array
 // this should contain links to all the images/
 
 const PlayArea = (props) => {
   const { player, players, characterList } = useContext(GlobalContext);
-  /*
-    Get players
-    Map
-
-  */
   const filler = 'filled';
   const [numPlayers, setNumPlayers] = useState(0);
+  console.log(characterList);
   return (
 
     <PositioningDiv className="positioningDiv">
       <img src={playAreaBG} alt="A spooky scary background on a spaceship!" />
-      {/* {players.map((p, i) => {
-        const CharacterModel = `Player${i}`;
-        return <CharacterModel src={characterList[p.charDex]} />;
-      })} */}
-      {/* <PlayerOne> ONE </PlayerOne>
-      <PlayerTwo>TWO</PlayerTwo>
-      <PlayerThree>THREE</PlayerThree>
-      <PlayerFour>FOUR</PlayerFour>
-      <PlayerFive>FIVE</PlayerFive>
-      <PlayerSix>SIX</PlayerSix>
-      <PlayerSeven>SEVEN</PlayerSeven>
-      <PlayerEight>EIGHT</PlayerEight> */}
+      {players.map((p, i) => {
+        const CharacterModel = `Player${i + 1}`;
+        return <CharacterModel src={characterList[3]} />;
+      })}
 
     </PositioningDiv>
 
@@ -54,62 +55,64 @@ const PlayArea = (props) => {
   //   user, players, setUser, setPlayers,
   // } = useContext(GlobalContext);
 };
-export default PlayArea;
+
 const PositioningDiv = Styled.div`
-  position: relative;
-  width: fit-content;
-  height: fit-content;
+position: relative;
+width: fit-content;
+height: fit-content;
 
 `;
 const Player1 = Styled.div`
-  position: absolute;
-  top: 65%;
-  left: 10%;
+position: absolute;
+top: 65%;
+left: 10%;
 `;
 
 const Player2 = Styled.div`
-  position: absolute;
-  top: 80%;
-  left: 20%;
+position: absolute;
+top: 80%;
+left: 20%;
 `;
 
 const Player3 = Styled.div`
-  position: absolute;
-  top: 65%;
-  left: 30%;
+position: absolute;
+top: 65%;
+left: 30%;
 `;
 
 const Player4 = Styled.div`
-  position: absolute;
-  top: 80%;
-  left: 40%;
+position: absolute;
+top: 80%;
+left: 40%;
 `;
 
 const Player5 = Styled.div`
-  position: absolute;
-  top: 65%;
-  left: 50%;
+position: absolute;
+top: 65%;
+left: 50%;
 `;
 
 const Player6 = Styled.div`
-  position: absolute;
-  top: 80%;
-  left: 60%;
+position: absolute;
+top: 80%;
+left: 60%;
 `;
 
 const Player7 = Styled.div`
-  position: absolute;
-  top: 65%;
-  left: 70%;
+position: absolute;
+top: 65%;
+left: 70%;
 `;
 
 const Player8 = Styled.div`
-  position: absolute;
-  top: 80%;
-  left: 80%;
+position: absolute;
+top: 80%;
+left: 80%;
 `;
 
 // const PlayerContainer = Styled.div`
 //   position: absolute;
 //   margin: 20%;
 // `;
+
+export default PlayArea;

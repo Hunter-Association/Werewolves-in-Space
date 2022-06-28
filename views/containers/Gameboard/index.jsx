@@ -2,11 +2,25 @@ import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
 import { GlobalContext } from '../../store';
-import MusicPlayer from './components/musicPlayer';
+// import MusicPlayer from './components/musicPlayer';
 import socket from '../../util/socket.config.js';
 import PlayArea from './PlayArea.jsx';
 import Chat from '../Chat/index.jsx';
-const Gameboard = (props) => {
+// import {
+//   runPlayerRound,
+//   endPlayerRound,
+//   runWolfRound,
+//   endWolfRound,
+//   suspectHandler,
+//   lockHandler,
+//   ejectHandler,
+//   eatHandler,
+//   clearData,
+//   suspect,
+//   lockIn,
+// } from './GameboardUtilities.jsx';
+
+const Gameboard = () => {
   // useEffect(() => {
   //   // socket.on('suspect', suspectHandler)
   //   // socket.on('lockIn', lockHandler)
@@ -31,16 +45,18 @@ const Gameboard = (props) => {
         <Link to="/">
           <div>Back to home</div>
         </Link>
-        <MusicPlayer />
+        {/* <MusicPlayer /> */}
       </HeaderDiv>
       <BottomDiv>
-          <PlayAreaDiv>
-          <PlayArea color="blue">playArea</PlayArea></PlayAreaDiv>
-          <ChatAreaDiv>
-            <ChatBufferDiv/>
-            <Chat height={'fit-content'}></Chat>
-            <ChatBufferDiv/>
-          </ChatAreaDiv>
+        <PlayAreaDiv>
+          <PlayArea color="blue">playArea</PlayArea>
+
+        </PlayAreaDiv>
+        <ChatAreaDiv>
+          <ChatBufferDiv />
+          <Chat height="fit-content" />
+          <ChatBufferDiv />
+        </ChatAreaDiv>
 
       </BottomDiv>
     </MainDiv>
