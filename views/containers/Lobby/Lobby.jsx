@@ -33,20 +33,24 @@ const Lobby = () => {
         setCanStart(playList.every((each) => each.status));
       }
     });
-    socket.on('game-started', () => navigate('/board'));
+    socket.on('game-started', () => {
+      console.log('game-started is runningggg');
+      navigate('/board')
+    });
+
   }, []);
 
   const readyUp = (p) => {
     socket.emit('ready', p, gameID);
   };
   const startGame = () => {
-    socket.emit('start-game', player, gameID);
+    console.log('startGame is running');
+    socket.emit('start-game', gameID, player);
   };
 
   const getCharAndReady = () => {
     const oldPlayer = { ...player };
     oldPlayer.charDex = currentCharacter;
-    console.log('oldie', oldPlayer);
     setPlayer(oldPlayer);
     readyUp(oldPlayer);
   };
