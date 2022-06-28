@@ -1,18 +1,14 @@
-// socket.on("Gamestart", (...args) => {
-//   // route to game view
-// });
-
 //========================= GAMEMASTER ======================//
 
 const runPlayerRound = () => {
   //start checking for enough votes to end round
-  let lockedIn = playerData.map(player) {
+  let lockedIn = players.map((player) => {
     if(player.lockedIn === true) {
       return player;
     }
-  };
+  });
   //run endPlayerround when cleared
-  if(lockedIn.length === playerData.length) {
+  if(lockedIn.length === players.length) {
     endPlayerRound(lockedIn);
   }
   setTimeout(runPlayerRound, 1000);
@@ -22,16 +18,15 @@ const runPlayerRound = () => {
 const endPlayerRound = (lockedIn) => {
   //run ejectViaAirlock if appropriate
   let votes = {};
-  lockedIn.forEach(player) {
-    let voteFor = player.suspects;
+  lockedIn.forEach((player) => {
     if(!votes[player.suspects]) {
       votes[player.suspects] = 1;
     } else {
-      votes[player.suspects] ++;
+      votes[player.suspects]++;
     }
-  }
+  });
 
-  let currentPoll = ['', 0];
+  let currentPoll = [['', 0]];
 
   for (let key in votes) {
     if (votes[key] > currentPoll[1]) {
@@ -40,12 +35,13 @@ const endPlayerRound = (lockedIn) => {
   };
 
   if(player.isHost) {
-    socket.emit('ejectViaAirlock', player, currentPoll[0]);
+    socket.emit('ejectViaAirLock', user, currentPoll[0]);
   }
+
 
   let colonists = [];
   let wolves = [];
-  playerData.forEach(player) {
+  players.forEach(player) {
     if(player.isWolf) {
       wolves.push(player);
     } else {
@@ -59,13 +55,13 @@ const endPlayerRound = (lockedIn) => {
   if (wolves.length < 0) {
     //if yes go to colonists win screen
   }
-
+  clearData();
   runWolfRound();
 };
 
 const runWolfRound = () => {
   let wolves = 0;
-  let wolvesLockedIn = playerData.map(player) {
+  let wolvesLockedIn = players.map(player) {
     if(player['isWolf']) {
       wolves++;
       if(player['isLockedin']) {
@@ -87,7 +83,7 @@ const endWolfRound = (wolvesLockedIn) => {
     if(!votes[player.suspects]) {
       votes[player.suspects] = 1;
     } else {
-      votes[player.suspects] ++;
+      votes[player.suspects]++;
     }
   }
 
@@ -105,7 +101,7 @@ const endWolfRound = (wolvesLockedIn) => {
 
   let colonists = [];
   let wolves = [];
-  playerData.forEach(player) {
+  players.forEach(player) {
     if(player.isWolf) {
       wolves.push(player);
     } else {
@@ -116,57 +112,110 @@ const endWolfRound = (wolvesLockedIn) => {
   if(colonists.length <= wolves.length) {
     //if yes go to wolves win screen
   }
+  clearData();
   runPlayerRound();
 };
 
-//========================= EMMITERS ======================//
+  //========================= LISTENERS ======================//
 
-const setVote = () => {
-  //send an emmiter to say who they are voting for
-};
+  const voteHandler = (prosecutor, defendant) => {
+    //change accusation for specified vote
+    setPlayers((prev) => {
+      prev.map((player) => {
+        if(player.id === prosecutor.id) {
+          return ({
+            ...player,
+            suspects: defendant,
+          })
+        }
+      })
+    });
+  };
 
-const lockVote = () => {
-  //send an emmiter to flip lock in status
-};
+  const lockHandler = (prosecutor) => {
+    //flip bool status for lock
+    setPlayers((prev) => {
+      prev.map((player) => {
+        if(player.id === prosecutor.id) {
+          return ({
+            ...player,
+            lockedIn: !player.lockedIn,
+          })
+        }
+      })
+    });
+  };
 
-const ejectViaAirlock = () => {
-  //eject player from airlock with emmiter
-  //announce player has been ejected
-  //run ejection animations
-};
+  const ejectHandler = (host, suspect) => {
+    //change alive status for indicated player
+    //check to see if self needs to be ejected
+    //if yes, eject self
+    if(user.id === suspect.id) {
+      setPlayer((prev) => ({
+        ...prev,
+        isDead: true,
+      }));
+    }
+    setPlayers((prev) => {
+      prev.map((player) => {
+        if(player.id === suspect.id) {
+          return ({
+            ...player,
+            isDead: true,
+          })
+        }
+      })
+    });
 
-const eatPlayer = () => {
-  //eat player with event emmiter
-  //announce player has been eaten
-  //run eating animations
-};
+    //*
+    //*
+    //*
+    //narrateEjection();
+    //*
+    //*
+    //*
+  };
 
-//========================= LISTENERS ======================//
+  const eatHandler = (host, dinner) => {
+    //change alive status for indicated player
+    //check to see if self needs to be ejected
+    //if yes, eject self
+    if(user.id === dinner.id) {
+      setPlayer((prev) => ({
+        ...prev,
+        isDead: true,
+      }));
+    }
+    setPlayers((prev) => {
+      prev.map((player) => {
+        if(player.id === dinner.id) {
+          return ({
+            ...player,
+            isDead: true,
+          })
+        }
+      })
+    });
 
-const voteHandler = () => {
-  //change accusation for specified vote
+    //*
+    //*
+    //*
+    //narrateColonistEaten();
+    //*
+    //*
+    //*
+  }
 
-};
+  const clearData = () => {
 
-const voteHandler = () => {
-  //flip bool status for lock
-  const [isLocked, setIsLocked] = useState(!!isLocked);
-
-};
-
-const ejectHandler = () => {
-  //change alive status for indicated player
-  const [isAlive, setIsAlive] = useState(false);
-
-};
-
-const eatPlayer = () => {
-  //change alive status for indicated player
-  // set state for player "isAlive" to false
-  const [isAlive, setIsAlive] = useState(false);
-
-}
-
-const clearData = () => {
-  //change all the accusations to no one, and locked in to false
-}
+    setPlayers((prev) => {
+      prev.map((player, index, array) => {
+        return ({
+          ...player,
+          suspects: null,
+          lockedIn: false,
+        })
+      })
+    });
+    //change all the accusations to no one, and locked in to false
+  }
