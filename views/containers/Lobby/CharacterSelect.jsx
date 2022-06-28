@@ -101,10 +101,6 @@ const CenterDiv = Styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
   max-width: 250px;
   border: 1px solid blue;
 `;
