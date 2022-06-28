@@ -19,7 +19,7 @@ const Lobby = () => {
       setPlayers((prev) => {
         prev.map((current) => {
           if (current.username === user.username) {
-            return { ...current, status: true };
+            return { ...current, status: true }; // add character:"soldier"
           }
           return current;
         });

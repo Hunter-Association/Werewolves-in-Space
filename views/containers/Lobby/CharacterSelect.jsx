@@ -6,26 +6,25 @@ import agent from '../../../Assets/characters/singleAgent.png';
 import cyberpunk from '../../../Assets/characters/singleCyberpunk.png';
 import soldier from '../../../Assets/characters/singleFutureSoldier.png';
 import normalGirl from '../../../Assets/characters/singleNormalGirl.png';
+import characterBios from '../../../Assets/characters/characterBios';
 
 const CharacterSelect = () => {
-  const [currentCharcter, setCurrentCharacter] = useState(3);
+  const [currentCharacter, setCurrentCharacter] = useState(3);
   const [characterList, setCharacterList] = useState(
     [adventureGirl, agent, cyberpunk, soldier, normalGirl],
   );
-  const i = `    this is the charcter bio. he is the super soldier that has the ability to hunt the werewolves in space!
-  testing for a longer string and to make sure the text doesnt go past testing 4 lines ahahasdlf`;
 
   const nextCharacterLeft = () => {
-    if (currentCharcter !== 0) {
-      setCurrentCharacter(currentCharcter - 1);
+    if (currentCharacter !== 0) {
+      setCurrentCharacter(currentCharacter - 1);
     } else {
       setCurrentCharacter(characterList.length - 1);
     }
   };
 
   const nextCharacterRight = () => {
-    if (currentCharcter !== characterList.length - 1) {
-      setCurrentCharacter(currentCharcter + 1);
+    if (currentCharacter !== characterList.length - 1) {
+      setCurrentCharacter(currentCharacter + 1);
     } else {
       setCurrentCharacter(0);
     }
@@ -45,8 +44,8 @@ const CharacterSelect = () => {
       <Row>
         <ButtonLeft onClick={() => nextCharacterLeft()} />
         <CenterDiv>
-          <CharacterImage src={characterList[currentCharcter]} alt={currentCharcter} />
-          <CharacterText>{i}</CharacterText>
+          <CharacterImage src={characterList[currentCharacter]} alt={currentCharacter} />
+          <CharacterText>{characterBios[currentCharacter]}</CharacterText>
         </CenterDiv>
         <ButtonRight onClick={() => nextCharacterRight()} />
       </Row>
@@ -100,6 +99,7 @@ const CenterDiv = Styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 250px;
   border: 1px solid blue;
 `;
 
