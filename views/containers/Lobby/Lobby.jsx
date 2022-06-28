@@ -1,19 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Styled from 'styled-components';
 import copy from 'copy-to-clipboard';
+import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import CrewManifest from '../../../Assets/CrewManifest.png';
 import LobbyChat from './LobbyChat';
 import arrowDown from '../../../Assets/arrow-down.svg';
 import arrowUp from '../../../Assets/arrow-up.svg';
-// import Chat from '../Chat';
 import CharacterSelect from './CharacterSelect';
 
 const Lobby = () => {
+  const navigate = useNavigate();
   const {
-    players, setPlayers, player, gameID,
+    players, setPlayers, player, setPlayer, gameID,
   } = useContext(GlobalContext);
+  const [currentCharacter, setCurrentCharacter] = useState(3);
 
   const [showChat, setShowChat] = useState(false);
 
@@ -28,17 +30,22 @@ const Lobby = () => {
         });
       });
     });
-    // socket.on('start', () => 'add board component here');
-    // });
+    socket.on('start-game', () => navigate('/board'));
   }, []);
 
   const readyUp = () => {
     socket.emit('ready', player, gameID);
   };
   const startGame = () => {
-    socket.emit('start', player, gameID);
+    socket.emit('start-game', player, gameID);
   };
 
+  const getCharAndReady = () => {
+    const oldPlayer = { ...player };
+    oldPlayer.charDex = currentCharacter;
+    setPlayer(oldPlayer);
+    readyUp();
+  };
   // const makeList = players.map((each) => (
   //   <div>{each.username}</div>
   // ));
@@ -46,8 +53,6 @@ const Lobby = () => {
   const handleChatShow = () => {
     setShowChat((prev) => !prev);
   };
-
-  const arrow = arrowUp;
 
   return (
     <Background>
@@ -59,7 +64,9 @@ const Lobby = () => {
             { players.map((each) => (
               <PlayerRow>
                 <PlayerName key={each.id}>{each.username.slice(0, 10)}</PlayerName>
-                <PlayerSelection>{each.color}</PlayerSelection>
+                {each.status
+                  ? <PlayerSelection color="green">Ready</PlayerSelection>
+                  : <PlayerSelection color="red">Waiting</PlayerSelection> }
               </PlayerRow>
             ))}
           </ListCol>
@@ -70,8 +77,11 @@ const Lobby = () => {
         </LeftColumn>
 
         <Column>
-          <CharacterSelect />
-          <LoadingButton onClick={readyUp} color="green" type="button">IM READY!</LoadingButton>
+          <CharacterSelect
+            currentCharacter={currentCharacter}
+            setCurrentCharacter={setCurrentCharacter}
+          />
+          <LoadingButton onClick={getCharAndReady} color="green" type="button">IM READY!</LoadingButton>
         </Column>
 
       </Row>
@@ -189,6 +199,7 @@ const PlayerName = Styled.div`
 
 const PlayerSelection = Styled.div`
   font-size: 2rem;
+  color:  ${(props) => props.color};
 `;
 
 const ChatDiv = Styled.div`

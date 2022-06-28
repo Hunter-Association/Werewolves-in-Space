@@ -6,26 +6,29 @@ import agent from '../../../Assets/characters/singleAgent.png';
 import cyberpunk from '../../../Assets/characters/singleCyberpunk.png';
 import soldier from '../../../Assets/characters/singleFutureSoldier.png';
 import normalGirl from '../../../Assets/characters/singleNormalGirl.png';
+import { GlobalContext } from '../../store';
 
-const CharacterSelect = () => {
-  const [currentCharcter, setCurrentCharacter] = useState(3);
-  const [characterList, setCharacterList] = useState(
-    [adventureGirl, agent, cyberpunk, soldier, normalGirl],
-  );
+const CharacterSelect = ({ currentCharacter, setCurrentCharacter }) => {
+  const { characterList, setCharacterList } = useContext(GlobalContext);
+  // console.log(characterList[1]);
+  // const [currentCharcter, setCurrentCharacter] = useState(3);
+  // const [characterList, setCharacterList] = useState(
+  //   [adventureGirl, agent, cyberpunk, soldier, normalGirl],
+  // );
   const i = `    this is the charcter bio. he is the super soldier that has the ability to hunt the werewolves in space!
   testing for a longer string and to make sure the text doesnt go past testing 4 lines ahahasdlf`;
 
   const nextCharacterLeft = () => {
-    if (currentCharcter !== 0) {
-      setCurrentCharacter(currentCharcter - 1);
+    if (currentCharacter !== 0) {
+      setCurrentCharacter(currentCharacter - 1);
     } else {
       setCurrentCharacter(characterList.length - 1);
     }
   };
 
   const nextCharacterRight = () => {
-    if (currentCharcter !== characterList.length - 1) {
-      setCurrentCharacter(currentCharcter + 1);
+    if (currentCharacter !== characterList.length - 1) {
+      setCurrentCharacter(currentCharacter + 1);
     } else {
       setCurrentCharacter(0);
     }
@@ -45,7 +48,7 @@ const CharacterSelect = () => {
       <Row>
         <ButtonLeft onClick={() => nextCharacterLeft()} />
         <CenterDiv>
-          <CharacterImage src={characterList[currentCharcter]} alt={currentCharcter} />
+          <CharacterImage src={characterList[currentCharacter]} alt={currentCharacter} />
           <CharacterText>{i}</CharacterText>
         </CenterDiv>
         <ButtonRight onClick={() => nextCharacterRight()} />
