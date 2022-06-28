@@ -4,9 +4,10 @@ import { GlobalContext } from '../../store';
 
 function GameBoard(props) {
   useEffect(() => {
-    socket.on('ejectedViaAirLock', ejectHandler)
-    socket.on('werewolf-spotted',)
-    socket.on('murdered',)
+    socket.on('suspect', suspectHandler)
+    socket.on('lockIn', lockHandler)
+    socket.on('ejectViaAirLock', ejectHandler)
+    socket.on('eatPlayer', eatHandler)
     socket.on('player-disconnected',)
     socket.on('chat-message', )
   }, [])

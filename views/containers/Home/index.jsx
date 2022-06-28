@@ -62,35 +62,6 @@ const Home = () => {
 };
 export default Home;
 
-<<<<<<< HEAD
-const HostOptions = ({ show, joinGame, gameID }) => {
-  const [copied, setCopied] = useState(false);
-  return (
-    <span>
-      {
-      show && (
-      <Row justify="space-between" align="center">
-        <Text
-          justify="space-between"
-          align="center"
-          onClick={() => {
-            copy(gameID);
-            setCopied((prev) => !prev);
-          }}
-        >
-          {gameID}
-          <Icon src={clipboard} alt="clipboard" />
-        </Text>
-        <Link to="/lobby">
-          <button type="button" onClick={joinGame}>Go</button>
-        </Link>
-      </Row>
-      )
-      }
-    </span>
-  );
-};
-=======
 // const HostOptions = ({ show, joinGame, gameID }) => {
 //   const [copied, setCopied] = useState(false);
 //   return (
@@ -116,7 +87,6 @@ const HostOptions = ({ show, joinGame, gameID }) => {
 //     </span>
 //   );
 // };
->>>>>>> 4ed1ba6db303d9bd43242dae4eec7bda02ea3d3e
 const JoinOptions = ({ show, joinGame, changeText }) => (
   <span>
     {

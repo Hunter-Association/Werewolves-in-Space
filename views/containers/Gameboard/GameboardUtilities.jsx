@@ -118,7 +118,7 @@ const endWolfRound = (wolvesLockedIn) => {
 
   //========================= LISTENERS ======================//
 
-  const voteHandler = (prosecutor, defendant) => {
+  const suspectHandler = (prosecutor, defendant) => {
     //change accusation for specified vote
     setPlayers((prev) => {
       prev.map((p) => {
@@ -219,3 +219,13 @@ const endWolfRound = (wolvesLockedIn) => {
     });
     //change all the accusations to no one, and locked in to false
   }
+
+    //========================= EMITTERS ======================//
+
+  const suspect = (defendant) => {
+    socket.emit('suspect', player, defendant);
+  };
+
+  const lockIn = () => {
+    socket.emit('lockIn', player, player);
+  };
