@@ -4,7 +4,9 @@ import copy from 'copy-to-clipboard';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import CrewManifest from '../../../Assets/CrewManifest.png';
-// import Chat from '../Chat';
+import LobbyChat from './LobbyChat';
+import arrowDown from '../../../Assets/arrow-down.svg';
+import arrowUp from '../../../Assets/arrow-up.svg';
 
 const Lobby = () => {
   const {
@@ -34,9 +36,16 @@ const Lobby = () => {
   const startGame = () => {
     socket.emit('start', player, gameID);
   };
+
   // const makeList = players.map((each) => (
   //   <div>{each.username}</div>
   // ));
+
+  const handleChatShow = () => {
+    setShowChat((prev) => !prev);
+  };
+
+  const arrow = arrowUp;
 
   return (
     <Background>
@@ -69,7 +78,15 @@ const Lobby = () => {
         {player.isHost ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
       </Row>
 
-      {/* <Chat width="30em" height="350px" /> */}
+      <ChatDiv>
+        {showChat && <LobbyChat />}
+        <ChatExpandCont>
+          <ChatText>Chat</ChatText>
+          <ArrowDiv onClick={handleChatShow}>
+            {showChat ? <img src={arrowDown} alt="arrow" /> : <img src={arrowUp} alt="arrow" /> }
+          </ArrowDiv>
+        </ChatExpandCont>
+      </ChatDiv>
     </Background>
 
   // <div>
@@ -171,4 +188,43 @@ const PlayerName = Styled.div`
 const PlayerSelection = Styled.div`
   font-size: 2rem;
 `;
+
+const ChatDiv = Styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 23.5em;
+  width: 22.2em;
+  border: 2px solid red;
+  position: fixed;
+  bottom: 0;
+  right: 2em;
+  z-index: 500;
+`;
+
+const ChatExpandCont = Styled.div`
+  display: flex;
+  height: 3em;
+  width: 21.9em;
+  background-color: black;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+`;
+
+const ChatText = Styled.div`
+  letter-spacing: 4px;
+  color: white;
+  flex-grow: 3;
+  padding-left: 1em;
+`;
+
+const ArrowDiv = Styled.div`
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  padding-right: 1em;
+  align-items: center;
+`;
+
 export default Lobby;
