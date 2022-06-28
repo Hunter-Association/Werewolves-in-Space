@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
-// import copy from 'copy-to-clipboard';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
+import copy from 'copy-to-clipboard';
+import Styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import {
   Button, Center, Column, TextInput,
 } from '../../library';
@@ -62,31 +61,33 @@ const Home = () => {
 };
 export default Home;
 
-// const HostOptions = ({ show, joinGame, gameID }) => {
-//   const [copied, setCopied] = useState(false);
-//   return (
-//     <span>
-//       {
-//       show && (
-//       <Row justify="space-between" align="center">
-//         <Text
-//           justify="space-between"
-//           align="center"
-//           onClick={() => {
-//             copy(gameID);
-//             setCopied((prev) => !prev);
-//           }}
-//         >
-//           {gameID}
-//           <Icon src={clipboard} alt="clipboard" />
-//         </Text>
-//         <button type="button" onClick={joinGame}>Go</button>
-//       </Row>
-//       )
-//       }
-//     </span>
-//   );
-// };
+const HostOptions = ({ show, joinGame, gameID }) => {
+  const [copied, setCopied] = useState(false);
+  return (
+    <span>
+      {
+      show && (
+      <Row justify="space-between" align="center">
+        <Text
+          justify="space-between"
+          align="center"
+          onClick={() => {
+            copy(gameID);
+            setCopied((prev) => !prev);
+          }}
+        >
+          {gameID}
+          <Icon src={clipboard} alt="clipboard" />
+        </Text>
+        <Link to="/lobby">
+          <button type="button" onClick={joinGame}>Go</button>
+        </Link>
+      </Row>
+      )
+      }
+    </span>
+  );
+};
 const JoinOptions = ({ show, joinGame, changeText }) => (
   <span>
     {
