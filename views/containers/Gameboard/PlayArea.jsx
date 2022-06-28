@@ -13,6 +13,7 @@ import { GlobalContext } from '../../store';
 
 const PlayArea = (props) => {
   const { player, players, characterList } = useContext(GlobalContext);
+  console.log(characterList);
   /*
     Get players
     Map
@@ -24,10 +25,11 @@ const PlayArea = (props) => {
 
     <PositioningDiv className="positioningDiv">
       <img src={playAreaBG} alt="A spooky scary background on a spaceship!" />
-      {/* {players.map((p, i) => {
+      {players.map((p, i) => {
         const CharacterModel = `Player${i}`;
+        console.log(CharacterModel);
         return <CharacterModel src={characterList[p.charDex]} />;
-      })} */}
+      })}
       {/* <PlayerOne> ONE </PlayerOne>
       <PlayerTwo>TWO</PlayerTwo>
       <PlayerThree>THREE</PlayerThree>
@@ -41,14 +43,20 @@ const PlayArea = (props) => {
 
   );
 
-  // useEffect(() => {
-  //   socket.on('suspect', suspectHandler)
-  //   socket.on('lockIn', lockHandler)
-  //   socket.on('ejectViaAirLock', ejectHandler)
-  //   socket.on('eatPlayer', eatHandler)
-  //   socket.on('player-disconnected',)
-  //   socket.on('chat-message', )
-  // }, [])
+  useEffect(() => {
+
+    // socket.on('start', (sender, msg) => {
+    //   setMessages((prev) => [...prev, { sender, msg }]);
+    // });
+
+
+    // socket.on('suspect', suspectHandler)
+    // socket.on('lockIn', lockHandler)
+    // socket.on('ejectViaAirLock', ejectHandler)
+    // socket.on('eatPlayer', eatHandler)
+    // socket.on('player-disconnected',)
+    // socket.on('chat-message', )
+  }, [])
 
   // const {
   //   user, players, setUser, setPlayers,
@@ -61,19 +69,19 @@ const PositioningDiv = Styled.div`
   height: fit-content;
 
 `;
-const Player1 = Styled.div`
+const Player1 = Styled.img`
   position: absolute;
   top: 65%;
   left: 10%;
 `;
 
-const Player2 = Styled.div`
+const Player2 = Styled.img`
   position: absolute;
   top: 80%;
   left: 20%;
 `;
 
-const Player3 = Styled.div`
+const Player3 = Styled.img`
   position: absolute;
   top: 65%;
   left: 30%;

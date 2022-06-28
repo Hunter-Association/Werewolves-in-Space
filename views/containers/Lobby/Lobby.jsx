@@ -4,13 +4,15 @@ import copy from 'copy-to-clipboard';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import CrewManifest from '../../../Assets/CrewManifest.png';
+import CharacterSelect from './CharacterSelect.jsx';
+import { Link, useNavigate } from 'react-router-dom';
 // import Chat from '../Chat';
 
 const Lobby = () => {
   const {
     players, setPlayers, player, gameID,
   } = useContext(GlobalContext);
-
+  const navigate = useNavigate();
   const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
@@ -33,6 +35,10 @@ const Lobby = () => {
   };
   const startGame = () => {
     socket.emit('start', player, gameID);
+
+    navigate('/board');
+
+
   };
   // const makeList = players.map((each) => (
   //   <div>{each.username}</div>

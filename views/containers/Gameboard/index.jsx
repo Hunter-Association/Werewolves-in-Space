@@ -6,22 +6,27 @@ import MusicPlayer from './components/musicPlayer';
 import socket from '../../util/socket.config.js';
 import PlayArea from './PlayArea.jsx';
 import Chat from '../Chat/index.jsx';
+import silence from '../../../assets/music/silence.mp3';
+
 const Gameboard = (props) => {
-  // useEffect(() => {
+  console.log(props);
+  useEffect(() => {
+    document.getElementById('gameMusic').volume = 0.1;
   //   // socket.on('suspect', suspectHandler)
   //   // socket.on('lockIn', lockHandler)
   //   // socket.on('ejectViaAirLock', ejectHandler)
   //   // socket.on('eatPlayer', eatHandler)
   //   // socket.on('player-disconnected',)
   //   // socket.on('chat-message', )
-  // }, [])
-
+  }, [])
   const {
     user, players, setUser, setPlayers,
   } = useContext(GlobalContext);
   const borderStyle = {
     border: '8px solid red',
   };
+
+
 
   return (
     <MainDiv>
@@ -31,16 +36,17 @@ const Gameboard = (props) => {
         <Link to="/">
           <div>Back to home</div>
         </Link>
-        <MusicPlayer />
+        {/* <MusicPlayer id="gameMusic" /> */}
       </HeaderDiv>
       <BottomDiv>
-          <PlayAreaDiv>
-          <PlayArea color="blue">playArea</PlayArea></PlayAreaDiv>
-          <ChatAreaDiv>
-            <ChatBufferDiv/>
-            <Chat height={'fit-content'}></Chat>
-            <ChatBufferDiv/>
-          </ChatAreaDiv>
+        <PlayAreaDiv>
+          <PlayArea></PlayArea>
+        </PlayAreaDiv>
+        <ChatAreaDiv>
+          <ChatBufferDiv />
+          <Chat height="fit-content" />
+          <ChatBufferDiv />
+        </ChatAreaDiv>
 
       </BottomDiv>
     </MainDiv>
