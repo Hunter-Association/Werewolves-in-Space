@@ -6,7 +6,7 @@ import { GlobalContext } from '../../store';
 import { Row } from '../../library';
 import socket from '../../util/socket.config';
 
-const Chat = () => {
+const Chat = ({ height, width }) => {
   const msgRef = useRef();
   const { player, setPlayer, gameID } = useContext(GlobalContext);
   const [messages, setMessages] = useState([]);
@@ -36,7 +36,7 @@ const Chat = () => {
   };
 
   return (
-    <ChatContainer>
+    <ChatContainer height={height} width={width}>
       <ChatConversation>
         {
           messages.map((msg) => (
@@ -73,11 +73,12 @@ const Chat = () => {
 
 export default Chat;
 
-const ChatContainer = Styled.section`
-  height: 550px;
+const ChatContainer = Styled.div`
+  height:  38rem;
   width: 350px;
   overflow: hidden;
 `;
+
 const ChatConversation = Styled.article`
   height: 300px;
   background-color: black;
