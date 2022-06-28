@@ -74,7 +74,7 @@ const Chat = ({ height, width }) => {
 export default Chat;
 
 const ChatContainer = Styled.div`
-  height:  38rem;
+  height: fit-content;
   width: 350px;
   overflow: hidden;
 `;
