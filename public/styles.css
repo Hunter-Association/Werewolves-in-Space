@@ -45,6 +45,7 @@ body {
   text-rendering: optimizeSpeed;
   font-family: AnotherDanger;
   color: white;
+  letter-spacing: 4;
 }
 
 /* A elements that don't have a class get default styles */
