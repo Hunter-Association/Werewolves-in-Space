@@ -24,7 +24,7 @@ const Home = () => {
   const [showJoinOptions, setShowJoinOptions] = useState(false);
   const joinGame = () => {
     socket.on('player-joined', (allPlayers) => {
-      console.log(allPlayers);
+      // console.log(allPlayers);
       setPlayers(allPlayers);
     });
     socket.emit('join-game', gameID, player);

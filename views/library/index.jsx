@@ -86,3 +86,12 @@ export const Scroll = Styled(Column)`
   align-items: ${(props) => props.align};
   overflow: scroll;
 `;
+
+export const CharacterColor = Styled.div`
+  backgroundColor: ${(props) => props.backgroundColor},
+  border: 3px solid black,
+  border-radius: 50%,
+  height: 20px,
+  width: 20px,
+  margin: 10px
+`;
