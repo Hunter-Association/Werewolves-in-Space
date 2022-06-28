@@ -18,7 +18,8 @@ const [player, setPlayer] = useState({
 });
 const [players, setPlayers] = useState([{
   username: 'realkllkdajldfdfakdjflksdsfd adlsd', isDead: false, isWolf: false, socket: {}, id: '', color: 'none', status: false,
-}, {
+},
+ {
   username: 'user2', isDead: false, isWolf: false, socket: {}, id: '', color: 'none', status: false,
 }, {
   username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', color: 'none', status: false,
@@ -32,7 +33,8 @@ const [players, setPlayers] = useState([{
   username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', color: 'none', status: false,
 }, {
   username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', color: 'none', status: false,
-}]);
+}
+]);
 const [gameID, setGameID] = useState(''); // When user joins game he will give this, host game create this.
 
 
