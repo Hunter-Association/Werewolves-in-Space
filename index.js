@@ -40,8 +40,6 @@ io.on('connection', socket => {
 
   socket.on('join-game', async (gameID, player) => {
     socket.player = player;
-    socket.gameID = gameID;
-    socket.gameID = gameID;
     playerMap.set(socket.id, player);
     socket.join(gameID);
 
@@ -49,7 +47,7 @@ io.on('connection', socket => {
     const playersArr = [...allPlayers].map(sktID => playerMap.get(sktID));
     io.to(gameID).emit('player-joined', playersArr);
   })
-  socket.on('ready', (player) => {
+  socket.on('ready', (player, gameID) => {
     io.to(gameID).emit('ready', player)
   })
   socket.on('suspect', (gameID, player, suspect) => {

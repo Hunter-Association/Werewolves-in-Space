@@ -18,7 +18,7 @@ const Lobby = () => {
   const [currentCharacter, setCurrentCharacter] = useState(3);
 
   const [showChat, setShowChat] = useState(false);
-  const [ canStart, setCanStart] = useState(false);
+  const [canStart, setCanStart] = useState(false);
 
   useEffect(() => {
     socket.on('ready', (user) => {
