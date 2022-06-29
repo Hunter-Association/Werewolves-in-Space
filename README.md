@@ -1,5 +1,6 @@
 # Werewolves-in-Space
-<img src="https://imgur.com/gNzcHHP.png" />
+<img src="https://i.imgur.com/jh7fdyi.png" />
+
 
 # About
 Werewolves In Space is a horror game of social deduction that can be played with a group of up to 8 daring players. The object of the game is to identify and kill the werewolves hiding amongst the astronauts.
