@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 mongoose.connect(
-  'mongodb+srv://shank:vEpe5XgqPjzF6711@cluster0.ddi8xuv.mongodb.net/ocean?retryWrites=true&w=majority',
+  // connection path goes here
+
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
