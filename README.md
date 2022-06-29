@@ -61,15 +61,14 @@ Werewolves In Space is a horror game of social deduction that can be played with
 </ol>
 
 # The Team:
-Chief Technical Officer: Ethan Flower  <br>
-Junior Developer: Scott <br>
-Junior Developer: Jason <br>
-Junior Developer: Amanda <br>
-Junior Developer: Yanick <br>
-Junior Developer: Victor <br>
-
-Student Interns: Larry, Justin
-
+Emperor: Ethan Flower  <br>
+Grogu: Scott <br>
+Haja: Jason <br>
+Ahsoka Tano: Amanda <br>
+Grand Moff: Yanick <br>
+Wado: Victor <br>
+Kit Fisto: Larry<br>
+Darth JarJar Binks (non-canon): Justin
 
 
 # FootNote
