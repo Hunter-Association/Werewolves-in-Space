@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 
 mongoose.connect(
   // connection path goes here
+<<<<<<< HEAD
   'mongodb://localhost:27017/users',
+=======
+  // 'mongodb://localhost:27017/users',
+>>>>>>> dev
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

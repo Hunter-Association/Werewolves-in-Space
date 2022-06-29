@@ -24,7 +24,7 @@ const [player, setPlayer] = useState({
   id: '',
   charDex: null,
   status: false,
-  isHost: true,
+  isHost: false,
   suspect: {},
   isLockedIn: false,
 });

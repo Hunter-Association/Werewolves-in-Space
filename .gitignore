@@ -107,3 +107,5 @@ public/*.png
 public/*.svg
 public/font
 model/db.js
+
+*.pem
