@@ -28,7 +28,6 @@ const MusicPlayer = ({ height, width, id }) => {
     </div>
   );
 };
-
 // const MusicPlayer = () => {
 //   const [isPlaying, setIsPlaying] = useState(true);
 //   const volume = 0.2;
@@ -45,12 +44,12 @@ const MusicPlayer = ({ height, width, id }) => {
 
 //   return (
 //     <div className="music-player">
-// <audio preload="auto" id="gameMusic" display="hidden" autoPlay className="test" type="audio/mpeg">
+// <audio preload="auto" id="gameMusic"
+// display="hidden" autoPlay className="test" type="audio/mpeg">
 //         <track kind="captions" />
 //         <source preload="auto" src={songURL} type="audio/mpeg" />
 //       </audio>
 //       <MuteButton muteFunction={handleMuteClick} isPlaying={isPlaying} />
 //     </div>
 //   );
-// };
 // export default MusicPlayer;
