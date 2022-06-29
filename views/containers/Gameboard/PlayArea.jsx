@@ -42,7 +42,8 @@ const PlayArea = () => {
 
     const suspectHandler = (prosecutor, defendant) => {
       // change accusation for specified vote
-      setPlayers((prev) => {
+      console.log(`${prosecutor.id}suspsects${defendant.id}of being a werewolf!`);
+      setPlayers((prev) => (
         prev.map((p) => {
           if (p.id === prosecutor.id) {
             return ({
@@ -50,13 +51,15 @@ const PlayArea = () => {
               suspect: defendant,
             });
           }
-        });
-      });
+          return p;
+        })
+      ));
     };
 
     const lockHandler = (prosecutor) => {
       // flip bool status for lock
-      setPlayers((prev) => {
+      console.log(`${prosecutor.id}is sure that${defendant.id}is a werewolf!`);
+      setPlayers((prev) => (
         prev.map((p) => {
           if (p.id === prosecutor.id) {
             return ({
@@ -64,8 +67,9 @@ const PlayArea = () => {
               lockedIn: !p.lockedIn,
             });
           }
-        });
-      });
+          return p;
+        })
+      ));
     };
 
     const ejectHandler = (host, suspect) => {
@@ -78,7 +82,7 @@ const PlayArea = () => {
           isDead: true,
         }));
       }
-      setPlayers((prev) => {
+      setPlayers((prev) => (
         prev.map((p) => {
           if (p.id === suspect.id) {
             return ({
@@ -86,13 +90,15 @@ const PlayArea = () => {
               isDead: true,
             });
           }
-        });
-      });
+          return p;
+        })
+      ));
 
       //*
       //*
       //*
       // narrateEjection();
+      console.log(suspect.id, 'was ejected from the airlock!');
       //*
       //*
       //*
@@ -108,7 +114,7 @@ const PlayArea = () => {
           isDead: true,
         }));
       }
-      setPlayers((prev) => {
+      setPlayers((prev) => (
         prev.map((p) => {
           if (p.id === dinner.id) {
             return ({
@@ -116,13 +122,15 @@ const PlayArea = () => {
               isDead: true,
             });
           }
-        });
-      });
+          return p;
+        })
+      ));
 
       //*
       //*
       //*
       // narrateColonistEaten();
+      console.log(dinner.id, 'was eaten by werewolves!');
       //*
       //*
       //*
@@ -183,7 +191,7 @@ const PlayArea = () => {
       });
 
       if (colonists.length <= wolves.length) {
-        // if yes go to wolves win screen
+        alert('Wolves win');
       }
       clearData();
       runPlayerRound();
@@ -284,11 +292,6 @@ const PlayArea = () => {
 
   return (
     <></>
-    // <PositioningDiv className="positioningDiv">
-    //   <img src={playAreaBG} alt="A spooky scary background on a spaceship!" />
-    //   {players.map((p, i) => getModel(p.id, i + 1))}
-    // </PositioningDiv>
-
   );
 };
 
