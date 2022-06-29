@@ -193,6 +193,12 @@ const LoadingButton = Styled.button`
   box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
   width: 15rem;
   z-index: 9000;
+  &:active {
+    border: 2px green solid;
+    color: green;
+    box-shadow: none;
+  }
+
 `;
 
 const PlayerName = Styled.div`
