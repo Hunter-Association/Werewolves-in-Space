@@ -29,21 +29,59 @@ const PlayArea = (props) => {
   const { player, players, characterList } = useContext(GlobalContext);
   const filler = 'filled';
   const [numPlayers, setNumPlayers] = useState(0);
-  console.log(characterList);
+  console.log(dummyPlayers);
+
+  const [dummyPlayers, setDummyPlayers] = useState([{
+    username: 'realkllkdajldfdfakdjflksdsfd adlsd', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
+    },
+   {
+    username: 'user2', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
+  }, {
+    username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: true,
+  }, {
+    username: 'user4', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
+  }, {
+    username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
+  }, {
+    username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
+  }, {
+    username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
+  }, {
+    username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
+  }]);
 
   const getModel = function (pID, pNum) {
     if (pNum === 1) {
       return <Player1 src={wolfImage} key={pID} num={pNum}/>;
     }
-
-
+    if (pNum === 2) {
+      return <Player2 src={wolfImage} key={pID} num={pNum}/>;
+    }
+    if (pNum === 3) {
+      return <Player3 src={wolfImage} key={pID} num={pNum}/>;
+    }
+    if (pNum === 4) {
+      return <Player4 src={wolfImage} key={pID} num={pNum}/>;
+    }
+    if (pNum === 5) {
+      return <Player5 src={wolfImage} key={pID} num={pNum}/>;
+    }
+    if (pNum === 6) {
+      return <Player6 src={wolfImage} key={pID} num={pNum}/>;
+    }
+    if (pNum === 7) {
+      return <Player7 src={wolfImage} key={pID} num={pNum}/>;
+    }
+    if (pNum === 8  ) {
+      return <Player8 src={wolfImage} key={pID} num={pNum}/>;
+    }
   }
 
   return (
 
     <PositioningDiv className="positioningDiv">
       <img src={playAreaBG} alt="A spooky scary background on a spaceship!" />
-      {players.map((p, i) => {
+      {dummyPlayers.map((p, i) => {
         const CharacterModel = `Player${i + 1}`;
         return getModel(p.id, i+1);
       })}
