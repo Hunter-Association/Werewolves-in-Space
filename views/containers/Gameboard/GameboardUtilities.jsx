@@ -2,9 +2,6 @@ import { useContext } from 'react';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 // TODO - Export all functions so the socket handlers can run them
-const {
-  player, players, setPlayer, setPlayers,
-} = useContext(GlobalContext);
 
 //= ======================== LISTENERS ======================//
 
@@ -168,8 +165,9 @@ export const runWolfRound = () => {
   // run endwolfround when cleared
   if (wolvesLockedIn.length === wolves) {
     endWolfRound(wolvesLockedIn);
+  } else {
+    setTimeout(runWolfRound, 1000);
   }
-  setTimeout(runWolfRound, 1000);
 };
 
 export const endPlayerRound = (lockedIn) => {
@@ -220,6 +218,9 @@ export const endPlayerRound = (lockedIn) => {
 
 export const runPlayerRound = () => {
   // start checking for enough votes to end round
+  const {
+    player, players, setPlayer, setPlayers,
+  } = useContext(GlobalContext);
   const lockedIn = players.map((p) => {
     if (p.lockedIn === true) {
       return p;

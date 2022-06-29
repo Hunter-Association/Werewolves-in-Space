@@ -23,7 +23,9 @@ const [player, setPlayer] = useState({
   id: '',
   charDex: null,
   status: false,
-  isHost: true
+  isHost: true,
+  suspect: {},
+  isLockedIn: false,
 });
 const [players, setPlayers] = useState([{
   username: 'realkllkdajldfdfakdjflksdsfd adlsd', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
