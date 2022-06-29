@@ -1,6 +1,7 @@
 # Werewolves-in-Space
 <img src="https://imgur.com/gNzcHHP.png" />
- # About
+
+# About
  Werewolf is a horror game of social deduction that can be played with a large group of people. The object of the game is to identify and kill the  werewolves amongst the astronauts. 
  <h3>Built With:</h3>
   <a href='#'>MongoDB</a>
