@@ -70,7 +70,7 @@ const PlayArea = () => {
 
   const handleClick = function (index) {
     const newList = [];
-    const selfIndex = 0;
+    const selfIndex = 0; // where the player is in the list of players
     console.log(player);
     if (index !== selfIndex) {
       for (let i = 0; i < dummyPlayers.length; i++) {
@@ -369,13 +369,27 @@ const PlayArea = () => {
   //   }
   // };
 
+  const handleButtonClick = function () {
+    console.log('so and so has locked in!');
+  };
+
   return (
     <PositioningDiv className="positioningDiv">
+      <div onClick={handleButtonClick}>
+        <LockInButton>LockIn</LockInButton>
+      </div>
       <img src={playAreaBG} alt="A spooky scary background on a spaceship!" />
       {dummyPlayers.map((p, i) => getModel(p.id, i + 1, p.status))}
     </PositioningDiv>
   );
 };
+
+const LockInButton = Styled.button`
+  position: absolute;
+  height: 50px;
+  width: 100px;
+
+`;
 
 const PositioningDiv = Styled.div`
 position: relative;
