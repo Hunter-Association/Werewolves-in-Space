@@ -24,7 +24,7 @@ import socket from '../../util/socket.config';
 import wolfImage from '../../../Assets/WhiteReady.png';
 import redWolf from '../../../Assets/RedReady.png';
 import playerWolf from '../../../Assets/playerWolf.png';
-
+import './player.css';
 // build a reference object/array
 // this should contain links to all the images/
 
@@ -83,6 +83,7 @@ const PlayArea = () => {
       setDummyPlayers(newList);
     }
   };
+
   const getModel = function (pID, pNum, isVoted) {
     let image;
     console.log(`isVoted is ${isVoted}`);
@@ -97,28 +98,28 @@ const PlayArea = () => {
     }
 
     if (pNum === 1) {
-      return <Player1 src={image} key={1} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
+      return <Player1 src={image} className="PlayerModel" key={1} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 2) {
-      return <Player2 src={image} key={2} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
+      return <Player2 src={image} className="PlayerModel" key={2} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 3) {
-      return <Player3 src={image} key={3} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
+      return <Player3 src={image} className="PlayerModel" key={3} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 4) {
-      return <Player4 src={image} key={4} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
+      return <Player4 src={image} className="PlayerModel" key={4} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 5) {
-      return <Player5 src={image} key={5} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
+      return <Player5 src={image} className="PlayerModel" key={5} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 6) {
-      return <Player6 src={image} key={6} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
+      return <Player6 src={image} className="PlayerModel" key={6} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 7) {
-      return <Player7 src={image} key={7} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
+      return <Player7 src={image} className="PlayerModel" key={7} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 8) {
-      return <Player8 src={image} key={8} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
+      return <Player8 src={image} className="PlayerModel" key={8} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
   };
 
@@ -378,10 +379,23 @@ const PlayArea = () => {
       <div onClick={handleButtonClick}>
         <LockInButton>LockIn</LockInButton>
       </div>
-      <img src={playAreaBG} alt="A spooky scary background on a spaceship!" />
+      <img src={playAreaBG} style={{ width: '100%' }} className="gameBG" alt="A spooky scary background on a spaceship!" />
       {dummyPlayers.map((p, i) => getModel(p.id, i + 1, p.status))}
     </PositioningDiv>
   );
+};
+
+const getModelStyle = function (theIndex) {
+  const index = theIndex - 1;
+  const left = `${12.5 * index}%`;
+  const bottom = `${((index % 2) * 10)}%`;
+  const result = {
+    position: 'absolute',
+    bottom,
+    left,
+    width: '12.5%',
+  };
+  return result;
 };
 
 const LockInButton = Styled.button`
@@ -394,55 +408,40 @@ const LockInButton = Styled.button`
 const PositioningDiv = Styled.div`
 position: relative;
 width: fit-content;
+width: 100%;
 height: fit-content;
 
 `;
 const Player1 = Styled.img`
-  position: absolute;
-  top: 65%;
-  left: 10%;
+  ${getModelStyle(1)}
 `;
 
 const Player2 = Styled.img`
-  position: absolute;
-  top: 80%;
-  left: 20%;
+  ${getModelStyle(2)}
 `;
 
 const Player3 = Styled.img`
-  position: absolute;
-  top: 65%;
-  left: 30%;
+  ${getModelStyle(3)}
 `;
 
 const Player4 = Styled.img`
-position: absolute;
-top: 80%;
-left: 40%;
+  ${getModelStyle(4)}
 `;
 
 const Player5 = Styled.img`
-position: absolute;
-top: 65%;
-left: 50%;
+  ${getModelStyle(5)}
 `;
 
 const Player6 = Styled.img`
-position: absolute;
-top: 80%;
-left: 60%;
+  ${getModelStyle(6)}
 `;
 
 const Player7 = Styled.img`
-position: absolute;
-top: 65%;
-left: 70%;
+  ${getModelStyle(7)}
 `;
 
 const Player8 = Styled.img`
-position: absolute;
-top: 80%;
-left: 80%;
+  ${getModelStyle(8)}
 `;
 
 // const PlayerContainer = Styled.div`

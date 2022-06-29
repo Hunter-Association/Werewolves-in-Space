@@ -76,13 +76,15 @@ const Chat = ({ height, width }) => {
 export default Chat;
 
 const ChatContainer = Styled.div`
-  height: fit-content;
-  width: 350px;
-  overflow: hidden;
+  classname: chatContainer;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ChatConversation = Styled.article`
-  height: 300px;
+  height: 70%;
   background-color: black;
   color: red;
   overflow-y: scroll;

@@ -6,7 +6,7 @@ import MusicPlayer from './components/musicPlayer';
 import socket from '../../util/socket.config';
 import PlayArea from './PlayArea';
 import Chat from '../Chat/index';
-
+import './player.css';
 const Gameboard = () => {
   const {
     user, players, setUser, setPlayers,
@@ -22,10 +22,10 @@ const Gameboard = () => {
     <MainDiv>
       <HeaderDiv>
         {/* nav bar */}
-        <p>Welcome to the board.</p>
-        <Link to="/">
+        <p style={{'font-size':'100px'}}>Space Werewolves</p>
+        {/* <Link to="/">
           <div>Back to home</div>
-        </Link>
+        </Link> */}
         <MusicPlayer />
       </HeaderDiv>
       <BottomDiv>
@@ -34,9 +34,9 @@ const Gameboard = () => {
 
         </PlayAreaDiv>
         <ChatAreaDiv>
-          <ChatBufferDiv />
-          <Chat height="fit-content" />
-          <ChatBufferDiv />
+
+          <Chat />
+
         </ChatAreaDiv>
 
       </BottomDiv>
@@ -48,16 +48,19 @@ const Gameboard = () => {
 export default Gameboard;
 
 const baseDiv = Styled.div`
+  height: 100vh;
+  width: 100vh;
+  overflow: hidden;
 `;
 
 const ChatBufferDiv = Styled.div`
-  height: 30%;
+  height: 10%;
 `;
 
 const HeaderDiv = Styled(baseDiv)`
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+justify-content: center;
 background: #181818;
 height: 20%;
 width: 100%;
@@ -74,10 +77,11 @@ const MainDiv = Styled.div`
 
 const BottomDiv = Styled(baseDiv)`
   display: flex;
+  gap: 20px;
   flex-direction: row;
   min-height: 470px;
   width: 100%;
-  justify-content:center;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
@@ -93,5 +97,5 @@ const PlayAreaDiv = Styled(baseDiv)`
 
 const ChatAreaDiv = Styled.div`
   width: 30%;
-  height: fit-content;
+  height: 100%;
 `;
