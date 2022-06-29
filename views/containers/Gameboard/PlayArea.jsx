@@ -21,6 +21,7 @@ import {
   lockIn,
 } from './GameboardUtilities.jsx';
 import wolfImage from '../../../assets/WhiteReady.png';
+import redWolf from '../../../assets/RedReady.png';
 
 // build a reference object/array
 // this should contain links to all the images/
@@ -49,33 +50,57 @@ const PlayArea = (props) => {
   }, {
     username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
   }]);
+  const handleClick = function (index) {
+    let newList = [];
+    for (var i = 0; i < dummyPlayers.length; i++) {
+      let current = JSON.parse(JSON.stringify(dummyPlayers[i]));
+      newList.push(current);
+      if (i === index)
+      {newList[i].status = true;}
+      else {
+        newList[i].status = false;
+      }
+    }
+    setDummyPlayers(newList);
+  }
+  const getModel = function (pID, pNum, isVoted) {
 
-  const getModel = function (pID, pNum) {
+    let image;
+    console.log('isVoted is ' + isVoted);
+    if (isVoted) {
+      image = redWolf;
+    } else {
+      image = wolfImage;
+    }
+    console.log('pnum is ' + pNum);
+
     if (pNum === 1) {
-      return <Player1 src={wolfImage} key={pID} num={pNum}/>;
+      return <Player1 src={image} key={1} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 2) {
-      return <Player2 src={wolfImage} key={pID} num={pNum}/>;
+      return <Player2 src={image} key={2} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 3) {
-      return <Player3 src={wolfImage} key={pID} num={pNum}/>;
+      return <Player3 src={image} key={3} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 4) {
-      return <Player4 src={wolfImage} key={pID} num={pNum}/>;
+      return <Player4 src={image} key={4} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 5) {
-      return <Player5 src={wolfImage} key={pID} num={pNum}/>;
+      return <Player5 src={image} key={5} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 6) {
-      return <Player6 src={wolfImage} key={pID} num={pNum}/>;
+      return <Player6 src={image} key={6} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
     if (pNum === 7) {
-      return <Player7 src={wolfImage} key={pID} num={pNum}/>;
+      return <Player7 src={image} key={7} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
-    if (pNum === 8  ) {
-      return <Player8 src={wolfImage} key={pID} num={pNum}/>;
+    if (pNum === 8 ) {
+      return <Player8 src={image} key={8} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
   }
+
+
 
   return (
 
@@ -83,7 +108,7 @@ const PlayArea = (props) => {
       <img src={playAreaBG} alt="A spooky scary background on a spaceship!" />
       {dummyPlayers.map((p, i) => {
         const CharacterModel = `Player${i + 1}`;
-        return getModel(p.id, i+1);
+        return getModel(p.id, i+1, p.status);
       })}
 
     </PositioningDiv>
@@ -109,6 +134,7 @@ const PlayArea = (props) => {
   //   user, players, setUser, setPlayers,
   // } = useContext(GlobalContext);
 };
+
 
 const PositioningDiv = Styled.div`
 position: relative;
