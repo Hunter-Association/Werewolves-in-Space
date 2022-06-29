@@ -50,7 +50,8 @@
   <code>git checkout dev</code>
   <li>Get up-to-date code from github</li>
   <code>git pull origin dev</code>
-  <li>git checkout [feature branch]</li>
+  <li>Checkout your feature branch and merge</li>
+  <code>git checkout [feature branch]</code>
   <code>git merge dev</code>
   <li>Handle any merge conflicts locally</li>
   # Push updates to feature branch
