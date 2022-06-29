@@ -23,12 +23,11 @@ const Gameboard = () => {
         <Link to="/">
           <div>Back to home</div>
         </Link>
-        {/* <MusicPlayer /> */}
+        {/* <MusicPlayer id="gameMusic" /> */}
       </HeaderDiv>
       <BottomDiv>
         <PlayAreaDiv>
-          <PlayArea color="blue">playArea</PlayArea>
-
+          <PlayArea />
         </PlayAreaDiv>
         <ChatAreaDiv>
           <ChatBufferDiv />
