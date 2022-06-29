@@ -65,8 +65,9 @@ Junior Developer: Scott <br>
 Junior Developer: Jason <br>
 Junior Developer: Amanda <br>
 Junior Developer: Yanick <br>
+Junior Developer: Victor <br>
 
-Senior Developers: Larry, Justin
+Student Interns: Larry, Justin
 
 
 
