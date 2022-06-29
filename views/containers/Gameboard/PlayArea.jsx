@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 // import { Link } from 'react-router-dom';
 // import { GlobalContext } from '../../store';
 // import MusicPlayer from './components/musicPlayer';
@@ -22,6 +22,8 @@ import { GlobalContext } from '../../store';
 // } from './GameboardUtilities';
 import socket from '../../util/socket.config';
 import wolfImage from '../../../Assets/WhiteReady.png';
+import redWolf from '../../../Assets/RedReady.png';
+import playerWolf from '../../../Assets/playerWolf.png';
 
 // build a reference object/array
 // this should contain links to all the images/
@@ -38,9 +40,9 @@ const PlayArea = () => {
     socket.on('eatPlayer', eatHandler);
     // socket.on('player-disconnected',);
     // socket.on('chat-message', );
-    if (player.isHost) {
-      runPlayerRound();
-    }
+    // if (player.isHost) {
+    //   runPlayerRound();
+    // }
   });
   //= ======================== scott stuff ======================//
   const filler = 'filled';
