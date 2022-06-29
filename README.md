@@ -72,6 +72,6 @@ Darth JarJar Binks (non-canon): Justin
 
 
 # FootNote
-For issues contact: Justin Chesterfield (casterwield@gmail.com)
-For any donations please Venmo: (ethanflower1)
+For issues contact: Justin Chesterfield (casterwield@gmail.com) <br>
+For any donations please Venmo: (ethanflower1) <br>
 For anything else: just pull the code and fix it.
