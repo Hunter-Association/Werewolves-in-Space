@@ -19,7 +19,7 @@
  <hr>
 
 
-# Contributing
+# Installing
 <ol>
   <li>Clone Repo on to your device</li>
   <code>git clone [project link] </code>
@@ -57,6 +57,18 @@
   # Make pull request from feature branch to dev branch
 </ol>
 
-# Contact
+# The Team:
+Chief Technical Officer: Ethan Flower  <br>
+Junior Developer: Scott <br>
+Junior Developer: Jason <br>
+Junior Developer: Amanda <br>
+Junior Developer: Yanick <br>
+
+Interns: Larry, Justin
+
+
+
+# FootNote
 For any bug reporting contact: Justin Chesterfield (casterwield@gmail.com)
-For any contributions Venmo: (ethanflower1)
+For any donations please Venmo: (ethanflower1)
+
