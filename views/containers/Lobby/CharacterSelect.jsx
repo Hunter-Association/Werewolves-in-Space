@@ -1,29 +1,55 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import Styled from 'styled-components';
 
-import soldier from '../../../Assets/singleFutureSoldier.png';
+import adventureGirl from '../../../Assets/characters/singleAdventureGirl.png';
+import agent from '../../../Assets/characters/singleAgent.png';
+import cyberpunk from '../../../Assets/characters/singleCyberpunk.png';
+import soldier from '../../../Assets/characters/singleFutureSoldier.png';
+import normalGirl from '../../../Assets/characters/singleNormalGirl.png';
+// import { GlobalContext } from '../../store';
 
-const CharacterSelect = () => {
-  const [currentCharcter, setCurrentCharacter] = useState(0);
-  const [characterList, setCharacterList] = useState(['red', 'blue', 'green']);
+import characterBios from '../../../Assets/characters/characterBios';
 
-  const i = 'this is the charcter bio. he is the super soldier that has the ability to hunt the werewolves in space!';
+const CharacterSelect = ({ currentCharacter, setCurrentCharacter }) => {
+  // const { characterList } = useContext(GlobalContext);
+  const [characterList, setCharacterList] = useState(
+    [adventureGirl, agent, cyberpunk, soldier, normalGirl],
+  );
+
+  const nextCharacterLeft = () => {
+    if (currentCharacter !== 0) {
+      setCurrentCharacter(currentCharacter - 1);
+    } else {
+      setCurrentCharacter(characterList.length - 1);
+    }
+  };
+
+  const nextCharacterRight = () => {
+    if (currentCharacter !== characterList.length - 1) {
+      setCurrentCharacter(currentCharacter + 1);
+    } else {
+      setCurrentCharacter(0);
+    }
+  };
+
   return (
     <Big>
-      <CharacterHeader>Character Select</CharacterHeader>
+      {/* <CharacterHeader>Character Select</CharacterHeader> */}
       <CharactersOverview>
-        <CharacterImagePreview src={soldier} alt="crew pic preview" />
-        <CharacterImagePreview src={soldier} alt="crew pic preview" />
-        <CharacterImagePreview src={soldier} alt="crew pic preview" />
+        <CharacterImagePreview src={adventureGirl} alt="adventureGirl preview" />
+        <CharacterImagePreview src={agent} alt="agent preview" />
+        <CharacterImagePreview src={cyberpunk} alt="cyberpunk preview" />
+        <CharacterImagePreview src={soldier} alt="soldier preview" />
+        <CharacterImagePreview src={normalGirl} alt="normalGirl preview" />
       </CharactersOverview>
 
       <Row>
-        <ButtonLeft onClick={() => setCurrentCharacter(characterList[currentCharcter - 1])} />
+        <ButtonLeft onClick={() => nextCharacterLeft()} />
         <CenterDiv>
-          <CharacterImage src={soldier} alt="crew pic" />
-          <CharacterText>{i}</CharacterText>
+          <CharacterImage src={characterList[currentCharacter]} alt={currentCharacter} />
+          <CharacterText>{characterBios[currentCharacter]}</CharacterText>
         </CenterDiv>
-        <ButtonRight onClick={() => setCurrentCharacter(characterList[currentCharcter + 1])} />
+        <ButtonRight onClick={() => nextCharacterRight()} />
       </Row>
     </Big>
   );
@@ -34,7 +60,7 @@ export default CharacterSelect;
 const Big = Styled.div`
   height: 50vh;
   width: 25rem;
-  border: 2px solid red;
+
 `;
 
 const Row = Styled.div`
@@ -44,13 +70,13 @@ const Row = Styled.div`
 `;
 
 const CharacterImage = Styled.img`
-  height: 275px;
-  width: 225px;
+  height: 280px;
+  width: 200px;
 `;
 
 const CharacterImagePreview = Styled.img`
-  max-height: 50px;
-  max-width: 50px;
+  max-height: 75px;
+  max-width: 75px;
 `;
 
 const ButtonRight = Styled.div`
@@ -59,7 +85,7 @@ height: 0;
 border-top: 20px solid transparent;
 border-bottom: 20px solid transparent;
 border-left: 20px solid red;
-margin: auto;
+margin: 10px;
 `;
 
 const ButtonLeft = Styled.div`
@@ -68,30 +94,29 @@ height: 0;
 border-top: 20px solid transparent;
 border-bottom: 20px solid transparent;
 border-right:20px solid red;
-margin: auto;
-  &:hover {
-    border-right: 20px dashed red;
-  }
+margin: 10px;
 `;
 
 const CenterDiv = Styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 250px;
+  max-width: 250px;
+  border: 1px solid blue;
 `;
 
-const CharacterHeader = Styled.h2`
-  text-align:center;
-`;
+// const CharacterHeader = Styled.h2`
+//   text-align:center;
+// `;
 
-const CharacterText = Styled.p`
+const CharacterText = Styled.div`
   overflow-wrap: break-word;
-  text-align:center;
+  text-align: center;
+  font-size: 12px;
 `;
 
 const CharactersOverview = Styled.div`
-  border: 1px solid pink;
+
   display: flex;
   justify-content: center;
   align-items: center;

@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
 import { GlobalContext } from '../../store';
-import MusicPlayer from './components/musicPlayer';
+// import MusicPlayer from './components/musicPlayer';
 import socket from '../../util/socket.config.js';
 import PlayArea from './PlayArea.jsx';
 import Chat from '../Chat/index.jsx';
@@ -11,7 +11,7 @@ import silence from '../../../assets/music/silence.mp3';
 const Gameboard = (props) => {
   console.log(props);
   useEffect(() => {
-    document.getElementById('gameMusic').volume = 0.1;
+
   //   // socket.on('suspect', suspectHandler)
   //   // socket.on('lockIn', lockHandler)
   //   // socket.on('ejectViaAirLock', ejectHandler)

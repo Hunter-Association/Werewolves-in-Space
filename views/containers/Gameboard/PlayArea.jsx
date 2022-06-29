@@ -7,37 +7,46 @@ import React, { useEffect, useContext, useState } from 'react';
 import Styled from 'styled-components';
 import playAreaBG from '../../../assets/img/playAreaBG.gif';
 import { GlobalContext } from '../../store';
+import {
+  runPlayerRound,
+  endPlayerRound,
+  runWolfRound,
+  endWolfRound,
+  suspectHandler,
+  lockHandler,
+  ejectHandler,
+  eatHandler,
+  clearData,
+  suspect,
+  lockIn,
+} from './GameboardUtilities.jsx';
+import wolfImage from '../../../assets/WhiteReady.png';
 
 // build a reference object/array
 // this should contain links to all the images/
 
 const PlayArea = (props) => {
   const { player, players, characterList } = useContext(GlobalContext);
-  console.log(characterList);
-  /*
-    Get players
-    Map
-
-  */
   const filler = 'filled';
   const [numPlayers, setNumPlayers] = useState(0);
+  console.log(characterList);
+
+  const getModel = function (pID, pNum) {
+    if (pNum === 1) {
+      return <Player1 src={wolfImage} key={pID} num={pNum}/>;
+    }
+
+
+  }
+
   return (
 
     <PositioningDiv className="positioningDiv">
       <img src={playAreaBG} alt="A spooky scary background on a spaceship!" />
       {players.map((p, i) => {
-        const CharacterModel = `Player${i}`;
-        console.log(CharacterModel);
-        return <CharacterModel src={characterList[p.charDex]} />;
+        const CharacterModel = `Player${i + 1}`;
+        return getModel(p.id, i+1);
       })}
-      {/* <PlayerOne> ONE </PlayerOne>
-      <PlayerTwo>TWO</PlayerTwo>
-      <PlayerThree>THREE</PlayerThree>
-      <PlayerFour>FOUR</PlayerFour>
-      <PlayerFive>FIVE</PlayerFive>
-      <PlayerSix>SIX</PlayerSix>
-      <PlayerSeven>SEVEN</PlayerSeven>
-      <PlayerEight>EIGHT</PlayerEight> */}
 
     </PositioningDiv>
 
@@ -62,11 +71,11 @@ const PlayArea = (props) => {
   //   user, players, setUser, setPlayers,
   // } = useContext(GlobalContext);
 };
-export default PlayArea;
+
 const PositioningDiv = Styled.div`
-  position: relative;
-  width: fit-content;
-  height: fit-content;
+position: relative;
+width: fit-content;
+height: fit-content;
 
 `;
 const Player1 = Styled.img`
@@ -87,37 +96,39 @@ const Player3 = Styled.img`
   left: 30%;
 `;
 
-const Player4 = Styled.div`
-  position: absolute;
-  top: 80%;
-  left: 40%;
+const Player4 = Styled.img`
+position: absolute;
+top: 80%;
+left: 40%;
 `;
 
-const Player5 = Styled.div`
-  position: absolute;
-  top: 65%;
-  left: 50%;
+const Player5 = Styled.img`
+position: absolute;
+top: 65%;
+left: 50%;
 `;
 
-const Player6 = Styled.div`
-  position: absolute;
-  top: 80%;
-  left: 60%;
+const Player6 = Styled.img`
+position: absolute;
+top: 80%;
+left: 60%;
 `;
 
-const Player7 = Styled.div`
-  position: absolute;
-  top: 65%;
-  left: 70%;
+const Player7 = Styled.img`
+position: absolute;
+top: 65%;
+left: 70%;
 `;
 
-const Player8 = Styled.div`
-  position: absolute;
-  top: 80%;
-  left: 80%;
+const Player8 = Styled.img`
+position: absolute;
+top: 80%;
+left: 80%;
 `;
 
 // const PlayerContainer = Styled.div`
 //   position: absolute;
 //   margin: 20%;
 // `;
+
+export default PlayArea;

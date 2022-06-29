@@ -31,6 +31,10 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
       },
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader'
+      },
     ]
   },
   // [devtool] this is an additional source map that will let the browser know what files are running our code.
