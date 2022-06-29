@@ -1,124 +1,10 @@
-//= ======================== GAMEMASTER ======================//
-
+import { useContext } from 'react';
+import { GlobalContext } from '../../store';
+import socket from '../../util/socket.config';
 // TODO - Export all functions so the socket handlers can run them
-
-export const runPlayerRound = () => {
-  // start checking for enough votes to end round
-  const lockedIn = players.map((p) => {
-    if (p.lockedIn === true) {
-      return p;
-    }
-  });
-  // run endPlayerround when cleared
-  //
-  if (lockedIn.length === players.length) {
-    endPlayerRound(lockedIn);
-  } else {
-    setTimeout(runPlayerRound, 100);
-  }
-};
-
-export const endPlayerRound = (lockedIn) => {
-  // run ejectViaAirlock if appropriate
-  const votes = {};
-  lockedIn.forEach((p) => {
-    if (!votes[p.suspects]) {
-      votes[p.suspects] = 1;
-    } else {
-      votes[p.suspects]++;
-    }
-  });
-
-  let currentPoll = [['', 0]];
-
-  for (const key in votes) {
-    if (votes[key] > currentPoll[1]) {
-      currentPoll = [key, votes[key]];
-    }
-  }
-
-  if (player.isHost) {
-    socket.emit('ejectViaAirLock', player, currentPoll[0]);
-  }
-
-  const colonists = [];
-  const wolves = [];
-  players.forEach((p) => {
-    if (p.isWolf) {
-      wolves.push(p);
-    } else {
-      colonists.push(p);
-    }
-  });
-  // check to see if all wolves are dead, or if wolves = colonists
-  if (colonists.length <= wolves.length) {
-    // if yes go to wolves win screen
-    alert('Wolves win');
-  }
-  if (wolves.length < 0) {
-    alert('Colonists win');
-    // if yes go to colonists win screen
-  }
-  clearData();
-  runWolfRound();
-};
-
-export const runWolfRound = () => {
-  let wolves = 0;
-  const wolvesLockedIn = players.map((p) => {
-    if (p.isWolf) {
-      wolves++;
-      if (p.isLockedin) {
-        return p;
-      }
-    }
-  });
-  // run endwolfround when cleared
-  if (wolvesLockedIn.length === wolves) {
-    endWolfRound(wolvesLockedIn);
-  }
-  setTimeout(runWolfRound, 1000);
-};
-
-export const endWolfRound = (wolvesLockedIn) => {
-  const votes = {};
-  wolvesLockedIn.forEach((p) => {
-    const voteFor = p.suspects;
-    if (!votes[p.suspects]) {
-      votes[p.suspects] = 1;
-    } else {
-      votes[p.suspects]++;
-    }
-  });
-
-  let currentPoll = ['', 0];
-
-  for (const key in votes) {
-    if (votes[key] > currentPoll[1]) {
-      currentPoll = [key, votes[key]];
-    }
-  }
-
-  if (player.isHost) {
-    socket.emit('eatPlayer', player, currentPoll[0]);
-  }
-
-  const colonists = [];
-  const wolves = [];
-  players.forEach((p) => {
-    if (p.isWolf) {
-      wolves.push(p);
-    } else {
-      colonists.push(p);
-    }
-  });
-
-  if (colonists.length <= wolves.length) {
-    // if yes go to wolves win screen
-  }
-  clearData();
-  runPlayerRound();
-};
+const {
+  player, players, setPlayer, setPlayers,
+} = useContext(GlobalContext);
 
 //= ======================== LISTENERS ======================//
 
@@ -154,7 +40,7 @@ export const ejectHandler = (host, suspect) => {
   // change alive status for indicated player
   // check to see if self needs to be ejected
   // if yes, eject self
-  if (user.id === suspect.id) {
+  if (player.id === suspect.id) {
     setPlayer((prev) => ({
       ...prev,
       isDead: true,
@@ -184,7 +70,7 @@ export const eatHandler = (host, dinner) => {
   // change alive status for indicated player
   // check to see if self needs to be ejected
   // if yes, eject self
-  if (user.id === dinner.id) {
+  if (player.id === dinner.id) {
     setPlayer((prev) => ({
       ...prev,
       isDead: true,
@@ -212,7 +98,7 @@ export const eatHandler = (host, dinner) => {
 
 export const clearData = () => {
   setPlayers((prev) => {
-    prev.map((p, index, array) => ({
+    prev.map((p) => ({
       ...p,
       suspects: null,
       lockedIn: false,
@@ -229,4 +115,121 @@ export const suspect = (defendant) => {
 
 export const lockIn = () => {
   socket.emit('lockIn', player, player);
+};
+
+//= ======================== GAMEMASTER ======================//
+export const endWolfRound = (wolvesLockedIn) => {
+  const votes = {};
+  wolvesLockedIn.forEach((p) => {
+    if (!votes[p.suspects]) {
+      votes[p.suspects] = 1;
+    } else {
+      votes[p.suspects] += 1;
+    }
+  });
+
+  let currentPoll = ['', 0];
+  const voteArray = Object.keys(votes);
+  voteArray.forEach((candidate) => {
+    if (votes[candidate] > currentPoll[1]) {
+      currentPoll = [candidate, votes[candidate]];
+    }
+  });
+
+  socket.emit('eatPlayer', player, currentPoll[0]);
+
+  const colonists = [];
+  const wolves = [];
+  players.forEach((p) => {
+    if (p.isWolf) {
+      wolves.push(p);
+    } else {
+      colonists.push(p);
+    }
+  });
+
+  if (colonists.length <= wolves.length) {
+    // if yes go to wolves win screen
+  }
+  clearData();
+  runPlayerRound();
+};
+
+export const runWolfRound = () => {
+  let wolves = 0;
+  const wolvesLockedIn = players.map((p) => {
+    if (p.isWolf) {
+      wolves += 1;
+      if (p.isLockedin) {
+        return p;
+      }
+    }
+  });
+  // run endwolfround when cleared
+  if (wolvesLockedIn.length === wolves) {
+    endWolfRound(wolvesLockedIn);
+  }
+  setTimeout(runWolfRound, 1000);
+};
+
+export const endPlayerRound = (lockedIn) => {
+  // run ejectViaAirlock if appropriate
+  const votes = {};
+  lockedIn.forEach((p) => {
+    if (!votes[p.suspects]) {
+      votes[p.suspects] = 1;
+    } else {
+      votes[p.suspects] += 1;
+    }
+  });
+
+  let currentPoll = ['', 0];
+  const voteArray = Object.keys(votes);
+  voteArray.forEach((candidate) => {
+    if (votes[candidate] > currentPoll[1]) {
+      currentPoll = [candidate, votes[candidate]];
+    }
+  });
+
+  if (player.isHost) {
+    socket.emit('ejectViaAirLock', player, currentPoll[0]);
+    // send messages as "narrator" into chat telling people what happened
+  }
+
+  const colonists = [];
+  const wolves = [];
+  players.forEach((p) => {
+    if (p.isWolf) {
+      wolves.push(p);
+    } else {
+      colonists.push(p);
+    }
+  });
+  // check to see if all wolves are dead, or if wolves = colonists
+  if (colonists.length <= wolves.length) {
+    // if yes go to wolves win screen
+    alert('Wolves win');
+  }
+  if (wolves.length < 0) {
+    alert('Colonists win');
+    // if yes go to colonists win screen
+  }
+  clearData();
+  runWolfRound();
+};
+
+export const runPlayerRound = () => {
+  // start checking for enough votes to end round
+  const lockedIn = players.map((p) => {
+    if (p.lockedIn === true) {
+      return p;
+    }
+  });
+  // run endPlayerround when cleared
+  //
+  if (lockedIn.length === players.length) {
+    endPlayerRound(lockedIn);
+  } else {
+    setTimeout(runPlayerRound, 100);
+  }
 };

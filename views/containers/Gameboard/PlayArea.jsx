@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 // import { Link } from 'react-router-dom';
 // import { GlobalContext } from '../../store';
 // import MusicPlayer from './components/musicPlayer';
@@ -19,16 +19,26 @@ import {
   clearData,
   suspect,
   lockIn,
-} from './GameboardUtilities.jsx';
+} from './GameboardUtilities';
+import socket from '../../util/socket.config';
 
 // build a reference object/array
 // this should contain links to all the images/
 
-const PlayArea = (props) => {
+const PlayArea = () => {
   const { player, players, characterList } = useContext(GlobalContext);
-  const filler = 'filled';
-  const [numPlayers, setNumPlayers] = useState(0);
   console.log(characterList);
+  useEffect(() => {
+    socket.on('suspect', suspectHandler);
+    socket.on('lockIn', lockHandler);
+    socket.on('ejectViaAirLock', ejectHandler);
+    socket.on('eatPlayer', eatHandler);
+    // socket.on('player-disconnected',);
+    // socket.on('chat-message', );
+    if (player.isHost) {
+      runPlayerRound();
+    }
+  }, []);
   return (
 
     <PositioningDiv className="positioningDiv">
@@ -41,19 +51,6 @@ const PlayArea = (props) => {
     </PositioningDiv>
 
   );
-
-  // useEffect(() => {
-  //   socket.on('suspect', suspectHandler)
-  //   socket.on('lockIn', lockHandler)
-  //   socket.on('ejectViaAirLock', ejectHandler)
-  //   socket.on('eatPlayer', eatHandler)
-  //   socket.on('player-disconnected',)
-  //   socket.on('chat-message', )
-  // }, [])
-
-  // const {
-  //   user, players, setUser, setPlayers,
-  // } = useContext(GlobalContext);
 };
 
 const PositioningDiv = Styled.div`

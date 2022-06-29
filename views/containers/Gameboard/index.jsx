@@ -1,35 +1,13 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
 import { GlobalContext } from '../../store';
 // import MusicPlayer from './components/musicPlayer';
-import socket from '../../util/socket.config.js';
-import PlayArea from './PlayArea.jsx';
-import Chat from '../Chat/index.jsx';
-// import {
-//   runPlayerRound,
-//   endPlayerRound,
-//   runWolfRound,
-//   endWolfRound,
-//   suspectHandler,
-//   lockHandler,
-//   ejectHandler,
-//   eatHandler,
-//   clearData,
-//   suspect,
-//   lockIn,
-// } from './GameboardUtilities.jsx';
+import socket from '../../util/socket.config';
+import PlayArea from './PlayArea';
+import Chat from '../Chat/index';
 
 const Gameboard = () => {
-  // useEffect(() => {
-  //   // socket.on('suspect', suspectHandler)
-  //   // socket.on('lockIn', lockHandler)
-  //   // socket.on('ejectViaAirLock', ejectHandler)
-  //   // socket.on('eatPlayer', eatHandler)
-  //   // socket.on('player-disconnected',)
-  //   // socket.on('chat-message', )
-  // }, [])
-
   const {
     user, players, setUser, setPlayers,
   } = useContext(GlobalContext);
