@@ -15,43 +15,59 @@ const Lobby = () => {
   const {
     players, setPlayers, player, setPlayer, gameID,
   } = useContext(GlobalContext);
+
   const [currentCharacter, setCurrentCharacter] = useState(3);
 
   const [showChat, setShowChat] = useState(false);
   const [canStart, setCanStart] = useState(false);
 
-  useEffect(() => {
-    socket.on('ready', (user) => {
-      const playList = players.map((current) => {
-        if (current.username === user.username) {
-          return { ...current, status: !current.status };
-        }
-        return current;
-      });
-      setPlayers(playList);
-      if (player.isHost) {
-        setCanStart(playList.every((each) => each.status));
+  socket.on('ready', (user) => {
+    const playList = players.map((current) => {
+      if (current.username === user.username) {
+        return { ...current, status: !current.status };
       }
+      return current;
     });
-    socket.on('game-started', () => {
-      console.log('game-started is runningggg');
-      navigate('/board');
-    });
-  }, []);
+    setPlayers(playList);
+    if (player.isHost) {
+      setCanStart(playList.every((each) => each.status));
+    }
+  });
+  socket.on('game-started', () => {
+    navigate('/board');
+  });
+
+  // useEffect(() => {
+  //   socket.on('ready', (user) => {
+  //     const playList = players.map((current) => {
+  //       console.log('playlist', playList);
+  //       if (current.username === user.username) {
+  //         return { ...current, status: !current.status };
+  //       }
+  //       return current;
+  //     });
+  //     setPlayers(playList);
+  //     if (player.isHost) {
+  //       setCanStart(playList.every((each) => each.status));
+  //     }
+  //   });
+  //   socket.on('game-started', () => {
+  //     navigate('/board');
+  //   });
+  // }, []);
 
   const readyUp = (p) => {
     socket.emit('ready', p, gameID);
   };
   const startGame = () => {
-    console.log('startGame is running');
-    socket.emit('start-game', gameID, player);
+    socket.emit('start-game', gameID);
   };
 
   const getCharAndReady = () => {
     const oldPlayer = { ...player };
     oldPlayer.charDex = currentCharacter;
     setPlayer(oldPlayer);
-    readyUp(oldPlayer);
+    readyUp(player);
   };
 
   const handleChatShow = () => {
@@ -176,13 +192,7 @@ const LoadingButton = Styled.button`
   border: none;
   box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
   width: 15rem;
-  z-index: 75;
-`;
-
-const Placeholder = Styled.div`
-  height: 50vh;
-  width: 25rem;
-  border: 2px solid red;
+  z-index: 9000;
 `;
 
 const PlayerName = Styled.div`

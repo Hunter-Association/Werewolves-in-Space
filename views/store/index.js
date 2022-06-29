@@ -15,6 +15,7 @@ const [isSoundEnabled, setIsSoundEnabled] = useState('true');
 const [characterList, setCharacterList] = useState(
   [adventureGirl, agent, cyberpunk, soldier, normalGirl],
 );
+
 const [player, setPlayer] = useState({
   username: 'anonymous',
   isDead: false,
@@ -23,7 +24,9 @@ const [player, setPlayer] = useState({
   id: '',
   charDex: null,
   status: false,
-  isHost: true
+  isHost: true,
+  suspect: {},
+  isLockedIn: false,
 });
 const [players, setPlayers] = useState([{
   username: 'realkllkdajldfdfakdjflksdsfd adlsd', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
