@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
 import { GlobalContext } from '../../store';
-// import MusicPlayer from './components/musicPlayer';
+import MusicPlayer from './components/musicPlayer';
 import socket from '../../util/socket.config';
 import PlayArea from './PlayArea';
 import Chat from '../Chat/index';
@@ -15,6 +15,9 @@ const Gameboard = () => {
     border: '8px solid red',
   };
 
+  useEffect(() => {
+    document.getElementById('gameMusic').volume = 0.1;
+  }, []);
   return (
     <MainDiv>
       <HeaderDiv>
@@ -23,7 +26,7 @@ const Gameboard = () => {
         <Link to="/">
           <div>Back to home</div>
         </Link>
-        {/* <MusicPlayer /> */}
+        <MusicPlayer />
       </HeaderDiv>
       <BottomDiv>
         <PlayAreaDiv>
