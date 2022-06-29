@@ -64,7 +64,7 @@ Junior Developer: Jason <br>
 Junior Developer: Amanda <br>
 Junior Developer: Yanick <br>
 
-Interns: Larry, Justin
+Senior Developers: Larry, Justin
 
 
 
