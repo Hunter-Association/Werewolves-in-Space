@@ -6,19 +6,29 @@ import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config.js';
 import PlayArea from './PlayArea.jsx';
 import Chat from '../Chat/index.jsx';
-import silence from '../../../assets/music/silence.mp3';
+// import {
+//   runPlayerRound,
+//   endPlayerRound,
+//   runWolfRound,
+//   endWolfRound,
+//   suspectHandler,
+//   lockHandler,
+//   ejectHandler,
+//   eatHandler,
+//   clearData,
+//   suspect,
+//   lockIn,
+// } from './GameboardUtilities.jsx';
 
-const Gameboard = (props) => {
-  console.log(props);
-  useEffect(() => {
-
+const Gameboard = () => {
+  // useEffect(() => {
   //   // socket.on('suspect', suspectHandler)
   //   // socket.on('lockIn', lockHandler)
   //   // socket.on('ejectViaAirLock', ejectHandler)
   //   // socket.on('eatPlayer', eatHandler)
   //   // socket.on('player-disconnected',)
   //   // socket.on('chat-message', )
-  }, [])
+  // }, [])
   const {
     user, players, setUser, setPlayers,
   } = useContext(GlobalContext);
@@ -36,11 +46,12 @@ const Gameboard = (props) => {
         <Link to="/">
           <div>Back to home</div>
         </Link>
-        {/* <MusicPlayer id="gameMusic" /> */}
+        {/* <MusicPlayer /> */}
       </HeaderDiv>
       <BottomDiv>
         <PlayAreaDiv>
-          <PlayArea></PlayArea>
+          <PlayArea color="blue">playArea</PlayArea>
+
         </PlayAreaDiv>
         <ChatAreaDiv>
           <ChatBufferDiv />

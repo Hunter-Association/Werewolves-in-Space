@@ -22,7 +22,7 @@ import {
 } from './GameboardUtilities.jsx';
 import wolfImage from '../../../assets/WhiteReady.png';
 import redWolf from '../../../assets/RedReady.png';
-
+import playerWolf from '../../../assets/playerWolf.png';
 // build a reference object/array
 // this should contain links to all the images/
 
@@ -34,8 +34,8 @@ const PlayArea = (props) => {
 
   const [dummyPlayers, setDummyPlayers] = useState([{
     username: 'realkllkdajldfdfakdjflksdsfd adlsd', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
-    },
-   {
+  },
+  {
     username: 'user2', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
   }, {
     username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: true,
@@ -51,28 +51,32 @@ const PlayArea = (props) => {
     username: 'user3', isDead: false, isWolf: false, socket: {}, id: '', charDex: null, status: false,
   }]);
   const handleClick = function (index) {
-    let newList = [];
-    for (var i = 0; i < dummyPlayers.length; i++) {
-      let current = JSON.parse(JSON.stringify(dummyPlayers[i]));
-      newList.push(current);
-      if (i === index)
-      {newList[i].status = true;}
-      else {
-        newList[i].status = false;
+    const newList = [];
+    const selfIndex = 0;
+    console.log(player);
+    if (index !== selfIndex) {
+      for (let i = 0; i < dummyPlayers.length; i++) {
+        const current = JSON.parse(JSON.stringify(dummyPlayers[i]));
+        newList.push(current);
+        if (i === index) { newList[i].status = true; } else {
+          newList[i].status = false;
+        }
       }
+      setDummyPlayers(newList);
     }
-    setDummyPlayers(newList);
-  }
+  };
   const getModel = function (pID, pNum, isVoted) {
-
     let image;
-    console.log('isVoted is ' + isVoted);
+    console.log(`isVoted is ${isVoted}`);
     if (isVoted) {
       image = redWolf;
     } else {
       image = wolfImage;
     }
-    console.log('pnum is ' + pNum);
+    const playerIndex = 1;
+    if (pNum === playerIndex) {
+      image = playerWolf;
+    }
 
     if (pNum === 1) {
       return <Player1 src={image} key={1} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
@@ -95,12 +99,10 @@ const PlayArea = (props) => {
     if (pNum === 7) {
       return <Player7 src={image} key={7} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
-    if (pNum === 8 ) {
+    if (pNum === 8) {
       return <Player8 src={image} key={8} num={pNum} onClick={() => (handleClick(pNum - 1))} />;
     }
-  }
-
-
+  };
 
   return (
 
@@ -108,7 +110,7 @@ const PlayArea = (props) => {
       <img src={playAreaBG} alt="A spooky scary background on a spaceship!" />
       {dummyPlayers.map((p, i) => {
         const CharacterModel = `Player${i + 1}`;
-        return getModel(p.id, i+1, p.status);
+        return getModel(p.id, i + 1, p.status);
       })}
 
     </PositioningDiv>
@@ -121,20 +123,18 @@ const PlayArea = (props) => {
     //   setMessages((prev) => [...prev, { sender, msg }]);
     // });
 
-
     // socket.on('suspect', suspectHandler)
     // socket.on('lockIn', lockHandler)
     // socket.on('ejectViaAirLock', ejectHandler)
     // socket.on('eatPlayer', eatHandler)
     // socket.on('player-disconnected',)
     // socket.on('chat-message', )
-  }, [])
+  }, []);
 
   // const {
   //   user, players, setUser, setPlayers,
   // } = useContext(GlobalContext);
 };
-
 
 const PositioningDiv = Styled.div`
 position: relative;

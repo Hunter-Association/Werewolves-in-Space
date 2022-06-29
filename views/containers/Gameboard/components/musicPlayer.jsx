@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import MuteButton from './muteButton';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const MusicPlayer = ({ height, width, id }) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const volume = 0.1;
@@ -30,6 +31,8 @@ const MusicPlayer = ({ height, width, id }) => {
   );
 };
 =======
+=======
+>>>>>>> 40121bc3ea66f09c35f8f37a31b9e22865c5ae42
 // const MusicPlayer = () => {
 //   const [isPlaying, setIsPlaying] = useState(true);
 //   const volume = 0.2;
@@ -54,6 +57,9 @@ const MusicPlayer = ({ height, width, id }) => {
 //     </div>
 //   );
 // };
+<<<<<<< HEAD
 >>>>>>> 6d8793eb8e4a6aa73599b2298d642e10ab752999
+=======
+>>>>>>> 40121bc3ea66f09c35f8f37a31b9e22865c5ae42
 
 // export default MusicPlayer;
