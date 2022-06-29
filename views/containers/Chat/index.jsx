@@ -16,8 +16,9 @@ const Chat = ({ height, width }) => {
       setMessages((prev) => [...prev, { sender, msg }]);
     });
     socket.on('murdered', (victim) => {
-      if (victim.username === player.username && hasRan.current) {
+      if (victim.username === player.username && !hasRan.current) {
         hasRan.current = true;
+        console.log(hasRan);
         setPlayer((prev) => ({ ...prev, isDead: true }));
         socket.on('dead-chat-message', (sender, msg) => {
           setMessages((prev) => [...prev, { sender, msg, socket }]);
