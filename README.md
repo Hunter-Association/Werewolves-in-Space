@@ -1,8 +1,24 @@
 # Werewolves-in-Space
-Werewolf is a super fun party game that can be played with a large group of people. The object of the game is to identify and kill the werewolves amongst the astronauts. 
+<img src="https://imgur.com/gNzcHHP.png" />
+ # About
+ Werewolf is a horror game of social deduction that can be played with a large group of people. The object of the game is to identify and kill the  werewolves amongst the astronauts. 
+ <h3>Built With:</h3>
+  <a href='#'>MongoDB</a>
+ &#160; | &#160;
+  <a href='#'>Express</a>
+ &#160; | &#160;
+  <a href='#'>ReactJS</a>
+  &#160; | &#160;
+  <a href='#'>NodeJS</a>
+  &#160;| &#160;
+  <a href='#'>Socket.io</a>
+  &#160;|&#160;
+  <a href='#'>ReactRouter</a>
+    
+ <hr>
 
 
-# Getting Started for Development
+# Contributing
 <ol>
   <li>Clone Repo on to your device</li>
   <code>git clone [project link] </code>
@@ -39,3 +55,7 @@ Werewolf is a super fun party game that can be played with a large group of peop
   # Push updates to feature branch
   # Make pull request from feature branch to dev branch
 </ol>
+
+# Contact
+For any bug reporting contact: Justin Chesterfield (casterwield@gmail.com)
+For any contributions Venmo: (ethanflower1)
