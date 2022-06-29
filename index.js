@@ -48,6 +48,7 @@ io.on('connection', socket => {
     io.to(gameID).emit('player-joined', playersArr);
   })
   socket.on('ready', (player, gameID) => {
+    console.log(player);
     io.to(gameID).emit('ready', player)
   })
   socket.on('suspect', (gameID, player, suspect) => {
