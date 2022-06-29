@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 mongoose.connect(
-  'mongodb://localhost:27017/users',
+  // connection path goes here
+
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
