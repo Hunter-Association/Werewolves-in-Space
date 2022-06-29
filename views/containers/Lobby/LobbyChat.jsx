@@ -24,7 +24,7 @@ const LobbyChat = ({ height, width }) => {
       }
     });
 
-    return () => socket.disconnect();
+    // return () => socket.disconnect();
   }, []);
 
   const clickHandler = () => {

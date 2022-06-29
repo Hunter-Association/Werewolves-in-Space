@@ -10,13 +10,14 @@ const Chat = ({ height, width }) => {
   const msgRef = useRef();
   const { player, setPlayer, gameID } = useContext(GlobalContext);
   const [messages, setMessages] = useState([]);
-
+  const hasRan = useRef(false);
   useEffect(() => {
     socket.on('chat-message', (sender, msg) => {
       setMessages((prev) => [...prev, { sender, msg }]);
     });
     socket.on('murdered', (victim) => {
-      if (victim.username === player.username) {
+      if (victim.username === player.username && hasRan.current) {
+        hasRan.current = true;
         setPlayer((prev) => ({ ...prev, isDead: true }));
         socket.on('dead-chat-message', (sender, msg) => {
           setMessages((prev) => [...prev, { sender, msg, socket }]);
