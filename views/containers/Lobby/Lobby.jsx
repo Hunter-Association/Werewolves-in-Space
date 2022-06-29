@@ -67,6 +67,7 @@ const Lobby = () => {
     const oldPlayer = { ...player };
     oldPlayer.charDex = currentCharacter;
     setPlayer(oldPlayer);
+    console.log(player);
     readyUp(player);
   };
 
@@ -101,13 +102,12 @@ const Lobby = () => {
             currentCharacter={currentCharacter}
             setCurrentCharacter={setCurrentCharacter}
           />
-          <LoadingButton onClick={getCharAndReady} color="green" type="button">IM READY!</LoadingButton>
+          <Row>
+            {player.isHost && canStart ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
+            <LoadingButton onClick={getCharAndReady} color="green" type="button">IM READY!</LoadingButton>
+          </Row>
         </Column>
 
-      </Row>
-
-      <Row>
-        {player.isHost && canStart ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
       </Row>
 
       <ChatDiv>
