@@ -2,7 +2,8 @@
 <img src="https://imgur.com/gNzcHHP.png" />
 
 # About
- Werewolf is a horror game of social deduction that can be played with a large group of people. The object of the game is to identify and kill the  werewolves amongst the astronauts. 
+Werewolves In Space is a horror game of social deduction that can be played with a group of up to 8 daring players. The object of the game is to identify and kill the werewolves hiding amongst the astronauts.
+	The space setting combined with fearsome werewolves puts a unique and eerie twist on this game of “find the murderer”. Players can chat to share and defend their suspicions in real time and watch as condemned players die and werewolves eat their fellow astronauts. As players die they leave the realm of the living but can still communicate with other dead players. Players can choose from 5 fearless astronaut adventurers to try and make it through the seemingly never ending days in space with the unceasing worry of being eaten by a werewolf or accused and killed by your fellow astronauts. Good luck making it to the end of your journey! 
  <h3>Built With:</h3>
   <a href='#'>MongoDB</a>
  &#160; | &#160;
