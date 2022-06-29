@@ -21,27 +21,42 @@ const Lobby = () => {
   const [showChat, setShowChat] = useState(false);
   const [canStart, setCanStart] = useState(false);
 
-  useEffect(() => {
-    socket.on('ready', (user) => {
-      const playList = players.map((current) => {
-        if (current.username === user.username) {
-          return { ...current, status: !current.status };
-        }
-        return current;
-      });
-      setPlayers(playList);
-      if (player.isHost) {
-        setCanStart(playList.every((each) => each.status));
+  socket.on('ready', (user) => {
+    const playList = players.map((current) => {
+      if (current.username === user.username) {
+        return { ...current, status: !current.status };
       }
+      return current;
     });
-    socket.on('game-started', () => {
-      console.log('happy');
-      navigate('/board');
-    });
-  }, []);
+    setPlayers(playList);
+    if (player.isHost) {
+      setCanStart(playList.every((each) => each.status));
+    }
+  });
+  socket.on('game-started', () => {
+    navigate('/board');
+  });
+
+  // useEffect(() => {
+  //   socket.on('ready', (user) => {
+  //     const playList = players.map((current) => {
+  //       console.log('playlist', playList);
+  //       if (current.username === user.username) {
+  //         return { ...current, status: !current.status };
+  //       }
+  //       return current;
+  //     });
+  //     setPlayers(playList);
+  //     if (player.isHost) {
+  //       setCanStart(playList.every((each) => each.status));
+  //     }
+  //   });
+  //   socket.on('game-started', () => {
+  //     navigate('/board');
+  //   });
+  // }, []);
 
   const readyUp = (p) => {
-    console.log('poop');
     socket.emit('ready', p, gameID);
   };
   const startGame = () => {
@@ -49,12 +64,10 @@ const Lobby = () => {
   };
 
   const getCharAndReady = () => {
-    console.log('hi');
     const oldPlayer = { ...player };
     oldPlayer.charDex = currentCharacter;
-    console.log('old', oldPlayer);
     setPlayer(oldPlayer);
-    readyUp(oldPlayer);
+    readyUp(player);
   };
 
   const handleChatShow = () => {
@@ -179,14 +192,8 @@ const LoadingButton = Styled.button`
   border: none;
   box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
   width: 15rem;
-  z-index: 75;
+  z-index: 9000;
 `;
-
-// const Placeholder = Styled.div`
-//   height: 50vh;
-//   width: 25rem;
-//   border: 2px solid red;
-// `;
 
 const PlayerName = Styled.div`
   font-size: 2rem;
