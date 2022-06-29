@@ -73,10 +73,13 @@ io.on('connection', socket => {
     io.to(gameID).emit('game-started')
   })
   socket.on('chat-message', (gameID, player, msg) => {
-    !player.isAlive ?
+    !player.isDead ?
     io.to(gameID).emit('chat-message', player, msg)
     :
     io.to(gameID).emit('dead-chat-message', player, msg);
+  })
+  socket.on('murdered', (gameID, player, victim) => {
+    io.to(gameID).emit('murdered', victim);
   })
 })
 
