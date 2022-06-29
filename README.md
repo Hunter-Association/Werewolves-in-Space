@@ -56,8 +56,10 @@ Werewolves In Space is a horror game of social deduction that can be played with
   <code>git checkout [feature branch]</code>
   <code>git merge dev</code>
   <li>Handle any merge conflicts locally</li>
-  # Push updates to feature branch
-  # Make pull request from feature branch to dev branch
+	<code>Accept Incoming Changes</code>
+  <li>Push updates to feature branch</li>
+  <code>git push origin [feature branch]</code>
+  <li>Make pull request from feature branch to dev branch using Github</li>
 </ol>
 
 # The Team:
