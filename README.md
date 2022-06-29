@@ -69,6 +69,6 @@ Interns: Larry, Justin
 
 
 # FootNote
-For any bug reporting contact: Justin Chesterfield (casterwield@gmail.com)
+For issues contact: Justin Chesterfield (casterwield@gmail.com)
 For any donations please Venmo: (ethanflower1)
-
+For anything else: just pull the code and fix it.
