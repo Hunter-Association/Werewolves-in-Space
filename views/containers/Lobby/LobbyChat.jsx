@@ -64,7 +64,7 @@ const LobbyChat = ({ height, width }) => {
       </ChatConversation>
       <Row>
         <ChatInput ref={msgRef} type="text" placeholder="write your message" />
-        <ChatButton onClick={clickHandler}>Send</ChatButton>
+        <ChatButton onClick={clickHandler}>SEND</ChatButton>
       </Row>
       {/* <ChatButton onClick={kill}>Click2Die</ChatButton> */}
     </ChatContainer>
@@ -74,14 +74,13 @@ const LobbyChat = ({ height, width }) => {
 export default LobbyChat;
 
 const ChatContainer = Styled.div`
-  height:  38rem;
-  width: 350px;
+  height: 95%;
+  width: 60%;
   overflow: hidden;
-
 `;
 
 const ChatConversation = Styled.article`
-  height: 300px;
+  height: 95%;
   background-color: black;
   color: red;
   overflow-y: scroll;
@@ -91,6 +90,8 @@ const ChatConversation = Styled.article`
 }
 `;
 const ChatInput = Styled.input`
+  font-family: arial;
+  font-size: 2em;
   width: 80%;
   min-height: 30px;
   color: red;
@@ -101,6 +102,9 @@ const ChatInput = Styled.input`
   }
 `;
 const ChatButton = Styled.button`
+  font-family: arial;
+  font-size: 2em;
+  font-weight: bold;
   min-height: 30px;
   width: 20%;
   color: red;
@@ -108,9 +112,12 @@ const ChatButton = Styled.button`
   border-style: none;
 `;
 const Text = Styled.p`
+  font-family: arial;
+  font-size: 20px;
   margin: 3px;
 `;
 const DeadText = Styled.p`
+  font-family: arial;
   margin: 3px;
   color: grey;
 `;
