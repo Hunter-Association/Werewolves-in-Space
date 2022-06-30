@@ -84,9 +84,9 @@ const PlayArea = () => {
         if (p.isDead) {
           return <span />;
         }
-        if (p.isWolf) {
-          return <Player8 src={characterList[gameState.players[0]?.charDex]} key={5} onClick={(e) => handler(i, e)} />;
-        }
+        // if (p.isWolf) {
+        //   return <Player8 src={characterList[gameState.players[0]?.charDex]} key={5} onClick={(e) => handler(i, e)} />;
+        // }
         return characters[i];
       })}
     </PositioningDiv>
@@ -108,52 +108,76 @@ width: fit-content;
 height: fit-content;
 
 `;
-const Player1 = Styled.div`
+const Player1 = Styled.img`
   position: absolute;
   top: 65%;
   left: 10%;
+
+  height: 120px;
+  width: 80px;
 `;
 
 const Player2 = Styled.img`
   position: absolute;
   top: 80%;
   left: 20%;
+
+  height: 120px;
+  width: 80px;
 `;
 
 const Player3 = Styled.img`
   position: absolute;
   top: 65%;
   left: 30%;
+
+  height: 120px;
+  width: 80px;
+
 `;
 
 const Player4 = Styled.img`
-position: absolute;
-top: 80%;
-left: 40%;
+  position: absolute;
+  top: 80%;
+  left: 40%;
+
+  height: 120px;
+  width: 80px;
 `;
 
 const Player5 = Styled.img`
 position: absolute;
 top: 65%;
 left: 50%;
+
+height: 120px;
+width: 80px;
 `;
 
 const Player6 = Styled.img`
 position: absolute;
 top: 80%;
 left: 60%;
+
+height: 120px;
+width: 80px;
 `;
 
 const Player7 = Styled.img`
 position: absolute;
 top: 65%;
 left: 70%;
+
+height: 120px;
+width: 80px;
 `;
 
 const Player8 = Styled.img`
 position: absolute;
 top: 80%;
 left: 80%;
+height: 120px;
+width: 80px;
 `;
 export default PlayArea;
 
