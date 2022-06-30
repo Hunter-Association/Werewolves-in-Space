@@ -244,7 +244,6 @@ left: 85%;
 `;
 export default PlayArea;
 
-export default PlayArea;
 // Legacy
 
 //= ======================== scott stuff ======================//
