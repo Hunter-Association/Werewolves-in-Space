@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, {
   useEffect, useContext, useState, useRef,
 } from 'react';
@@ -55,25 +56,34 @@ const PlayArea = () => {
     <Player8 src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />,
   ];
 
+  const suspects = [<div>
+    <Player1 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+    {player.isLockedIn ? <span>Suspicion Cast!</span> : <span>Suspect?</span>}
+                    </div>,
+    <div>
+      <Player2 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+      {player.isLockedIn ? <span>Suspicion Cast!</span> : <span>Suspect?</span>}
+    </div>];
+
   return (
     <PositioningDiv className="positioningDiv">
       {
-       gameState.isDone ? (
-         <h1>
-           {gameState.winners}
-           {' '}
-           won the game!
-         </h1>
-       ) : null
+        gameState.isDone ? (
+          <h1>
+            {gameState.winners}
+            {' '}
+            won the game!
+          </h1>
+        ) : null
       }
 
       {
         !gameState.isDone
-         && (gameState.isDay ? <h1>Find the WereWolf</h1> : <h1>Choose your Prey</h1>)
+         && (gameState.isDay ? <DayNightHeading>Find the WereWolf</DayNightHeading> : <DayNightHeading>Choose your Prey</DayNightHeading>)
       }
 
       { (!gameState.isDone && gameState.isDay)
-     && <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>LockIn</LockInButton>}
+     && <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>Lock-In</LockInButton>}
       {
         !gameState.isDone && (gameState.isDay ? (<img src={playAreaBG} alt="A spooky scary background on a spaceship!" />) : (<img src={NightTimeBG} alt="A spooky scary background on a spaceship!" />))
       }
@@ -84,102 +94,84 @@ const PlayArea = () => {
           return <span />;
         }
         // if (p.isWolf) {
-        //   return <Player8 src={characterList[gameState.players[0]?.charDex]} key={5} onClick={(e) => handler(i, e)} />;
+        //   return <Player8 src={redWolf} key={5} onClick={(e) => handler(i, e)} />;
         // }
+        if (p.username === player.suspect.username) {
+          return <div>{suspects[i]}</div>;
+        }
         return characters[i];
       })}
     </PositioningDiv>
   );
 };
 
+const getModelStyle = function (theIndex) {
+  const index = theIndex - 1;
+  const left = `${12.5 * index}%`;
+  const bottom = `${((index % 2) * 10)}%`;
+  const result = {
+    position: 'absolute',
+    bottom,
+    left,
+    width: '12.5%',
+  };
+  return result;
+};
+
 //  =============styles below::::
+const DayNightHeading = Styled.h1`
+  letter-spacing: 4px;
+`;
 
 const LockInButton = Styled.button`
   position: absolute;
   height: 50px;
+  left: 50%;
+  right: 50%;
   width: 100px;
-
+  letter-spacing: 4px;
 `;
 
 const PositioningDiv = Styled.div`
 position: relative;
 width: fit-content;
+width: 100%;
 height: fit-content;
 
 `;
 const Player1 = Styled.img`
-  position: absolute;
-  top: 65%;
-  left: 10%;
-
-  height: 120px;
-  width: 80px;
+  ${getModelStyle(1)}
 `;
 
 const Player2 = Styled.img`
-  position: absolute;
-  top: 80%;
-  left: 20%;
-
-  height: 120px;
-  width: 80px;
+  ${getModelStyle(2)}
 `;
 
 const Player3 = Styled.img`
-  position: absolute;
-  top: 65%;
-  left: 30%;
-
-  height: 120px;
-  width: 80px;
-
+  ${getModelStyle(3)}
 `;
 
 const Player4 = Styled.img`
-  position: absolute;
-  top: 80%;
-  left: 40%;
-
-  height: 120px;
-  width: 80px;
+  ${getModelStyle(4)}
 `;
 
 const Player5 = Styled.img`
-position: absolute;
-top: 65%;
-left: 50%;
-
-height: 120px;
-width: 80px;
+  ${getModelStyle(5)}
 `;
 
 const Player6 = Styled.img`
-position: absolute;
-top: 80%;
-left: 60%;
-
-height: 120px;
-width: 80px;
+  ${getModelStyle(6)}
 `;
 
 const Player7 = Styled.img`
-position: absolute;
-top: 65%;
-left: 70%;
-
-height: 120px;
-width: 80px;
+  ${getModelStyle(7)}
 `;
 
 const Player8 = Styled.img`
-position: absolute;
-top: 80%;
-left: 80%;
-height: 120px;
-width: 80px;
+  ${getModelStyle(8)}
 `;
-export default PlayArea;
 
+export default PlayArea;
 // Legacy
 
 //= ======================== scott stuff ======================//
