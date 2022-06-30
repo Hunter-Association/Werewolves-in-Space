@@ -7,6 +7,7 @@ import socket from '../../util/socket.config';
 
 export const suspectHandler = (prosecutor, defendant) => {
   // change accusation for specified vote
+  //add 'suspect' to the event target
   setPlayers((prev) => {
     prev.map((p) => {
       if (p.id === prosecutor.id) {
@@ -18,7 +19,7 @@ export const suspectHandler = (prosecutor, defendant) => {
     });
   });
 };
-
+//change color of 'suspect'
 export const lockHandler = (prosecutor) => {
   // flip bool status for lock
   setPlayers((prev) => {

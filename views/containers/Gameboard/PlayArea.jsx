@@ -55,6 +55,40 @@ const PlayArea = () => {
     <Player8 src={playerWolf} key={8} onClick={(e) => handler(7, e)} />,
   ];
 
+  const suspects = [
+    <div>
+      <Player1 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+      <Suspect1>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect1>
+    </div>,
+    <div>
+      <Player2 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+      <Suspect2>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect2>
+    </div>,
+    <div>
+      <Player3 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+      <Suspect3>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect3>
+    </div>,
+    <div>
+      <Player4 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+      <Suspect4>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect4>
+    </div>,
+    <div>
+      <Player5 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+      <Suspect5>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect5>
+    </div>,
+    <div>
+      <Player6 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+      <Suspect6>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect6>
+    </div>,
+    <div>
+      <Player7 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+      <Suspect7>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect7>
+    </div>,
+    <div>
+      <Player8 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+      <Suspect8>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect8>
+    </div>,
+  ];
   return (
     <PositioningDiv className="positioningDiv">
       {
@@ -83,10 +117,10 @@ const PlayArea = () => {
         if (p.isDead) {
           return <span />;
         }
-        if (p.isWolf) {
-          return <Player8 src={redWolf} key={5} onClick={(e) => handler(i, e)} />;
+        if (p.username === player.suspect.username) {
+          return <div>{suspects[i]}</div>;
         }
-        return characters[i];
+        return <div>{characters[i]}</div>;
       })}
     </PositioningDiv>
   );
@@ -107,10 +141,18 @@ width: fit-content;
 height: fit-content;
 
 `;
-const Player1 = Styled.div`
+
+const Player1 = Styled.img`
   position: absolute;
   top: 65%;
   left: 10%;
+`;
+
+const Suspect1 = Styled.div`
+  position: absolute;
+  top: 80%;
+  left: 15%;
+  text-color: purple
 `;
 
 const Player2 = Styled.img`
@@ -119,10 +161,23 @@ const Player2 = Styled.img`
   left: 20%;
 `;
 
+const Suspect2 = Styled.div`
+  position: absolute;
+  top: 95%;
+  left: 25%;
+  text-color: red;
+`;
+
 const Player3 = Styled.img`
   position: absolute;
   top: 65%;
   left: 30%;
+`;
+
+const Suspect3 = Styled.img`
+  position: absolute;
+  top: 80%;
+  left: 35%;
 `;
 
 const Player4 = Styled.img`
@@ -131,10 +186,22 @@ top: 80%;
 left: 40%;
 `;
 
+const Suspect4 = Styled.img`
+position: absolute;
+top: 95%;
+left: 45%;
+`;
+
 const Player5 = Styled.img`
 position: absolute;
 top: 65%;
 left: 50%;
+`;
+
+const Suspect5 = Styled.img`
+position: absolute;
+top: 80%;
+left: 55%;
 `;
 
 const Player6 = Styled.img`
@@ -143,16 +210,34 @@ top: 80%;
 left: 60%;
 `;
 
+const Suspect6 = Styled.img`
+position: absolute;
+top: 95%;
+left: 65%;
+`;
+
 const Player7 = Styled.img`
 position: absolute;
 top: 65%;
 left: 70%;
 `;
 
+const Suspect7 = Styled.img`
+position: absolute;
+top: 80%;
+left: 75%;
+`;
+
 const Player8 = Styled.img`
 position: absolute;
 top: 80%;
 left: 80%;
+`;
+
+const Suspect8 = Styled.img`
+position: absolute;
+top: 95%;
+left: 85%;
 `;
 export default PlayArea;
 
