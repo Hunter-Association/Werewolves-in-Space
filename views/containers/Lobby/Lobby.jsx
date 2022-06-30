@@ -79,7 +79,7 @@ const Lobby = () => {
   return (
     <Background>
       <Title>LOADING BAY</Title>
-      <Row>
+      <LobbyRow>
         <LeftColumn>
           <Img src={CrewManifest} alt="crew-manifest" />
           <ListCol>
@@ -92,15 +92,6 @@ const Lobby = () => {
               </PlayerRow>
             ))}
           </ListCol>
-          <Column>
-            <CodeDiv>Room Code</CodeDiv>
-            <TextRow onClick={() => copy(gameID)}>
-              <LoadingButton1 color="grey" type="button">
-                {gameID}
-              </LoadingButton1>
-              <IconImg src={copyIcon} />
-            </TextRow>
-          </Column>
         </LeftColumn>
 
         <Column>
@@ -108,23 +99,37 @@ const Lobby = () => {
             currentCharacter={currentCharacter}
             setCurrentCharacter={setCurrentCharacter}
           />
-          <Row>
-            {player.isHost && canStart ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
-            <LoadingButton onClick={getCharAndReady} color="green" type="button">IM READY!</LoadingButton>
-          </Row>
         </Column>
 
-      </Row>
+        <Column>
+          <ChatTitle>Chat</ChatTitle>
+          <LobbyChat />
+        </Column>
 
-      <ChatDiv>
-        {showChat && <LobbyChat />}
-        <ChatExpandCont>
+      </LobbyRow>
+      <BottomColumn>
+        <CodeDiv>Room Code</CodeDiv>
+        <TextRow onClick={() => copy(gameID)}>
+          <LoadingButton1 color="grey" type="button">
+            {gameID}
+          </LoadingButton1>
+          <IconImg src={copyIcon} />
+        </TextRow>
+        <Row>
+          {player.isHost && canStart ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
+          <LoadingButton onClick={getCharAndReady} color="green" type="button">IM READY!</LoadingButton>
+        </Row>
+
+      </BottomColumn>
+
+      {/* <ChatDiv> */}
+      {/* <ChatExpandCont>
           <ChatText>Chat</ChatText>
           <ArrowDiv onClick={handleChatShow}>
             {showChat ? <img src={arrowDown} alt="arrow" /> : <img src={arrowUp} alt="arrow" /> }
           </ArrowDiv>
-        </ChatExpandCont>
-      </ChatDiv>
+        </ChatExpandCont> */}
+      {/* </ChatDiv> */}
     </Background>
   );
 };
@@ -137,10 +142,24 @@ const Background = Styled.div`
   align-items: center;
 `;
 
+export const LobbyRow = Styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  width: 100vw;
+`;
+
 const Title = Styled.div`
   font-family: anotherDanger;
   color: red;
   font-size: 10vh;
+`;
+
+const ChatTitle = Styled.div`
+  font-family: anotherDanger;
+  color: red;
+  font-size: 3em;
 `;
 
 const PlayerRow = Styled.div`
@@ -149,37 +168,57 @@ const PlayerRow = Styled.div`
   padding: 0 1rem;
   background-color: 'black';
   margin-bottom: 5px;
-  width: 20rem;
+  width: 100%;
   z-index: 100;
+  height: 2em;
 `;
 
 const CodeDiv = Styled.div`
   z-index: 75;
-  margin-bottom: 1.7em;
-
+  font-size: 1.5em;
+  height: 4em;
 `;
 
 const Column = Styled.div`
+  height: 100%;
+  width: 32vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
-const ListCol = Styled(Column)`
-  margin-top: 5.5em;
+const ListCol = Styled.div`
+  position: absolute;
   background-color: black;
   z-index: 50;
+  width: 48%;
+  height: 69%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
 const LeftColumn = Styled(Column)`
-  position: relative;
-  width: 30rem;
+  display: flex;
   height: 100%;
+  position: relative;
+  width: 32vw;
 `;
 
 const Img = Styled.img`
   position: absolute;
-  width: 100%;
+  width: 70%;
+`;
+
+const BottomColumn = Styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+  width: 100vw;
+  margin-top: 4em;
 `;
 
 const IconImg = Styled.img`
@@ -201,7 +240,7 @@ const TextRow = Styled.div`
   background-color: #232323;
   z-index: 1;
   border: none;
-  border-radius: 25px;
+  border-radius: 10px;
   padding: 5px;
   box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
   &:active {
@@ -214,17 +253,17 @@ const TextRow = Styled.div`
 const LoadingButton1 = Styled.button`
   background-color: #232323;
   color:  ${(props) => props.color || '#E0E0E0'};
-  font-size: 24px;
+  font-size: 1.5em;
   font-family: Arial, Helvetica, sans-serif;
   border: none;
-  width: 5rem;
+  width: 10rem;
   z-index: 9000;
 `;
 
 const LoadingButton = Styled.button`
   background-color: #232323;
   color:  ${(props) => props.color || '#E0E0E0'};
-  font-size: 24px;
+  font-size: 1.5em;
   border: none;
   box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
   width: 15rem;
@@ -246,41 +285,41 @@ const PlayerSelection = Styled.div`
   color:  ${(props) => props.color};
 `;
 
-const ChatDiv = Styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 23.5em;
-  width: 22.2em;
-  position: fixed;
-  bottom: 1rem;
-  right: 2em;
-  z-index: 500;
-`;
+// const ChatDiv = Styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   height: 23.5em;
+//   width: 22.2em;
+//   position: fixed;
+//   bottom: 1rem;
+//   right: 2em;
+//   z-index: 500;
+// `;
 
-const ChatExpandCont = Styled.div`
-  display: flex;
-  height: 3em;
-  width: 21.9em;
-  background-color: black;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  bottom: 1rem;
-`;
+// const ChatExpandCont = Styled.div`
+//   display: flex;
+//   height: 3em;
+//   width: 21.9em;
+//   background-color: black;
+//   justify-content: space-between;
+//   align-items: center;
+//   position: fixed;
+//   bottom: 1rem;
+// `;
 
-const ChatText = Styled.div`
-  letter-spacing: 4px;
-  color: white;
-  flex-grow: 3;
-  padding-left: 1em;
-`;
+// const ChatText = Styled.div`
+//   letter-spacing: 4px;
+//   color: white;
+//   flex-grow: 3;
+//   padding-left: 1em;
+// `;
 
-const ArrowDiv = Styled.div`
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-end;
-  padding-right: 1em;
-  align-items: center;
-`;
+// const ArrowDiv = Styled.div`
+//   display: flex;
+//   flex-grow: 1;
+//   justify-content: flex-end;
+//   padding-right: 1em;
+//   align-items: center;
+// `;
 
 export default Lobby;
