@@ -37,6 +37,12 @@ const Chat = ({ height, width }) => {
     socket.emit('murdered', gameID, player, player);
   };
 
+  const keyHandler = (e) => {
+    if (e.code === 'Enter') {
+      clickHandler();
+    }
+  }
+
   return (
     <ChatContainer height={height} width={width}>
       <ChatConversation>
@@ -65,10 +71,9 @@ const Chat = ({ height, width }) => {
         }
       </ChatConversation>
       <Row>
-        <ChatInput ref={msgRef} type="text" placeholder="write your message" />
+        <ChatInput ref={msgRef} type="text" placeholder="write your message" onKeyPress={keyHandler} />
         <ChatButton onClick={clickHandler}>Send</ChatButton>
       </Row>
-      <ChatButton onClick={kill}>Click2Die</ChatButton>
     </ChatContainer>
   );
 };
@@ -76,13 +81,14 @@ const Chat = ({ height, width }) => {
 export default Chat;
 
 const ChatContainer = Styled.div`
+  font-family: Sans-serif;
   height: fit-content;
   width: 350px;
   overflow: hidden;
 `;
 
 const ChatConversation = Styled.article`
-  height: 300px;
+  height: 477px;
   background-color: black;
   color: red;
   overflow-y: scroll;
@@ -108,6 +114,7 @@ const ChatButton = Styled.button`
   border-style: none;
 `;
 const Text = Styled.p`
+  color: #d20000;
   margin: 3px;
 `;
 const DeadText = Styled.p`

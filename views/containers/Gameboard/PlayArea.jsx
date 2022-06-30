@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, {
   useEffect, useContext, useState, useRef,
 } from 'react';
@@ -78,11 +79,15 @@ const PlayArea = () => {
 
       {
         !gameState.isDone
+<<<<<<< HEAD
         && (gameState.isDay ? <h1>Find the WereWolf</h1> : <h1>Choose your Prey</h1>)
+=======
+         && (gameState.isDay ? <DayNightHeading>Find the WereWolf</DayNightHeading> : <DayNightHeading>Choose your Prey</DayNightHeading>)
+>>>>>>> dev
       }
 
       { (!gameState.isDone && gameState.isDay)
-     && <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>LockIn</LockInButton>}
+     && <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>Lock-In</LockInButton>}
       {
         !gameState.isDone && (gameState.isDay ? (<img src={playAreaBG} alt="A spooky scary background on a spaceship!" />) : (<img src={NightTimeBG} alt="A spooky scary background on a spaceship!" />))
       }
@@ -104,70 +109,73 @@ const PlayArea = () => {
   );
 };
 
+const getModelStyle = function (theIndex) {
+  const index = theIndex - 1;
+  const left = `${12.5 * index}%`;
+  const bottom = `${((index % 2) * 10)}%`;
+  const result = {
+    position: 'absolute',
+    bottom,
+    left,
+    width: '12.5%',
+  };
+  return result;
+};
+
 //  =============styles below::::
+const DayNightHeading = Styled.h1`
+  letter-spacing: 4px;
+`;
 
 const LockInButton = Styled.button`
   position: absolute;
   height: 50px;
+  left: 50%;
+  right: 50%;
   width: 100px;
-
+  letter-spacing: 4px;
 `;
 
 const PositioningDiv = Styled.div`
 position: relative;
 width: fit-content;
+width: 100%;
 height: fit-content;
 
 `;
-const Player1 = Styled.div`
-  position: absolute;
-  top: 65%;
-  left: 10%;
+const Player1 = Styled.img`
+  ${getModelStyle(1)}
 `;
 
 const Player2 = Styled.img`
-  position: absolute;
-  top: 80%;
-  left: 20%;
+  ${getModelStyle(2)}
 `;
 
 const Player3 = Styled.img`
-  position: absolute;
-  top: 65%;
-  left: 30%;
+  ${getModelStyle(3)}
 `;
 
 const Player4 = Styled.img`
-position: absolute;
-top: 80%;
-left: 40%;
+  ${getModelStyle(4)}
 `;
 
 const Player5 = Styled.img`
-position: absolute;
-top: 65%;
-left: 50%;
+  ${getModelStyle(5)}
 `;
 
 const Player6 = Styled.img`
-position: absolute;
-top: 80%;
-left: 60%;
+  ${getModelStyle(6)}
 `;
 
 const Player7 = Styled.img`
-position: absolute;
-top: 65%;
-left: 70%;
+  ${getModelStyle(7)}
 `;
 
 const Player8 = Styled.img`
-position: absolute;
-top: 80%;
-left: 80%;
+  ${getModelStyle(8)}
 `;
-export default PlayArea;
 
+export default PlayArea;
 // Legacy
 
 //= ======================== scott stuff ======================//
