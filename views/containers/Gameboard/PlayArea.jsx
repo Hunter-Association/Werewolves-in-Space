@@ -44,15 +44,16 @@ const PlayArea = () => {
     }
   };
 
+  console.log('gameeeee state', gameState.players);
   const characters = [
-    <Player1 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />,
-    <Player2 src={playerWolf} key={2} onClick={(e) => handler(1, e)} />,
-    <Player3 src={playerWolf} key={3} onClick={(e) => handler(2, e)} />,
-    <Player4 src={playerWolf} key={4} onClick={(e) => handler(3, e)} />,
-    <Player5 src={playerWolf} key={5} onClick={(e) => handler(4, e)} />,
-    <Player6 src={playerWolf} key={6} onClick={(e) => handler(5, e)} />,
-    <Player7 src={playerWolf} key={7} onClick={(e) => handler(6, e)} />,
-    <Player8 src={playerWolf} key={8} onClick={(e) => handler(7, e)} />,
+    <Player1 src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />,
+    <Player2 src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />,
+    <Player3 src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />,
+    <Player4 src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />,
+    <Player5 src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />,
+    <Player6 src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />,
+    <Player7 src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />,
+    <Player8 src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />,
   ];
 
   return (
@@ -84,7 +85,7 @@ const PlayArea = () => {
           return <span />;
         }
         if (p.isWolf) {
-          return <Player8 src={redWolf} key={5} onClick={(e) => handler(i, e)} />;
+          return <Player8 src={characterList[gameState.players[0]?.charDex]} key={5} onClick={(e) => handler(i, e)} />;
         }
         return characters[i];
       })}

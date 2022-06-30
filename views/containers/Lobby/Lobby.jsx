@@ -24,7 +24,7 @@ const Lobby = () => {
   socket.on('ready', (user) => {
     const playList = players.map((current) => {
       if (current.username === user.username) {
-        return { ...current, status: !current.status };
+        return { ...current, status: !current.status, charDex: currentCharacter };
       }
       return current;
     });
@@ -58,6 +58,7 @@ const Lobby = () => {
   // }, []);
 
   const readyUp = (p) => {
+    console.log('inside ready up', p);
     socket.emit('ready', p, gameID);
   };
   const startGame = () => {
@@ -65,11 +66,10 @@ const Lobby = () => {
   };
 
   const getCharAndReady = () => {
-    const oldPlayer = { ...player };
-    oldPlayer.charDex = currentCharacter;
-    setPlayer(oldPlayer);
-    console.log(player);
-    readyUp(player);
+    console.log('ok !!!!', currentCharacter);
+    const playerWithCharDex = { ...player };
+    playerWithCharDex.charDex = currentCharacter;
+    readyUp(playerWithCharDex);
   };
 
   const handleChatShow = () => {
