@@ -17,7 +17,6 @@ const Lobby = () => {
   } = useContext(GlobalContext);
 
   const [currentCharacter, setCurrentCharacter] = useState(3);
-
   const [showChat, setShowChat] = useState(false);
   const [canStart, setCanStart] = useState(false);
 
