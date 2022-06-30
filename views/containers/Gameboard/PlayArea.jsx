@@ -44,7 +44,6 @@ const PlayArea = () => {
     }
   };
 
-  console.log('gameeeee state', gameState.players);
   const characters = [
     <Player1 src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />,
     <Player2 src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />,
