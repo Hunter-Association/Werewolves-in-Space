@@ -23,9 +23,9 @@ const Gameboard = () => {
       <HeaderDiv>
         {/* nav bar */}
         <p>Welcome to the board.</p>
-        <Link to="/">
+        {/* <Link to="/">
           <div>Back to home</div>
-        </Link>
+        </Link> */}
         <MusicPlayer />
       </HeaderDiv>
       <BottomDiv>
