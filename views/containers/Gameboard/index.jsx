@@ -26,6 +26,8 @@ const Gameboard = () => {
       <HeaderDiv>
         {/* nav bar */}
         <p>Welcome to the board.</p>
+        <button type="button" onClick={() => setInfoModal(!infoModal)}>Info</button>
+        {infoModal ? <GameInfo /> : null}
         {/* <Link to="/">
           <div>Back to home</div>
         </Link> */}
