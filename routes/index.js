@@ -1,6 +1,8 @@
 const router = require('express').Router();
+const authentication = require('./authentication');
 
-router.use('/', (req, res) => res.send('hello'));
+router.use('/authentication', authentication);
+// router.use('/', (req, res) => res.send('hello'));
 /*
   Express server redirects to here...
   all base path should start here with this syntax router.use('/anyPath', HandlerFunc)
