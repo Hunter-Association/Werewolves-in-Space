@@ -17,7 +17,6 @@ const Lobby = () => {
   } = useContext(GlobalContext);
 
   const [currentCharacter, setCurrentCharacter] = useState(3);
-
   const [showChat, setShowChat] = useState(false);
   const [canStart, setCanStart] = useState(false);
 
@@ -33,7 +32,8 @@ const Lobby = () => {
       setCanStart(playList.every((each) => each.status));
     }
   });
-  socket.on('game-started', () => {
+  socket.on('game-started', (playerss) => {
+    setPlayers(playerss);
     navigate('/board');
   });
 

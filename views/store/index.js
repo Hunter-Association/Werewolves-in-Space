@@ -26,6 +26,7 @@ const [player, setPlayer] = useState({
   status: false,
   isHost: false,
   suspect: {},
+  votesAgainst: 0,
   isLockedIn: false,
 });
 const [players, setPlayers] = useState([{
@@ -51,6 +52,8 @@ const [gameID, setGameID] = useState(''); // When user joins game he will give t
 
 
 const [sessionData, setSessionData] = useState(null);
+
+
 
 // =================================================== export your state and setState functions here
 return (

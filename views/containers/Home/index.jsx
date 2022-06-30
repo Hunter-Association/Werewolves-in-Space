@@ -10,6 +10,7 @@ import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import claws from '../../../Assets/Werewolf Scratches.png';
 // import clipboard from '../../../Assets/clipboard2-plus-fill.svg';
+// const [isJoining, setIsJoining] = useState(false);
 
 const Home = () => {
   const {
@@ -22,8 +23,12 @@ const Home = () => {
   } = useContext(GlobalContext);
 
   const navigate = useNavigate();
-
   const [showJoinOptions, setShowJoinOptions] = useState(true);
+  const [isJoining, setIsJoining] = useState(false);
+
+  const handleJoinStatus = () => {
+    setIsJoining((prev) => true);
+  };
   const hostGame = () => {
     socket.on('player-joined', (allPlayers) => {
       setPlayers(allPlayers);
@@ -44,10 +49,6 @@ const Home = () => {
     navigate('/lobby');
   };
 
-  // const joinHandler = () => {
-  //   setShowJoinOptions((prev) => !prev);
-  // };
-
   return (
     <Center backgroundColor="#181818">
       <HomeSection>
@@ -55,7 +56,12 @@ const Home = () => {
         <Form backgroundColor="#181818">
           <Button onClick={hostGame} backgroundColor="#D20000">Host Game</Button>
           {/* <Button onClick={joinHandler} backgroundColor="#D20000">Join Game</Button> */}
-          <JoinOptions show={showJoinOptions} changeText={setGameID} joinGame={joinGame} />
+          <JoinOptions
+            handleJoinStatus={handleJoinStatus}
+            isJoining={isJoining}
+            show={showJoinOptions}
+            changeText={setGameID}
+            joinGame={joinGame} />
         </Form>
       </HomeSection>
     </Center>
@@ -88,14 +94,16 @@ export default Home;
 //     </span>
 //   );
 // };
-const JoinOptions = ({ show, joinGame, changeText }) => (
+
+
+const JoinOptions = ({ show, joinGame, changeText, handleJoinStatus, isJoining }) => (
+
   <span>
     {
       show && (
         <Column>
-          <GameCode type="text" placeholder="Enter Game Code" onChange={(e) => changeText(e.target.value)} />
-          {/* <button type="button" onClick={joinGame}>Go</button> */}
-          <GameCodeDiv><LoginButton type="button" value="Join Game" onClick={joinGame} /></GameCodeDiv>
+          <GameCode type="text" placeholder="Enter Game Code" onChange={(e) => { changeText(e.target.value); handleJoinStatus(); }} />
+          <GameCodeDiv>{isJoining ? <LoginButton type="button" value="Join Game" onClick={joinGame} /> : <LoginButton type="button" value="Join Game" />}</GameCodeDiv>
         </Column>
       )
     }
