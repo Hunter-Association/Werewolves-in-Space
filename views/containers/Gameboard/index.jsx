@@ -22,7 +22,6 @@ const Gameboard = () => {
     <MainDiv>
       <HeaderDiv>
         {/* nav bar */}
-        <p>Welcome to the board.</p>
         {/* <Link to="/">
           <div>Back to home</div>
         </Link> */}
@@ -48,16 +47,18 @@ const Gameboard = () => {
 export default Gameboard;
 
 const baseDiv = Styled.div`
+  height: 100vh;
+  overflow: hidden;
 `;
 
 const ChatBufferDiv = Styled.div`
-  height: 30%;
+  height: 10%;
 `;
 
 const HeaderDiv = Styled(baseDiv)`
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+justify-content: center;
 background: #181818;
 height: 20%;
 width: 100%;
@@ -67,17 +68,18 @@ const MainDiv = Styled.div`
   display: flex;
   flex-direction: column;
   background: #181818;
-  height: 100vh;
+  // height: 100vh;
   min-width: 1000px;
   align-items: center;
 `;
 
 const BottomDiv = Styled(baseDiv)`
   display: flex;
+  gap: 20px;
   flex-direction: row;
   min-height: 470px;
   width: 100%;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -86,12 +88,10 @@ const GameAndChatDiv = Styled.div`
 `;
 
 const PlayAreaDiv = Styled(baseDiv)`
-  width: 70%;
   height: fit-content;
   display: relative;
   `;
 
 const ChatAreaDiv = Styled.div`
-  width: 30%;
-  height: fit-content;
+
 `;
