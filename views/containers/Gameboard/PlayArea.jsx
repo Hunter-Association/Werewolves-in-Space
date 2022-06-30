@@ -59,7 +59,7 @@ const PlayArea = () => {
   const suspects = [<div>
     <Player1 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
     {player.isLockedIn ? <span>Suspicion Cast!</span> : <span>Suspect?</span>}
-  </div>,
+                    </div>,
     <div>
       <Player2 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
       {player.isLockedIn ? <span>Suspicion Cast!</span> : <span>Suspect?</span>}
@@ -79,11 +79,7 @@ const PlayArea = () => {
 
       {
         !gameState.isDone
-<<<<<<< HEAD
-        && (gameState.isDay ? <h1>Find the WereWolf</h1> : <h1>Choose your Prey</h1>)
-=======
          && (gameState.isDay ? <DayNightHeading>Find the WereWolf</DayNightHeading> : <DayNightHeading>Choose your Prey</DayNightHeading>)
->>>>>>> dev
       }
 
       { (!gameState.isDone && gameState.isDay)
