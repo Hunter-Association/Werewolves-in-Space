@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
 import { GlobalContext } from '../../store';
@@ -6,6 +6,7 @@ import MusicPlayer from './components/musicPlayer';
 import socket from '../../util/socket.config';
 import PlayArea from './PlayArea';
 import Chat from '../Chat/index';
+import GameInfo from './components/gameInfo';
 
 const Gameboard = () => {
   const {
@@ -15,6 +16,8 @@ const Gameboard = () => {
     border: '8px solid red',
   };
 
+  const [infoModal, setInfoModal] = useState(false);
+
   useEffect(() => {
     document.getElementById('gameMusic').volume = 0.1;
   }, []);
@@ -22,6 +25,9 @@ const Gameboard = () => {
     <MainDiv>
       <HeaderDiv>
         {/* nav bar */}
+        <p>Welcome to the board.</p>
+        <button type="button" onClick={() => setInfoModal(!infoModal)}>Info</button>
+        {infoModal ? <GameInfo /> : null}
         {/* <Link to="/">
           <div>Back to home</div>
         </Link> */}
