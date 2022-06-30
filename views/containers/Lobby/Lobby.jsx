@@ -32,7 +32,8 @@ const Lobby = () => {
       setCanStart(playList.every((each) => each.status));
     }
   });
-  socket.on('game-started', () => {
+  socket.on('game-started', (playerss) => {
+    setPlayers(playerss);
     navigate('/board');
   });
 
