@@ -28,9 +28,9 @@ const Gameboard = () => {
         <p>Welcome to the board.</p>
         <button type="button" onClick={() => setInfoModal(!infoModal)}>Info</button>
         {infoModal ? <GameInfo /> : null}
-        <Link to="/">
+        {/* <Link to="/">
           <div>Back to home</div>
-        </Link>
+        </Link> */}
         <MusicPlayer />
       </HeaderDiv>
       <BottomDiv>
