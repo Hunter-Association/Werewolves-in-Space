@@ -22,7 +22,7 @@ const [player, setPlayer] = useState({
   isWolf: false,
   socket: {},
   id: '',
-  charDex: null,
+  charDex: 3,
   status: false,
   isHost: false,
   suspect: {},

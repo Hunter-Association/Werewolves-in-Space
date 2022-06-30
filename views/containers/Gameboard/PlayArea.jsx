@@ -1,8 +1,7 @@
 import React, {
   useEffect, useContext, useState, useRef,
 } from 'react';
-
-import Styled from 'styled-components';
+import Styled, { keyframes } from 'styled-components';
 import playAreaBG from '../../../Assets/img/playAreaBG.gif';
 import NightTimeBG from '../../../Assets/NightTimeBG.png';
 import { GlobalContext } from '../../store';
@@ -11,9 +10,26 @@ import wolfImage from '../../../Assets/WhiteReady.png';
 import redWolf from '../../../Assets/RedReady.png';
 import playerWolf from '../../../Assets/playerWolf.png';
 
+// // static images
+// import singleAdventureGirl from '../../../Assets/characters/singleAdventureGirl.png';
+// import singleAgent from '../../../Assets/characters/singleAgent.png';
+// import singleCyberpunk from '../../../Assets/characters/singleCyberpunk.png';
+// import singleSoldier from '../../../Assets/characters/singleFutureSoldier.png';
+// import singleNormalGirl from '../../../Assets/characters/singleNormalGirl.png';
+// // import { GlobalContext } from '../../store';
+
+// // gifs
+// import adventureGirl from '../../../Assets/characters/AdventureGirl_Talking.png';
+// import agent from '../../../Assets/characters/Agent_Talking.png';
+// import cyberpunk from '../../../Assets/characters/CyberPunk_Talking.png';
+// import soldier from '../../../Assets/characters/FutureSoldier_Talking.png';
+// import normalGirl from '../../../Assets/characters/NormalGirl_Talking.png';
+
+import characterBios from '../../../Assets/characters/characterBios';
+
 const PlayArea = () => {
   const {
-    player, players, setPlayer, setPlayers, characterList, gameID,
+    player, players, setPlayer, setPlayers, characterList, setCharacterList, gameID,
   } = useContext(GlobalContext);
   const [gameState, setGameState] = useState({
     players, isDay: true, winners: 'nobody', isDone: false,
@@ -43,17 +59,19 @@ const PlayArea = () => {
       socket.emit('eat', gameID, gameState.players[number]);
     }
   };
-
+  console.log(characterList, 'characterlist');
+  console.log(gameState, 'gameState');
   const characters = [
-    <Player1 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />,
-    <Player2 src={playerWolf} key={2} onClick={(e) => handler(1, e)} />,
-    <Player3 src={playerWolf} key={3} onClick={(e) => handler(2, e)} />,
-    <Player4 src={playerWolf} key={4} onClick={(e) => handler(3, e)} />,
-    <Player5 src={playerWolf} key={5} onClick={(e) => handler(4, e)} />,
-    <Player6 src={playerWolf} key={6} onClick={(e) => handler(5, e)} />,
-    <Player7 src={playerWolf} key={7} onClick={(e) => handler(6, e)} />,
-    <Player8 src={playerWolf} key={8} onClick={(e) => handler(7, e)} />,
+    <Player1 src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />,
+    <Player2 src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />,
+    <Player3 src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />,
+    <Player4 src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />,
+    <Player5 src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />,
+    <Player6 src={characterList[gameState.players[0]?.charDex]} key={6} onClick={(e) => handler(5, e)} />,
+    <Player7 src={characterList[gameState.players[0]?.charDex]} key={7} onClick={(e) => handler(6, e)} />,
+    <Player8 src={characterList[gameState.players[0]?.charDex]} key={8} onClick={(e) => handler(7, e)} />,
   ];
+  console.log(characters);
 
   return (
     <PositioningDiv className="positioningDiv">
@@ -84,7 +102,7 @@ const PlayArea = () => {
           return <span />;
         }
         if (p.isWolf) {
-          return <Player8 src={redWolf} key={5} onClick={(e) => handler(i, e)} />;
+          return <Player8 src={characterList[p.charDex]} key={5} onClick={(e) => handler(i, e)} />;
         }
         return characters[i];
       })}
@@ -156,6 +174,63 @@ left: 80%;
 `;
 export default PlayArea;
 
+const animation = keyframes`
+  100% { background-position: -1025px; }
+`;
+
+// const SoldierStyle = Styled.div`
+//   height: 64px;
+//   width: 50px;
+//   transform: scale(3);
+//   margin-top: 80px;
+//   margin-bottom: 100px;
+//   margin-right: 30px;
+//   background: url(${soldier}) left center;
+//   animation: ${animation} 2s steps(8) infinite;
+//   `;
+
+// const AdventureGirlStyle = Styled.div`
+// height: 64px;
+// width: 50px;
+// transform: scale(3);
+// margin-top: 80px;
+// margin-bottom: 100px;
+// margin-right: 30px;
+// background: url(${adventureGirl}) left center;
+// animation: ${animation} 2s steps(8) infinite;
+// `;
+// const AgentStyle = Styled.div`
+// height: 64px;
+// width: 50px;
+// transform: scale(3);
+// margin-top: 80px;
+// margin-bottom: 100px;
+// margin-right: 30px;
+// background: url(${agent}) left center;
+// animation: ${animation} 2s steps(8) infinite;
+// `;
+
+// const CyberpunkStyle = Styled.div`
+// height: 64px;
+// width: 50px;
+// transform: scale(3);
+// margin-top: 80px;
+// margin-bottom: 100px;
+// margin-right: 30px;
+// background: url(${cyberpunk}) left center;
+// animation: ${animation} 2s steps(8) infinite;
+// `;
+
+// const NormalGirlStyle = Styled.div`
+// height: 64px;
+// width: 50px;
+// transform: scale(3);
+// margin-top: 80px;
+// margin-bottom: 100px;
+// margin-right: 30px;
+// background: url(${normalGirl}) left center;
+// animation: ${animation} 2s steps(8) infinite;
+// `;
 // Legacy
 
 //= ======================== scott stuff ======================//

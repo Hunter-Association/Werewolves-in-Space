@@ -53,11 +53,13 @@ io.on('connection', socket => {
     io.to(gameID).emit('player-joined', playersArr);
   })
   socket.on('ready', (player, gameID) => {
-    for (var i = 0; i < gameState.players; i++) {
+    for (var i = 0; i < gameState.players.length; i++) {
       if (gameState.players[i].username === player.username) {
+        gameState.players[i].charDex = player.charDex;
         gameState.players[i].status = true;
       }
     }
+    console.log(player.charDex);
     io.to(gameID).emit('ready', player)
   })
   socket.on('start-game', (gameID) => {
