@@ -26,6 +26,7 @@ const [player, setPlayer] = useState({
   status: false,
   isHost: false,
   suspect: {},
+  votesAgainst: 0,
   isLockedIn: false,
 });
 const [players, setPlayers] = useState([{

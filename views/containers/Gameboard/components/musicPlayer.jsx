@@ -21,7 +21,7 @@ const MusicPlayer = ({ height, width, id='gameMusic' }) => {
 
   return (
     <div className="music-player" position="fixed">
-      <audio preload="auto" id={id} display="hidden" autoPlay loop className="gameMusic" type="audio/mpeg">
+      <audio preload="auto" id={id} display="hidden" autoPlay muted loop className="gameMusic" type="audio/mpeg">
         <track kind="captions" />
         <source preload="auto" src={songURL} type="audio/mpeg" />
       </audio>

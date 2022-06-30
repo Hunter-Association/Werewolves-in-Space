@@ -35,51 +35,126 @@ const PORT = process.env.PORT || 3000;
 
 
 //=====SOCKETS==================
-const playerMap = new Map();
+const playerMap = {};
+const gameState = {
+  isDay: true,
+  isDone: false,
+  winners: '',
+}
+
 io.on('connection', socket => {
 
   socket.on('join-game', async (gameID, player) => {
-    socket.player = player;
-    playerMap.set(socket.id, player);
+    playerMap[socket.id] = player;
     socket.join(gameID);
-
     const allPlayers = await io.in(gameID).allSockets();
-    const playersArr = [...allPlayers].map(sktID => playerMap.get(sktID));
+    const playersArr = [...allPlayers].map(sktID => playerMap[sktID]);
+    gameState.players = playersArr;
     io.to(gameID).emit('player-joined', playersArr);
   })
   socket.on('ready', (player, gameID) => {
-    console.log(player);
+    for (var i = 0; i < gameState.players; i++) {
+      if (gameState.players[i].username === player.username) {
+        gameState.players[i].status = true;
+      }
+    }
     io.to(gameID).emit('ready', player)
   })
+  socket.on('start-game', (gameID) => {
+    //start timer
+    gameState.players[0].isWolf = true;
+    io.to(gameID).emit('game-started', gameState.players)
+  })
   socket.on('suspect', (gameID, player, suspect) => {
-    io.to(gameID).emit('suspect', player, suspect)
+    // console.log(gameID)
+    // console.log("🚀 suspect", suspect);
+    // console.log("🚀 player",  player);
+
+    for (var i = 0; i < gameState.players.length; i++) {
+      if (gameState.players[i].username === player.username) {
+        console.log('preSus', gameState)
+        gameState.players[i].suspect = suspect;
+      }
+      console.log('postSus', gameState)
+    }
+    io.to(gameID).emit('state-change', gameState)
   })
   socket.on('lockIn', (gameID, player, colonist) => {
-    io.to(gameID).emit('lockIn', player, colonist)
+    for (var i = 0; i < gameState.players.length; i++) {
+      if (gameState.players[i].username === player.username) {
+        gameState.players[i].isLockedIn = true;
+        gameState.players[i].suspect.votesAgainst += 1;
+        gameState.players.forEach(p => {
+          if (p.username === gameState.players[i].suspect.username) {
+            p.votesAgainst += 1;
+          }
+        })
+      }
+    }
+    if (gameState.players.every((p) => p.isLockedIn)) {
+      let victim = {votesAgainst: 0};
+      gameState.players.forEach((p) => {
+        if (p.votesAgainst > victim.votesAgainst) {
+          victim = p;
+        }
+      })
+      gameState.players.forEach((p) => {
+        if (p.username === victim.username) {
+          p.isDead = true;
+        }
+      })
+      if (gameState.players.filter((p) => !p.isDead).length === 2) {
+        console.log('problem is in your wolves win condition ')
+        gameState.isDone = true;
+        gameState.winners = 'wolves';
+      }
+      if (gameState.players.filter((p) => p.isDead && p.isWolf).length !== 0) {
+        console.log('problem is in your wolves colonists condition ')
+        gameState.isDone = true;
+        gameState.winners = 'Colonists'
+      }
+      gameState.isDay = false;
+    }
+    let data = {...gameState}
+    if (gameState.isDone) {
+      gameState.players = [];
+      gameState.isDay = true;
+      gameState.winners = '';
+      gameState.isDone = false;
+    }
+    io.to(gameID).emit('state-change', data)
+
   })
-  socket.on('ejectViaAirLock', (gameID, player, colonist) => {
-    io.to(gameID).emit('ejectViaAirLock', player, colonist)
-  })
-  socket.on('eatPlayer', (gameID, player, colonist) => {
-    io.to(gameID).emit('eatPlayer', player, colonist)
-  })
-  socket.on('disconnect', () => {
-    io.emit('player-disconnected')
-  })
-  socket.on('game-over', (winningTeam) => {
-    io.emit('game-over', winningTeam)
-  })
-  socket.on('start-game', (gameID) => {
-    io.to(gameID).emit('game-started')
+  socket.on('eat', (gameID, victim) => {
+    for (var i = 0; i < gameState.players.length; i++) {
+      if (gameState.players[i].username === victim.username) {
+        gameState.players[i].isDead = true;
+      }
+    }
+    if (gameState.players.filter((p) => !p.isDead).length === 2) {
+      gameState.isDone = true;
+      gameState.winners = 'wolves';
+    }
+    gameState.isDay = true;
+    let data = {...gameState};
+    if (gameState.isDone) {
+      gameState.players = [];
+      gameState.isDay = true;
+      gameState.winners = '';
+      gameState.isDone = false;
+    }
+    gameState.players.forEach(p => {
+      if (!p.isDead) {
+        p.isLockedIn = false;
+      }
+    });
+    io.to(gameID).emit('state-change', data)
   })
   socket.on('chat-message', (gameID, player, msg) => {
     !player.isDead ?
     io.to(gameID).emit('chat-message', player, msg)
     :
     io.to(gameID).emit('dead-chat-message', player, msg);
-  })
-  socket.on('murdered', (gameID, player, victim) => {
-    io.to(gameID).emit('murdered', victim);
   })
 })
 
