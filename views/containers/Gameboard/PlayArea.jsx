@@ -55,21 +55,30 @@ const PlayArea = () => {
     <Player8 src={playerWolf} key={8} onClick={(e) => handler(7, e)} />,
   ];
 
+  const suspects = [<div>
+    <Player1 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+    {player.isLockedIn ? <span>Suspicion Cast!</span> : <span>Suspect?</span>}
+  </div>,
+    <div>
+      <Player2 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
+      {player.isLockedIn ? <span>Suspicion Cast!</span> : <span>Suspect?</span>}
+    </div>];
+
   return (
     <PositioningDiv className="positioningDiv">
       {
-       gameState.isDone ? (
-         <h1>
-           {gameState.winners}
-           {' '}
-           won the game!
-         </h1>
-       ) : null
+        gameState.isDone ? (
+          <h1>
+            {gameState.winners}
+            {' '}
+            won the game!
+          </h1>
+        ) : null
       }
 
       {
         !gameState.isDone
-         && (gameState.isDay ? <h1>Find the WereWolf</h1> : <h1>Choose your Prey</h1>)
+        && (gameState.isDay ? <h1>Find the WereWolf</h1> : <h1>Choose your Prey</h1>)
       }
 
       { (!gameState.isDone && gameState.isDay)
@@ -85,6 +94,9 @@ const PlayArea = () => {
         }
         if (p.isWolf) {
           return <Player8 src={redWolf} key={5} onClick={(e) => handler(i, e)} />;
+        }
+        if (p.username === player.suspect.username) {
+          return <div>{suspects[i]}</div>;
         }
         return characters[i];
       })}
