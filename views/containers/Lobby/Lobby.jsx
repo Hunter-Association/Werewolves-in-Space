@@ -9,6 +9,7 @@ import LobbyChat from './LobbyChat';
 import arrowDown from '../../../Assets/arrow-down.svg';
 import arrowUp from '../../../Assets/arrow-up.svg';
 import CharacterSelect from './CharacterSelect';
+import copyIcon from '../../../Assets/icons8-copy-48.png';
 
 const Lobby = () => {
   const navigate = useNavigate();
@@ -93,7 +94,12 @@ const Lobby = () => {
           </ListCol>
           <Column>
             <CodeDiv>Room Code</CodeDiv>
-            <LoadingButton color="grey" onClick={() => copy(gameID)} type="button">{gameID}</LoadingButton>
+            <TextRow onClick={() => copy(gameID)}>
+              <LoadingButton1 color="grey" type="button">
+                {gameID}
+              </LoadingButton1>
+              <IconImg src={copyIcon} />
+            </TextRow>
           </Column>
         </LeftColumn>
 
@@ -176,13 +182,43 @@ const Img = Styled.img`
   width: 100%;
 `;
 
+const IconImg = Styled.img`
+  float: right;
+  z-index: 1;
+`;
+
 const Row = Styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 1rem;
   padding-top: 5vh;
+`;
 
+const TextRow = Styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #232323;
+  z-index: 1;
+  border: none;
+  border-radius: 25px;
+  padding: 5px;
+  box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
+  &:active {
+    border: 2px green solid;
+    color: green;
+    box-shadow: none;
+  }
+`;
+
+const LoadingButton1 = Styled.button`
+  background-color: #232323;
+  color:  ${(props) => props.color || '#E0E0E0'};
+  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+  width: 5rem;
+  z-index: 9000;
 `;
 
 const LoadingButton = Styled.button`
@@ -198,7 +234,6 @@ const LoadingButton = Styled.button`
     color: green;
     box-shadow: none;
   }
-
 `;
 
 const PlayerName = Styled.div`

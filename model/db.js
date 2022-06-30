@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 mongoose.connect(
   // connection path goes here
-
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
