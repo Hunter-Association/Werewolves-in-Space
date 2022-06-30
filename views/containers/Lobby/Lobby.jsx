@@ -9,6 +9,7 @@ import LobbyChat from './LobbyChat';
 import arrowDown from '../../../Assets/arrow-down.svg';
 import arrowUp from '../../../Assets/arrow-up.svg';
 import CharacterSelect from './CharacterSelect';
+import copyIcon from '../../../Assets/icons8-copy-48.png';
 
 const Lobby = () => {
   const navigate = useNavigate();
@@ -108,7 +109,12 @@ const Lobby = () => {
       </LobbyRow>
       <BottomColumn>
         <CodeDiv>Room Code</CodeDiv>
-        <LoadingButton color="grey" onClick={() => copy(gameID)} type="button">{gameID}</LoadingButton>
+        <TextRow onClick={() => copy(gameID)}>
+          <LoadingButton1 color="grey" type="button">
+            {gameID}
+          </LoadingButton1>
+          <IconImg src={copyIcon} />
+        </TextRow>
         <Row>
           {player.isHost && canStart ? <LoadingButton color="red" onClick={startGame} type="button">START GAME</LoadingButton> : null}
           <LoadingButton onClick={getCharAndReady} color="green" type="button">IM READY!</LoadingButton>
@@ -164,31 +170,30 @@ const PlayerRow = Styled.div`
   margin-bottom: 5px;
   width: 100%;
   z-index: 100;
-  height: 5em;
+  height: 2em;
 `;
 
 const CodeDiv = Styled.div`
   z-index: 75;
-  font-size: 3em;
+  font-size: 1.5em;
   height: 4em;
 `;
 
 const Column = Styled.div`
   height: 100%;
-  flex-grow: 1;
+  width: 32vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-left: 10em;
 `;
 
 const ListCol = Styled.div`
   position: absolute;
   background-color: black;
   z-index: 50;
-  width: 65%;
-  height: 70%;
+  width: 48%;
+  height: 69%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -198,13 +203,12 @@ const LeftColumn = Styled(Column)`
   display: flex;
   height: 100%;
   position: relative;
-  flex-grow: 1;
-  margin-left: 100px;
+  width: 32vw;
 `;
 
 const Img = Styled.img`
   position: absolute;
-  width: 90%;
+  width: 70%;
 `;
 
 const BottomColumn = Styled.div`
@@ -217,19 +221,49 @@ const BottomColumn = Styled.div`
   margin-top: 4em;
 `;
 
+const IconImg = Styled.img`
+  float: right;
+  z-index: 1;
+`;
+
 const Row = Styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 1rem;
-  padding-top: 2em;
+  padding-top: 5vh;
+`;
 
+const TextRow = Styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #232323;
+  z-index: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
+  &:active {
+    border: 2px green solid;
+    color: green;
+    box-shadow: none;
+  }
+`;
+
+const LoadingButton1 = Styled.button`
+  background-color: #232323;
+  color:  ${(props) => props.color || '#E0E0E0'};
+  font-size: 1.5em;
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+  width: 10rem;
+  z-index: 9000;
 `;
 
 const LoadingButton = Styled.button`
   background-color: #232323;
   color:  ${(props) => props.color || '#E0E0E0'};
-  font-size: 3em;
+  font-size: 1.5em;
   border: none;
   box-shadow: 4px 4px 4px 1px rgba(0,0,0,0.4);
   width: 15rem;
@@ -239,16 +273,15 @@ const LoadingButton = Styled.button`
     color: green;
     box-shadow: none;
   }
-
 `;
 
 const PlayerName = Styled.div`
-  font-size: 4rem;
+  font-size: 2rem;
   letter-spacing: 4px;
 `;
 
 const PlayerSelection = Styled.div`
-  font-size: 4rem;
+  font-size: 2rem;
   color:  ${(props) => props.color};
 `;
 
