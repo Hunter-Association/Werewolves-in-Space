@@ -35,6 +35,11 @@ const LobbyChat = ({ height, width }) => {
     socket.emit('murdered', gameID, player, player);
   };
 
+  const keyHandler = (e) => {
+    if (e.code === 'Enter') {
+      clickHandler();
+    }
+  }
   return (
     <ChatContainer height={height} width={width}>
       <ChatConversation>
@@ -63,7 +68,7 @@ const LobbyChat = ({ height, width }) => {
         }
       </ChatConversation>
       <Row>
-        <ChatInput ref={msgRef} type="text" placeholder="write your message" />
+        <ChatInput ref={msgRef} type="text" onKeyPress={keyHandler} placeholder="write your message" />
         <ChatButton onClick={clickHandler}>SEND</ChatButton>
       </Row>
       {/* <ChatButton onClick={kill}>Click2Die</ChatButton> */}
