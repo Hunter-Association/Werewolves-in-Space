@@ -8,9 +8,6 @@ import playAreaBG from '../../../Assets/img/playAreaBG.gif';
 import NightTimeBG from '../../../Assets/NightTimeBG.png';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
-import wolfImage from '../../../Assets/WhiteReady.png';
-import redWolf from '../../../Assets/RedReady.png';
-import playerWolf from '../../../Assets/playerWolf.png';
 
 const PlayArea = () => {
   const {
@@ -56,14 +53,40 @@ const PlayArea = () => {
     <Player8 src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />,
   ];
 
-  const suspects = [<div>
-    <Player1 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
-    {player.isLockedIn ? <span>Suspicion Cast!</span> : <span>Suspect?</span>}
-                    </div>,
+  const suspects = [
+    <Player1>
+      <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
+      <Suspect1>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect1>
+    </Player1>,
     <div>
-      <Player2 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />
-      {player.isLockedIn ? <span>Suspicion Cast!</span> : <span>Suspect?</span>}
-    </div>];
+      <Player2 src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
+      <Suspect2>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect2>
+    </div>,
+    <div>
+      <Player3 src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
+      <Suspect3>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect3>
+    </div>,
+    <div>
+      <Player4 src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />
+      <Suspect4>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect4>
+    </div>,
+    <div>
+      <Player5 src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />
+      <Suspect5>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect5>
+    </div>,
+    <div>
+      <Player6 src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />
+      <Suspect6>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect6>
+    </div>,
+    <div>
+      <Player7 src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
+      <Suspect7>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect7>
+    </div>,
+    <div>
+      <Player8 src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
+      <Suspect8>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect8>
+    </div>,
+  ];
 
   return (
     <PositioningDiv className="positioningDiv">
@@ -169,6 +192,46 @@ const Player7 = Styled.img`
 
 const Player8 = Styled.img`
   ${getModelStyle(8)}
+`;
+
+const Suspect1 = Styled.div`
+  color: white;
+  z-index: 10;
+`;
+
+const Suspect2 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect3 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect4 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect5 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect6 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect7 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect8 = Styled.div`
+color: white;
+z-index: 10;
 `;
 
 export default PlayArea;
@@ -502,3 +565,5 @@ export default PlayArea;
 // const handleButtonClick = function () {
 //   console.log('so and so has locked in!');
 // };
+
+// let hat = 'just a hat';
