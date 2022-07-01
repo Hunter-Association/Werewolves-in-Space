@@ -7,6 +7,7 @@ const infoStyle = {
     width: '2',
     height: '2px',
     border_radius: '10%',
+    backgroundColor: 'rgb(19 18 18 / 75%)',
   },
   content: {
     width: '450px',
@@ -20,10 +21,7 @@ const infoStyle = {
   },
 };
 
-const GameInfo = () => {
-  const [infoModal, setInfoModal] = useState(false);
-
-  return (
+const GameInfo = () => (
     <Modal isOpen={true} style={infoStyle} appElement={document.getElementById('root')}>
       <InfoContainer>
         <InfoHeaders>How To Play as Colonist</InfoHeaders>
@@ -37,8 +35,7 @@ const GameInfo = () => {
         <InfoDivs>*Kill all of the colonists to win!</InfoDivs>
       </InfoContainer>
     </Modal>
-  );
-};
+);
 
 export default GameInfo;
 

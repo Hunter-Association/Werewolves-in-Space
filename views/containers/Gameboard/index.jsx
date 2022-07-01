@@ -6,17 +6,21 @@ import MusicPlayer from './components/musicPlayer';
 import socket from '../../util/socket.config';
 import PlayArea from './PlayArea';
 import Chat from '../Chat/index';
-import GameInfo from './components/gameInfo';
+import GameInfo from './Modals/gameInfo';
+import CrewWin from './Modals/CrewWin';
+import WerewolvesWin from './Modals/WerewolvesWin';
 
 const Gameboard = () => {
   const {
-    user, players, setUser, setPlayers,
+    user, players, setUser, setPlayers, winners,
   } = useContext(GlobalContext);
   const borderStyle = {
     border: '8px solid red',
   };
 
   const [infoModal, setInfoModal] = useState(false);
+  const [crewWin, setCrewWin] = useState(false);
+  const [werewolvesWin, setWerewolvesWin] = useState(false);
 
   useEffect(() => {
     document.getElementById('gameMusic').volume = 0.1;
@@ -34,9 +38,11 @@ const Gameboard = () => {
         <MusicPlayer />
       </HeaderDiv>
       <BottomDiv>
+      {/* <CrewWin /> */}
+        {winners === 'Colonists' ? <CrewWin /> : null}
+        {winners === 'wolves' ? <WerewolvesWin /> : null}
         <PlayAreaDiv>
           <PlayArea>playArea</PlayArea>
-
         </PlayAreaDiv>
         <ChatAreaDiv>
           <ChatBufferDiv />
