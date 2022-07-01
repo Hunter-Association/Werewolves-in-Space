@@ -58,10 +58,10 @@ const PlayArea = () => {
       <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
       <Suspect1>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect1>
     </Player1>,
-    <div>
-      <Player2 src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
+    <Player2>
+      <img src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
       <Suspect2>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect2>
-    </div>,
+    </Player2>,
     <div>
       <Player3 src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
       <Suspect3>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect3>
@@ -119,7 +119,7 @@ const PlayArea = () => {
         if (p.username === player.suspect.username) {
           return <div>{suspects[i]}</div>;
         }
-        return <div>{characters[i]}</div>;
+        return characters[i];
       })}
     </PositioningDiv>
   );
