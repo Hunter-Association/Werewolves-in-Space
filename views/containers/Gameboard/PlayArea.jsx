@@ -8,6 +8,25 @@ import playAreaBG from '../../../Assets/img/playAreaBG.gif';
 import NightTimeBG from '../../../Assets/NightTimeBG.png';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
+import Spotlight from './components/spotlight.jsx';
+
+const getModelStyle = function (theIndex) {
+  const index = theIndex - 1;
+  const left = `${12.5 * index}%`;
+  const bottom = `${((index % 2) * 10)}%`;
+  const result = {
+    position: 'absolute',
+    bottom,
+    left,
+    width: '12.5%',
+  };
+  return result;
+};
+
+const whatever = {'position': 'absolute',
+'left': '0',
+'bottom': '0',
+'z-index': '10'}
 
 const PlayArea = () => {
   const {
@@ -50,68 +69,104 @@ const PlayArea = () => {
     </Player1>,
     <Player2>
       <UsernameDiv>{gameState.players[1]?.username}</UsernameDiv>
-    <img src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
+      <img src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
     </Player2>,
     <Player3>
       <UsernameDiv>{gameState.players[2]?.username}</UsernameDiv>
-    <img src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
+      <img src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
     </Player3>,
     <Player4>
       <UsernameDiv>{gameState.players[3]?.username}</UsernameDiv>
-    <img src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />
+      <img src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />
     </Player4>,
     <Player5>
       <UsernameDiv>{gameState.players[4]?.username}</UsernameDiv>
-    <img src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />
+      <img src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />
     </Player5>,
     <Player6>
       <UsernameDiv>{gameState.players[5]?.username}</UsernameDiv>
-    <img src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />
+      <img src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />
     </Player6>,
     <Player7>
       <UsernameDiv>{gameState.players[6]?.username}</UsernameDiv>
-    <img src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
+      <img src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
     </Player7>,
     <Player8>
       <UsernameDiv>{gameState.players[7]?.username}</UsernameDiv>
-    <img src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
+      <img src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
     </Player8>,
   ];
 
   const suspects = [
-    <Character1>
+    <Player1>
       <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
-      <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
-    </Character1>,
-    <Character2>
+      <UsernameDiv>{gameState.players[0]?.username}</UsernameDiv>
+      <img src={characterList[gameState.players[0]?.charDex]} style={{
+'z-index': '10', 'position': 'relative'}} key={1} onClick={(e) => handler(0, e)} />
+      <Spotlight theStyle={getModelStyle(1)} />
+    </Player1>,
+    <Player2>
       <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
-      <img src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
-    </Character2>,
-    <Character3>
+      <UsernameDiv>{gameState.players[1]?.username}</UsernameDiv>
+      <img src={characterList[gameState.players[1]?.charDex]} key={2} style={{
+'z-index': '10', 'position': 'relative'}}  onClick={(e) => handler(1, e)} />
+      <Spotlight theStyle={getModelStyle(2)} />
+    </Player2>,
+    <Player3>
       <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
-      <img src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
-    </Character3>,
-    <Character4>
+      <UsernameDiv>{gameState.players[2]?.username}</UsernameDiv>
+      <img src={characterList[gameState.players[2]?.charDex]} style={{
+'z-index': '10', 'position': 'relative'}} key={3} onClick={(e) => handler(2, e)} />
+      <Spotlight theStyle={getModelStyle(1)} />
+    </Player3>,
+    <Player4>
       <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
-      <img src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />
-    </Character4>,
-    <Character5>
+      <UsernameDiv>{gameState.players[3]?.username}</UsernameDiv>
+      <img src={characterList[gameState.players[3]?.charDex]} style={{
+'z-index': '10', 'position': 'relative'}} key={4} onClick={(e) => handler(3, e)} />
+      <Spotlight theStyle={getModelStyle(1)}/>
+    </Player4>,
+    <Player5>
       <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
-      <img src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />
-    </Character5>,
-    <Character6>
+      <UsernameDiv>{gameState.players[4]?.username}</UsernameDiv>
+      <img src={characterList[gameState.players[4]?.charDex]} style={{
+'z-index': '10', 'position': 'relative'}} key={5} onClick={(e) => handler(4, e)} />
+      <Spotlight theStyle={getModelStyle(1)}/>
+    </Player5>,
+    <Player6>
       <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
-      <img src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />
-    </Character6>,
-    <Character7>
+      <UsernameDiv>{gameState.players[5]?.username}</UsernameDiv>
+      <img src={characterList[gameState.players[5]?.charDex]} style={{
+'z-index': '10', 'position': 'relative'}} key={6} onClick={(e) => handler(5, e)} />
+      <Spotlight theStyle={getModelStyle(1)}/>
+    </Player6>,
+    <Player7>
       <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
-      <img src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
-    </Character7>,
-    <Character8>
+      <UsernameDiv>{gameState.players[6]?.username}</UsernameDiv>
+      <img src={characterList[gameState.players[6]?.charDex]} style={{
+'z-index': '10', 'position': 'relative'}} key={7} onClick={(e) => handler(6, e)} />
+      <Spotlight theStyle={getModelStyle(1)}/>
+    </Player7>,
+    <Player8>
       <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
-      <img src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
-    </Character8>,
+      <UsernameDiv>{gameState.players[7]?.username}</UsernameDiv>
+      <img src={characterList[gameState.players[7]?.charDex]} style={{
+'z-index': '10', 'position': 'relative'}} key={8} onClick={(e) => handler(7, e)} />
+      <Spotlight theStyle={getModelStyle(1)}/>
+    </Player8>,
+    // <Character7>
+    //   <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
+    //   <img src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
+    //   <Spotlight />
+    // </Character7>,
+    // <Character8>
+    //   <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
+    //   <img src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
+    //   <Spotlight />
+    // </Character8>,
   ];
+
+
 
   return (
     <PositioningDiv className="positioningDiv">
@@ -142,25 +197,12 @@ const PlayArea = () => {
           return <span />;
         }
         if (p.username === player.suspect.username) {
-          return <div>{suspects[i]}</div>;
+          return suspects[i];
         }
         return characters[i];
       })}
     </PositioningDiv>
   );
-};
-
-const getModelStyle = function (theIndex) {
-  const index = theIndex - 1;
-  const left = `${12.5 * index}%`;
-  const bottom = `${((index % 2) * 10)}%`;
-  const result = {
-    position: 'absolute',
-    bottom,
-    left,
-    width: '12.5%',
-  };
-  return result;
 };
 
 //  =============styles below::::
@@ -222,46 +264,46 @@ const Player8 = Styled.section`
   ${getModelStyle(8)}
 `;
 const Character1 = Styled.div`
-${getModelStyle(1)}
-`
+
+`;
 const Character2 = Styled.div`
-${getModelStyle(2)}
-`
+
+`;
 const Character3 = Styled.div`
-${getModelStyle(3)}
-`
+
+`;
 const Character4 = Styled.div`
-${getModelStyle(4)}
-`
+
+`;
 const Character5 = Styled.div`
-${getModelStyle(5)}
-`
+
+`;
 const Character6 = Styled.div`
-${getModelStyle(6)}
-`
+
+`;
 const Character7 = Styled.div`
-${getModelStyle(7)}
-`
+
+`;
 const Character8 = Styled.div`
-${getModelStyle(8)}
-`
+
+`;
 
 const SuspectTextDiv = Styled.div`
   color: red;
   z-index: 10;
   text-align: center;
-`
+`;
 const Suspect1 = Styled.div`
   color: white;
   z-index: 10;
-  position: absolute;
+
 top: 0;
 `;
 
 const Suspect2 = Styled.div`
 color: white;
 z-index: 10;
-position: absolute;
+
 top: 0;
 `;
 

@@ -1,0 +1,22 @@
+.dot {
+  box-shadow: -5px 5px 39px 20px red;
+  height: 25px;
+  width: 100px;
+  animation: myAnim 2s ease 0s infinite normal forwards;
+  background-color: clear;
+  border-radius: 100%;
+  display: inline-block;
+}
+@keyframes myAnim {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.1);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
