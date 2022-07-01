@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // import { GlobalContext } from '../../../store/index';
-import songURL from '../../../../assets/music/board/Track2.mp3';
+import songURL from '../../../../Assets/music/board/Track2.mp3';
 import MuteButton from './muteButton';
 // import MusicHelper from './musicHelper';
 
