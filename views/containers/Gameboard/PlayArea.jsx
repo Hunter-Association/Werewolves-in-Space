@@ -5,7 +5,8 @@ import React, {
 
 import Styled from 'styled-components';
 import playAreaBG from '../../../Assets/img/playAreaBG.gif';
-import NightTimeBG from '../../../Assets/NightTimeBG.png';
+// import NightTimeBG from '../../../Assets/NightTimeBG.png';
+import NightTimeBG from '../../../Assets/alternateNightBG.jpg';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
 import Spotlight from './components/spotlight.jsx';
@@ -184,12 +185,15 @@ const PlayArea = () => {
         !gameState.isDone
          && (gameState.isDay ? <DayNightHeading>Find the WereWolf</DayNightHeading> : <DayNightHeading>Choose your Prey</DayNightHeading>)
       }
-
+      <ButtonDiv>
       { (!gameState.isDone && gameState.isDay)
-     && <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>Lock-In</LockInButton>}
+     && <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>🔒 Lock-In 🔒</LockInButton>}
+      </ButtonDiv>
       {
         !gameState.isDone && (gameState.isDay ? (<img src={playAreaBG} alt="A spooky scary background on a spaceship!" />) : (<img src={NightTimeBG} alt="A spooky scary background on a spaceship!" />))
       }
+
+
 
       { !gameState.isDone
       && gameState.players.map((p, i) => {
@@ -205,18 +209,33 @@ const PlayArea = () => {
   );
 };
 
+
+
 //  =============styles below::::
 const DayNightHeading = Styled.h1`
   letter-spacing: 4px;
+  text-align: center;
+`;
+
+const ButtonDiv = Styled.div`
+  position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 `;
 
 const LockInButton = Styled.button`
-  position: absolute;
-  height: 50px;
-  left: 50%;
-  right: 50%;
-  width: 100px;
   letter-spacing: 4px;
+  background-color: #04aa6d94;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 4px;
 `;
 
 const UsernameDiv = Styled.div`

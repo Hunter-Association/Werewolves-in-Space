@@ -12,7 +12,7 @@ import WerewolvesWin from './Modals/WerewolvesWin';
 
 const Gameboard = () => {
   const {
-    user, players, setUser, setPlayers, winners,
+    user, player, players, setUser, setPlayers, winners,
   } = useContext(GlobalContext);
   const borderStyle = {
     border: '8px solid red',
@@ -29,8 +29,7 @@ const Gameboard = () => {
     <MainDiv>
       <HeaderDiv>
         {/* nav bar */}
-        <p>Welcome to the board.</p>
-        <button type="button" onClick={() => setInfoModal(!infoModal)}>Info</button>
+        <button type="button" style={{height:'50px', width:'100px', padding: '10px'}} onClick={() => setInfoModal(!infoModal)}>Info</button>
         {infoModal ? <GameInfo /> : null}
         {/* <Link to="/">
           <div>Back to home</div>
@@ -43,6 +42,9 @@ const Gameboard = () => {
         {winners === 'wolves' ? <WerewolvesWin /> : null}
         <PlayAreaDiv>
           <PlayArea>playArea</PlayArea>
+          {
+          player.isWolf ? <DescriptionText> You are a werewolf. Sow deceit and take out all of the humans! </DescriptionText> : <DescriptionText> You are a human. Sniff out the werewolves! </DescriptionText>
+          }
         </PlayAreaDiv>
         <ChatAreaDiv>
           <ChatBufferDiv />
@@ -57,6 +59,12 @@ const Gameboard = () => {
 };
 
 export default Gameboard;
+
+const DescriptionText = Styled.p`
+  font: 15px;
+  font-family: arial;
+  text-align: center;
+`
 
 const baseDiv = Styled.div`
   height: 100vh;
