@@ -186,8 +186,9 @@ const PlayArea = () => {
          && (gameState.isDay ? <DayNightHeading>Find the WereWolf</DayNightHeading> : <DayNightHeading>Choose your Prey</DayNightHeading>)
       }
       <ButtonDiv>
-      { (!gameState.isDone && gameState.isDay)
-     && <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>🔒 Lock-In 🔒</LockInButton>}
+      { !gameState.isDone && gameState.isDay
+     && (!player.isLockedIn ? <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>🔓 Lock-In 🔓</LockInButton> : <LockedInButton>🔒 Vote Cast! 🔒</LockedInButton>)
+      }
       </ButtonDiv>
       {
         !gameState.isDone && (gameState.isDay ? (<img src={playAreaBG} alt="A spooky scary background on a spaceship!" />) : (<img src={NightTimeBG} alt="A spooky scary background on a spaceship!" />))
@@ -223,6 +224,21 @@ const ButtonDiv = Styled.div`
     display: flex;
     justify-content: center;
 `;
+
+const LockedInButton = Styled.button`
+    letter-spacing: 4px;
+    background-color: #aa040494;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 4px;
+`;
+
 
 const LockInButton = Styled.button`
   letter-spacing: 4px;
