@@ -57,14 +57,14 @@ const PlayArea = () => {
   ];
 
   const suspects = [
-    <Player1>
-      <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
+    <Character1>
       <Suspect1>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect1>
-    </Player1>,
-    <Player2>
-      <img src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
+      <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
+    </Character1>,
+    <Character2>
       <Suspect2>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect2>
-    </Player2>,
+      <img src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
+    </Character2>,
     <div>
       <Player3 src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
       <Suspect3>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect3>
@@ -86,8 +86,9 @@ const PlayArea = () => {
       <Suspect7>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect7>
     </div>,
     <div>
-      <Player8 src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
       <Suspect8>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect8>
+      <Player8 src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
+
     </div>,
   ];
 
@@ -193,15 +194,24 @@ const Player7 = Styled.img`
 const Player8 = Styled.img`
   ${getModelStyle(8)}
 `;
-
+const Character1 = Styled.div`
+${getModelStyle(1)}
+`
+const Character2 = Styled.div`
+${getModelStyle(2)}
+`
 const Suspect1 = Styled.div`
   color: white;
   z-index: 10;
+  position: absolute;
+top: 0;
 `;
 
 const Suspect2 = Styled.div`
 color: white;
 z-index: 10;
+position: absolute;
+top: 0;
 `;
 
 const Suspect3 = Styled.div`
