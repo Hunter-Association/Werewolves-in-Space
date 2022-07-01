@@ -166,9 +166,6 @@ const Player1 = Styled.img`
 `;
 
 const Suspect1 = Styled.div`
-  position: absolute;
-  top: 80%;
-  left: 15%;
   text-color: purple
 `;
 
@@ -177,9 +174,6 @@ const Player2 = Styled.img`
 `;
 
 const Suspect2 = Styled.div`
-  position: absolute;
-  top: 95%;
-  left: 25%;
   text-color: red;
 `;
 
