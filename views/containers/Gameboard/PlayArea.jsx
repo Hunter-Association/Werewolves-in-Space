@@ -36,11 +36,9 @@ const PlayArea = () => {
 
   const handler = (number, e) => {
     e.stopPropagation();
-    if (gameState.isDay) {
-      console.log('ran', gameState.players[number]);
+    if (gameState.isDay)
       socket.emit('suspect', gameID, player, gameState.players[number]);
     } else if (player.isWolf) {
-      console.log('ran at night');
       socket.emit('eat', gameID, gameState.players[number]);
     }
   };
@@ -57,38 +55,38 @@ const PlayArea = () => {
   ];
 
   const suspects = [
-    <Player1>
-      <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
+    <Character1>
       <Suspect1>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect1>
-    </Player1>,
-    <div>
-      <Player2 src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
+      <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
+    </Character1>,
+    <Character2>
       <Suspect2>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect2>
-    </div>,
-    <div>
-      <Player3 src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
+      <img src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
+    </Character2>,
+    <Character3>
       <Suspect3>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect3>
-    </div>,
-    <div>
-      <Player4 src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />
+      <img src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
+    </Character3>,
+    <Character4>
       <Suspect4>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect4>
-    </div>,
-    <div>
-      <Player5 src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />
+      <img src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />
+    </Character4>,
+    <Character5>
       <Suspect5>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect5>
-    </div>,
-    <div>
-      <Player6 src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />
+      <img src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />
+    </Character5>,
+    <Character6>
       <Suspect6>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect6>
-    </div>,
-    <div>
-      <Player7 src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
+      <img src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />
+    </Character6>,
+    <Character7>
       <Suspect7>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect7>
-    </div>,
-    <div>
-      <Player8 src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
+      <img src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
+    </Character7>,
+    <Character8>
       <Suspect8>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect8>
-    </div>,
+      <img src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
+    </Character8>,
   ];
 
   return (
@@ -119,9 +117,6 @@ const PlayArea = () => {
         if (p.isDead) {
           return <span />;
         }
-        // if (p.isWolf) {
-        //   return <Player8 src={redWolf} key={5} onClick={(e) => handler(i, e)} />;
-        // }
         if (p.username === player.suspect.username) {
           return <div>{suspects[i]}</div>;
         }
@@ -196,15 +191,42 @@ const Player7 = Styled.img`
 const Player8 = Styled.img`
   ${getModelStyle(8)}
 `;
-
+const Character1 = Styled.div`
+${getModelStyle(1)}
+`
+const Character2 = Styled.div`
+${getModelStyle(2)}
+`
+const Character3 = Styled.div`
+${getModelStyle(3)}
+`
+const Character4 = Styled.div`
+${getModelStyle(4)}
+`
+const Character5 = Styled.div`
+${getModelStyle(5)}
+`
+const Character6 = Styled.div`
+${getModelStyle(6)}
+`
+const Character7 = Styled.div`
+${getModelStyle(7)}
+`
+const Character8 = Styled.div`
+${getModelStyle(8)}
+`
 const Suspect1 = Styled.div`
   color: white;
   z-index: 10;
+  position: absolute;
+top: 0;
 `;
 
 const Suspect2 = Styled.div`
 color: white;
 z-index: 10;
+position: absolute;
+top: 0;
 `;
 
 const Suspect3 = Styled.div`
@@ -238,6 +260,7 @@ z-index: 10;
 `;
 
 export default PlayArea;
+
 // Legacy
 
 //= ======================== scott stuff ======================//
