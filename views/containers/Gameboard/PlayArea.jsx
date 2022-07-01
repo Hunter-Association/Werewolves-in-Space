@@ -45,7 +45,7 @@ const PlayArea = () => {
 
   const characters = [
     <Player1>
-      <div>{gameState.players[0]?.username}</div>
+      <UsernameDiv>{gameState.players[0]?.username}</UsernameDiv>
       <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
     </Player1>,
     <Player2>
@@ -175,6 +175,12 @@ const LockInButton = Styled.button`
   right: 50%;
   width: 100px;
   letter-spacing: 4px;
+`;
+
+const UsernameDiv = Styled.div`
+    text-align: center;
+    max-width: 100%;
+    overflow:hidden;
 `;
 
 const PositioningDiv = Styled.div`
