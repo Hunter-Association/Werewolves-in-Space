@@ -22,6 +22,15 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader',
+      },
+      // loader for font file
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
     ]
   },
   // [devtool] this is an additional source map that will let the browser know what files are running our code.
@@ -29,6 +38,6 @@ module.exports = {
   devtool: "eval-cheap-module-source-map",
   // [devServer] configuration for the live server including port
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ttf'],
   }
 }
