@@ -49,66 +49,66 @@ const PlayArea = () => {
       <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
     </Player1>,
     <Player2>
-      <div>{gameState.players[1]?.username}</div>
+      <UsernameDiv>{gameState.players[1]?.username}</UsernameDiv>
     <img src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
     </Player2>,
     <Player3>
-      <div>{gameState.players[2]?.username}</div>
+      <UsernameDiv>{gameState.players[2]?.username}</UsernameDiv>
     <img src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
     </Player3>,
     <Player4>
-      <div>{gameState.players[3]?.username}</div>
+      <UsernameDiv>{gameState.players[3]?.username}</UsernameDiv>
     <img src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />
     </Player4>,
     <Player5>
-      <div>{gameState.players[4]?.username}</div>
+      <UsernameDiv>{gameState.players[4]?.username}</UsernameDiv>
     <img src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />
     </Player5>,
     <Player6>
-      <div>{gameState.players[5]?.username}</div>
+      <UsernameDiv>{gameState.players[5]?.username}</UsernameDiv>
     <img src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />
     </Player6>,
     <Player7>
-      <div>{gameState.players[6]?.username}</div>
+      <UsernameDiv>{gameState.players[6]?.username}</UsernameDiv>
     <img src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
     </Player7>,
     <Player8>
-      <div>{gameState.players[7]?.username}</div>
+      <UsernameDiv>{gameState.players[7]?.username}</UsernameDiv>
     <img src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
     </Player8>,
   ];
 
   const suspects = [
     <Character1>
-      <Suspect1>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect1>
+      <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
       <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
     </Character1>,
     <Character2>
-      <Suspect2>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect2>
+      <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
       <img src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
     </Character2>,
     <Character3>
-      <Suspect3>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect3>
+      <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
       <img src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
     </Character3>,
     <Character4>
-      <Suspect4>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect4>
+      <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
       <img src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />
     </Character4>,
     <Character5>
-      <Suspect5>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect5>
+      <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
       <img src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />
     </Character5>,
     <Character6>
-      <Suspect6>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect6>
+      <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
       <img src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />
     </Character6>,
     <Character7>
-      <Suspect7>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect7>
+      <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
       <img src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
     </Character7>,
     <Character8>
-      <Suspect8>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect8>
+      <SuspectTextDiv>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</SuspectTextDiv>
       <img src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
     </Character8>,
   ];
@@ -244,6 +244,12 @@ ${getModelStyle(7)}
 `
 const Character8 = Styled.div`
 ${getModelStyle(8)}
+`
+
+const SuspectTextDiv = Styled.div`
+  color: red;
+  z-index: 10;
+  text-align: center;
 `
 const Suspect1 = Styled.div`
   color: white;
