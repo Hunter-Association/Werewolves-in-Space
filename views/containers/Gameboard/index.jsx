@@ -12,7 +12,7 @@ import WerewolvesWin from './Modals/WerewolvesWin';
 
 const Gameboard = () => {
   const {
-    user, players, setUser, setPlayers,
+    user, players, setUser, setPlayers, winners,
   } = useContext(GlobalContext);
   const borderStyle = {
     border: '8px solid red',
@@ -39,8 +39,8 @@ const Gameboard = () => {
       </HeaderDiv>
       <BottomDiv>
       {/* <CrewWin /> */}
-        {crewWin ? <CrewWin /> : null}
-        {werewolvesWin ? <WerewolvesWin /> : null}
+        {winners === 'Colonists' ? <CrewWin /> : null}
+        {winners === 'wolves' ? <WerewolvesWin /> : null}
         <PlayAreaDiv>
           <PlayArea>playArea</PlayArea>
         </PlayAreaDiv>

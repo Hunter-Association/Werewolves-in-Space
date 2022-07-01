@@ -13,7 +13,7 @@ import playerWolf from '../../../Assets/playerWolf.png';
 
 const PlayArea = () => {
   const {
-    player, players, setPlayer, setPlayers, characterList, gameID,
+    player, players, setPlayer, setPlayers, characterList, gameID, setWinners,
   } = useContext(GlobalContext);
   const [gameState, setGameState] = useState({
     players, isDay: true, winners: 'nobody', isDone: false,
@@ -23,6 +23,9 @@ const PlayArea = () => {
     if (!hasRan.current) {
       socket.on('state-change', (gs) => {
         setGameState(gs);
+        if (gs.isDone) {
+          setWinners(gs.winners);
+        }
         console.log('gameSTate', gs);
         gs.players.forEach((p) => {
           if (p.username === player.username) {

@@ -15,6 +15,7 @@ const [isSoundEnabled, setIsSoundEnabled] = useState('true');
 const [characterList, setCharacterList] = useState(
   [adventureGirl, agent, cyberpunk, soldier, normalGirl],
 );
+const [winners, setWinners] = useState('');
 
 const [player, setPlayer] = useState({
   username: 'anonymous',
@@ -72,6 +73,8 @@ return (
     setSessionData,
     characterList,
     setCharacterList,
+    winners,
+    setWinners,
   }}>
     {props.children}
   </GlobalContext.Provider>
