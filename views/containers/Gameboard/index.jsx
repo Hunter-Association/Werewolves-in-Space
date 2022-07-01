@@ -94,10 +94,11 @@ const GameAndChatDiv = Styled.div`
 `;
 
 const PlayAreaDiv = Styled(baseDiv)`
+  width: 80%;
   height: fit-content;
   display: relative;
   `;
 
 const ChatAreaDiv = Styled.div`
-
+  width: 20%;
 `;

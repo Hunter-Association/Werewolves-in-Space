@@ -54,10 +54,10 @@ const PlayArea = () => {
   ];
 
   const suspects = [
-    <Player1>
-      <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
+    <div>
+      <Player1 src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
       <Suspect1>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect1>
-    </Player1>,
+    </div>,
     <div>
       <Player2 src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
       <Suspect2>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect2>
@@ -108,7 +108,7 @@ const PlayArea = () => {
       { (!gameState.isDone && gameState.isDay)
      && <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>Lock-In</LockInButton>}
       {
-        !gameState.isDone && (gameState.isDay ? (<img src={playAreaBG} alt="A spooky scary background on a spaceship!" />) : (<img src={NightTimeBG} alt="A spooky scary background on a spaceship!" />))
+        !gameState.isDone && (gameState.isDay ? (<DayBG src={playAreaBG}  />) : (<NightBG src={NightTimeBG}/>))
       }
 
       { !gameState.isDone
@@ -140,6 +140,16 @@ const getModelStyle = function (theIndex) {
   };
   return result;
 };
+
+const DayBG = Styled.img`
+  width: 100%;
+  alt: "A spooky scary background on a spaceship!";
+`;
+
+const NightBG = Styled.img`
+  width: 100%;
+  alt: "A spooky scary background on a spaceship!";
+`;
 
 //  =============styles below::::
 const DayNightHeading = Styled.h1`
