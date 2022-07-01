@@ -36,11 +36,9 @@ const PlayArea = () => {
 
   const handler = (number, e) => {
     e.stopPropagation();
-    if (gameState.isDay) {
-      console.log('ran', gameState.players[number]);
+    if (gameState.isDay)
       socket.emit('suspect', gameID, player, gameState.players[number]);
     } else if (player.isWolf) {
-      console.log('ran at night');
       socket.emit('eat', gameID, gameState.players[number]);
     }
   };
