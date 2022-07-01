@@ -36,7 +36,7 @@ const PlayArea = () => {
 
   const handler = (number, e) => {
     e.stopPropagation();
-    if (gameState.isDay)
+    if (gameState.isDay) {
       socket.emit('suspect', gameID, player, gameState.players[number]);
     } else if (player.isWolf) {
       socket.emit('eat', gameID, gameState.players[number]);
@@ -44,14 +44,38 @@ const PlayArea = () => {
   };
 
   const characters = [
-    <Player1 src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />,
-    <Player2 src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />,
-    <Player3 src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />,
-    <Player4 src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />,
-    <Player5 src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />,
-    <Player6 src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />,
-    <Player7 src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />,
-    <Player8 src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />,
+    <Player1>
+      <div>{gameState.players[0].username}</div>
+      <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
+    </Player1>,
+    <Player2>
+      <div>{gameState.players[1].username}</div>
+    <img src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
+    </Player2>,
+    <Player3>
+      <div>{gameState.players[2].username}</div>
+    <img src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
+    </Player3>,
+    <Player4>
+      <div>{gameState.players[3].username}</div>
+    <img src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />
+    </Player4>,
+    <Player5>
+      <div>{gameState.players[4].username}</div>
+    <img src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />
+    </Player5>,
+    <Player6>
+      <div>{gameState.players[5].username}</div>
+    <img src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />
+    </Player6>,
+    <Player7>
+      <div>{gameState.players[6].username}</div>
+    <img src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
+    </Player7>,
+    <Player8>
+      <div>{gameState.players[7].username}</div>
+    <img src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
+    </Player8>,
   ];
 
   const suspects = [
@@ -160,35 +184,35 @@ width: 100%;
 height: fit-content;
 
 `;
-const Player1 = Styled.img`
+const Player1 = Styled.section`
   ${getModelStyle(1)}
 `;
 
-const Player2 = Styled.img`
+const Player2 = Styled.section`
   ${getModelStyle(2)}
 `;
 
-const Player3 = Styled.img`
+const Player3 = Styled.section`
   ${getModelStyle(3)}
 `;
 
-const Player4 = Styled.img`
+const Player4 = Styled.section`
   ${getModelStyle(4)}
 `;
 
-const Player5 = Styled.img`
+const Player5 = Styled.section`
   ${getModelStyle(5)}
 `;
 
-const Player6 = Styled.img`
+const Player6 = Styled.section`
   ${getModelStyle(6)}
 `;
 
-const Player7 = Styled.img`
+const Player7 = Styled.section`
   ${getModelStyle(7)}
 `;
 
-const Player8 = Styled.img`
+const Player8 = Styled.section`
   ${getModelStyle(8)}
 `;
 const Character1 = Styled.div`
