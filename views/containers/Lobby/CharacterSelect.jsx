@@ -74,9 +74,11 @@ const CharacterSelect = ({ currentCharacter, setCurrentCharacter }) => {
 export default CharacterSelect;
 
 const Big = Styled.div`
-  height: 50vh;
-  width: 25rem;
-
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 90%;
+  justify-content: center;
 `;
 
 const Row = Styled.div`
@@ -85,13 +87,8 @@ const Row = Styled.div`
   align-items: center;
 `;
 
-const CharacterImage = Styled.img`
-  height: 280px;
-  width: 200px;
-`;
-
 const CharacterImagePreview = Styled.img`
-  max-height: 75px;
+  height: 125px;
   max-width: 75px;
 `;
 
@@ -117,8 +114,7 @@ const CenterDiv = Styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 250px;
-  height: 350px;
+  width: 100%;
 
 `;
 
@@ -127,10 +123,11 @@ const CenterDiv = Styled.div`
 // `;
 
 const CharacterText = Styled.div`
-  overflow-wrap: break-word;
+  width: 95%;
   text-align: center;
-  font-size: 12px;
+  font-size: 1rem;
   letter-spacing: 2px;
+  margin-top: 5em;
 `;
 
 const CharactersOverview = Styled.div`
@@ -138,6 +135,7 @@ const CharactersOverview = Styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5em;
 `;
 
 const animation = keyframes`
@@ -147,7 +145,7 @@ const animation = keyframes`
 const SoldierStyle = Styled.div`
   height: 64px;
   width: 50px;
-  transform: scale(3);
+  transform: scale(4);
   margin-top: 80px;
   margin-bottom: 100px;
   margin-right: 30px;
@@ -158,7 +156,7 @@ const SoldierStyle = Styled.div`
 const AdventureGirlStyle = Styled.div`
 height: 64px;
 width: 50px;
-transform: scale(3);
+transform: scale(4);
 margin-top: 80px;
 margin-bottom: 100px;
 margin-right: 30px;
@@ -168,7 +166,7 @@ animation: ${animation} 2s steps(8) infinite;
 const AgentStyle = Styled.div`
 height: 64px;
 width: 50px;
-transform: scale(3);
+transform: scale(4);
 margin-top: 80px;
 margin-bottom: 100px;
 margin-right: 30px;
@@ -179,7 +177,7 @@ animation: ${animation} 2s steps(8) infinite;
 const CyberpunkStyle = Styled.div`
 height: 64px;
 width: 50px;
-transform: scale(3);
+transform: scale(4);
 margin-top: 80px;
 margin-bottom: 100px;
 margin-right: 30px;
@@ -190,7 +188,7 @@ animation: ${animation} 2s steps(8) infinite;
 const NormalGirlStyle = Styled.div`
 height: 64px;
 width: 50px;
-transform: scale(3);
+transform: scale(4);
 margin-top: 80px;
 margin-bottom: 100px;
 margin-right: 30px;

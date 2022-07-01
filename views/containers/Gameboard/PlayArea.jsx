@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, {
   useEffect, useContext, useState, useRef,
 } from 'react';
@@ -7,9 +8,6 @@ import playAreaBG from '../../../Assets/img/playAreaBG.gif';
 import NightTimeBG from '../../../Assets/NightTimeBG.png';
 import { GlobalContext } from '../../store';
 import socket from '../../util/socket.config';
-import wolfImage from '../../../Assets/WhiteReady.png';
-import redWolf from '../../../Assets/RedReady.png';
-import playerWolf from '../../../Assets/playerWolf.png';
 
 const PlayArea = () => {
   const {
@@ -48,35 +46,70 @@ const PlayArea = () => {
   };
 
   const characters = [
-    <Player1 src={playerWolf} key={1} onClick={(e) => handler(0, e)} />,
-    <Player2 src={playerWolf} key={2} onClick={(e) => handler(1, e)} />,
-    <Player3 src={playerWolf} key={3} onClick={(e) => handler(2, e)} />,
-    <Player4 src={playerWolf} key={4} onClick={(e) => handler(3, e)} />,
-    <Player5 src={playerWolf} key={5} onClick={(e) => handler(4, e)} />,
-    <Player6 src={playerWolf} key={6} onClick={(e) => handler(5, e)} />,
-    <Player7 src={playerWolf} key={7} onClick={(e) => handler(6, e)} />,
-    <Player8 src={playerWolf} key={8} onClick={(e) => handler(7, e)} />,
+    <Player1 src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />,
+    <Player2 src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />,
+    <Player3 src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />,
+    <Player4 src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />,
+    <Player5 src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />,
+    <Player6 src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />,
+    <Player7 src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />,
+    <Player8 src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />,
+  ];
+
+  const suspects = [
+    <Player1>
+      <img src={characterList[gameState.players[0]?.charDex]} key={1} onClick={(e) => handler(0, e)} />
+      <Suspect1>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect1>
+    </Player1>,
+    <div>
+      <Player2 src={characterList[gameState.players[1]?.charDex]} key={2} onClick={(e) => handler(1, e)} />
+      <Suspect2>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect2>
+    </div>,
+    <div>
+      <Player3 src={characterList[gameState.players[2]?.charDex]} key={3} onClick={(e) => handler(2, e)} />
+      <Suspect3>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect3>
+    </div>,
+    <div>
+      <Player4 src={characterList[gameState.players[3]?.charDex]} key={4} onClick={(e) => handler(3, e)} />
+      <Suspect4>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect4>
+    </div>,
+    <div>
+      <Player5 src={characterList[gameState.players[4]?.charDex]} key={5} onClick={(e) => handler(4, e)} />
+      <Suspect5>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect5>
+    </div>,
+    <div>
+      <Player6 src={characterList[gameState.players[5]?.charDex]} key={6} onClick={(e) => handler(5, e)} />
+      <Suspect6>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect6>
+    </div>,
+    <div>
+      <Player7 src={characterList[gameState.players[6]?.charDex]} key={7} onClick={(e) => handler(6, e)} />
+      <Suspect7>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect7>
+    </div>,
+    <div>
+      <Player8 src={characterList[gameState.players[7]?.charDex]} key={8} onClick={(e) => handler(7, e)} />
+      <Suspect8>{player.isLockedIn ? 'Suspicion Cast!' : 'Suspect'}</Suspect8>
+    </div>,
   ];
 
   return (
     <PositioningDiv className="positioningDiv">
       {
-       gameState.isDone ? (
-         <h1>
-           {gameState.winners}
-           {' '}
-           won the game!
-         </h1>
-       ) : null
+        gameState.isDone ? (
+          <h1>
+            {gameState.winners}
+            {' '}
+            won the game!
+          </h1>
+        ) : null
       }
 
       {
         !gameState.isDone
-         && (gameState.isDay ? <h1>Find the WereWolf</h1> : <h1>Choose your Prey</h1>)
+         && (gameState.isDay ? <DayNightHeading>Find the WereWolf</DayNightHeading> : <DayNightHeading>Choose your Prey</DayNightHeading>)
       }
 
       { (!gameState.isDone && gameState.isDay)
-     && <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>LockIn</LockInButton>}
+     && <LockInButton onClick={(e) => { e.stopPropagation(); socket.emit('lockIn', gameID, player); }}>Lock-In</LockInButton>}
       {
         !gameState.isDone && (gameState.isDay ? (<img src={playAreaBG} alt="A spooky scary background on a spaceship!" />) : (<img src={NightTimeBG} alt="A spooky scary background on a spaceship!" />))
       }
@@ -86,8 +119,11 @@ const PlayArea = () => {
         if (p.isDead) {
           return <span />;
         }
-        if (p.isWolf) {
-          return <Player8 src={redWolf} key={5} onClick={(e) => handler(i, e)} />;
+        // if (p.isWolf) {
+        //   return <Player8 src={redWolf} key={5} onClick={(e) => handler(i, e)} />;
+        // }
+        if (p.username === player.suspect.username) {
+          return <div>{suspects[i]}</div>;
         }
         return characters[i];
       })}
@@ -95,70 +131,113 @@ const PlayArea = () => {
   );
 };
 
+const getModelStyle = function (theIndex) {
+  const index = theIndex - 1;
+  const left = `${12.5 * index}%`;
+  const bottom = `${((index % 2) * 10)}%`;
+  const result = {
+    position: 'absolute',
+    bottom,
+    left,
+    width: '12.5%',
+  };
+  return result;
+};
+
 //  =============styles below::::
+const DayNightHeading = Styled.h1`
+  letter-spacing: 4px;
+`;
 
 const LockInButton = Styled.button`
   position: absolute;
   height: 50px;
+  left: 50%;
+  right: 50%;
   width: 100px;
-
+  letter-spacing: 4px;
 `;
 
 const PositioningDiv = Styled.div`
 position: relative;
 width: fit-content;
+width: 100%;
 height: fit-content;
 
 `;
-const Player1 = Styled.div`
-  position: absolute;
-  top: 65%;
-  left: 10%;
+const Player1 = Styled.img`
+  ${getModelStyle(1)}
 `;
 
 const Player2 = Styled.img`
-  position: absolute;
-  top: 80%;
-  left: 20%;
+  ${getModelStyle(2)}
 `;
 
 const Player3 = Styled.img`
-  position: absolute;
-  top: 65%;
-  left: 30%;
+  ${getModelStyle(3)}
 `;
 
 const Player4 = Styled.img`
-position: absolute;
-top: 80%;
-left: 40%;
+  ${getModelStyle(4)}
 `;
 
 const Player5 = Styled.img`
-position: absolute;
-top: 65%;
-left: 50%;
+  ${getModelStyle(5)}
 `;
 
 const Player6 = Styled.img`
-position: absolute;
-top: 80%;
-left: 60%;
+  ${getModelStyle(6)}
 `;
 
 const Player7 = Styled.img`
-position: absolute;
-top: 65%;
-left: 70%;
+  ${getModelStyle(7)}
 `;
 
 const Player8 = Styled.img`
-position: absolute;
-top: 80%;
-left: 80%;
+  ${getModelStyle(8)}
 `;
-export default PlayArea;
 
+const Suspect1 = Styled.div`
+  color: white;
+  z-index: 10;
+`;
+
+const Suspect2 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect3 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect4 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect5 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect6 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect7 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+const Suspect8 = Styled.div`
+color: white;
+z-index: 10;
+`;
+
+export default PlayArea;
 // Legacy
 
 //= ======================== scott stuff ======================//
@@ -489,3 +568,5 @@ export default PlayArea;
 // const handleButtonClick = function () {
 //   console.log('so and so has locked in!');
 // };
+
+// let hat = 'just a hat';
